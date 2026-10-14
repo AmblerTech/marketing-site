@@ -37,3 +37,46 @@ test('mobile: hero card sits below the headline', async ({ page }) => {
   const card = await page.locator('[data-status-card]').boundingBox();
   expect(card.y).toBeGreaterThan(h1.y + h1.height);
 });
+
+test('reduced motion: final states, nothing hidden', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/preview/index.html');
+  await expect(page.locator('[data-status-badge]')).toHaveText('Shipped');
+  const hidden = await page.$$eval('[data-reveal]', (els) => els.filter((e) => getComputedStyle(e).opacity !== '1').length);
+  expect(hidden).toBe(0);
+});
+
+test('JS blocked: all copy visible', async ({ page }) => {
+  await page.route('**/dist/ambler.js', (r) => r.abort());
+  await page.goto('/preview/index.html');
+  const hidden = await page.$$eval('[data-reveal]', (els) => els.filter((e) => getComputedStyle(e).opacity !== '1').length);
+  expect(hidden).toBe(0);
+  await expect(page.locator('[data-count="93"]')).toHaveText('93%');
+});
+
+test('animated: badge cycles and no console errors', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(e.message));
+  page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+  await page.goto('/preview/index.html');
+  await expect(page.locator('[data-status-badge]')).toHaveText('Draft');
+  await expect(page.locator('[data-status-badge]')).toHaveText('Artist input', { timeout: 3000 });
+  await page.locator('[data-count="93"]').scrollIntoViewIfNeeded();
+  await expect(page.locator('[data-count="93"]')).toHaveText('93%', { timeout: 4000 });
+  expect(errors).toEqual([]);
+});
+
+test('animated @375: no sideways scroll mid-animation', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.goto('/preview/index.html');
+  await page.waitForTimeout(800);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+});
+
+test('animated: reveals start hidden and come in on scroll', async ({ page }) => {
+  await page.goto('/preview/index.html');
+  const last = page.locator('[data-reveal]').last();
+  expect(await last.evaluate((e) => getComputedStyle(e).opacity)).toBe('0');
+  await last.scrollIntoViewIfNeeded();
+  await expect.poll(() => last.evaluate((e) => getComputedStyle(e).opacity), { timeout: 3000 }).toBe('1');
+});
