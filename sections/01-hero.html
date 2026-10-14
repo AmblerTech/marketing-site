@@ -11,28 +11,34 @@
         <a class="amb-btn amb-btn--ghost" href="/#howitworks">See how it works ↓</a>
       </div>
     </div>
-    <div class="amb-card amb-reg" data-status-card data-reveal aria-label="Example registration from a fictional label">
-      <div class="amb-reg__head">
-        <div class="amb-reg__art" aria-hidden="true"></div>
-        <div>
-          <p class="amb-reg__title">Midnight</p>
-          <p class="amb-reg__sub">Kayo · Harmattan Records · Single</p>
+    <div class="amb-hero__visual" data-reveal>
+      <div class="amb-card amb-reg" data-status-card role="group" aria-labelledby="amb-reg-title" aria-describedby="amb-reg-caption">
+        <div class="amb-reg__head">
+          <div class="amb-reg__art" aria-hidden="true"></div>
+          <div>
+            <p class="amb-reg__title" id="amb-reg-title">Midnight</p>
+            <p class="amb-reg__sub">Kayo · Harmattan Records · Single</p>
+          </div>
+          <span class="amb-badge amb-badge--shipped" data-status-badge data-key="shipped">Shipped</span>
         </div>
-        <span class="amb-badge amb-badge--shipped" data-status-badge data-key="shipped">Shipped</span>
+        <dl class="amb-reg__meta">
+          <div><dt>Catalogue no.</dt><dd><span data-fill data-fill-order="5" class="is-filled">HRM-026 <em class="amb-tag">Suggested</em></span></dd></div>
+          <div><dt>Release date</dt><dd>24 Jul 2026</dd></div>
+          <div class="amb-reg__wide"><dt>Audio</dt><dd><span data-fill data-fill-order="6" class="is-filled">105 BPM · F♯ minor · 3:11 <em class="amb-tag">Detected from audio</em></span></dd></div>
+          <div class="amb-reg__wide"><dt>ISRC</dt><dd><span data-isrc data-shown="true">GB-K3A-26-00109 <em class="amb-tag amb-tag--ambler">Issued by Ambler</em></span></dd></div>
+        </dl>
+        <p class="amb-reg__label">Contributors &amp; publishing splits</p>
+        <p class="amb-reg__note">From your directory · splits suggested from your last release</p>
+        <ul class="amb-splits">
+          <li><span class="amb-avatar is-confirmed" data-confirm aria-hidden="true">K</span><span data-fill data-fill-order="1" class="is-filled">Kayo · Composer, Lyricist</span><b data-fill data-fill-order="7" class="is-filled">25%</b></li>
+          <li><span class="amb-avatar is-confirmed" data-confirm aria-hidden="true">A</span><span data-fill data-fill-order="2" class="is-filled">Amara · Lyricist</span><b data-fill data-fill-order="8" class="is-filled">25%</b></li>
+          <li><span class="amb-avatar is-confirmed" data-confirm aria-hidden="true">T</span><span data-fill data-fill-order="3" class="is-filled">Tobs · Composer</span><b data-fill data-fill-order="9" class="is-filled">25%</b></li>
+          <li><span class="amb-avatar is-confirmed" data-confirm aria-hidden="true">S</span><span data-fill data-fill-order="4" class="is-filled">Selasi · Producer</span><b data-fill data-fill-order="10" class="is-filled">25%</b></li>
+        </ul>
+        <div class="amb-bar" aria-hidden="true"><span data-split="100" style="--amb-fill: 100%"></span></div>
+        <div class="amb-reg__foot"><p><span data-confirm-label>Confirmed by all contributors</span> · <b data-confirm-pct>100%</b></p><button type="button" class="amb-replay" data-replay>Replay</button></div>
       </div>
-      <dl class="amb-reg__meta">
-        <div><dt>ISRC</dt><dd><span data-isrc data-shown="true">GB-K3A-26-00109</span></dd></div>
-        <div><dt>Release date</dt><dd>14 Nov 2026</dd></div>
-      </dl>
-      <p class="amb-reg__label">Publishing splits</p>
-      <ul class="amb-splits">
-        <li><span class="amb-avatar is-confirmed" data-confirm>K</span><span>Kayo · Composer, Lyricist</span><b>25%</b></li>
-        <li><span class="amb-avatar is-confirmed" data-confirm>A</span><span>Amara · Lyricist</span><b>25%</b></li>
-        <li><span class="amb-avatar is-confirmed" data-confirm>T</span><span>Tobs · Composer</span><b>25%</b></li>
-        <li><span class="amb-avatar is-confirmed" data-confirm>S</span><span>Selasi · Producer</span><b>25%</b></li>
-      </ul>
-      <div class="amb-bar" aria-label="Splits confirmed: 100%"><span data-split="100" style="--amb-fill: 100%"></span></div>
-      <p class="amb-reg__foot"><span data-confirm-label>Confirmed by all contributors</span><b data-confirm-pct>100%</b></p>
+      <p class="amb-hero__caption" id="amb-reg-caption">A returning label's next single. Most of it was already there.</p>
     </div>
   </div>
 </div>

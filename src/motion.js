@@ -44,10 +44,53 @@ function setStatus(card, i) {
 }
 
 export function applyFinal(doc) {
-  doc.querySelectorAll('[data-status-card]').forEach((c) => setStatus(c, STATUS_STEPS.length - 1));
+  doc.querySelectorAll('[data-status-card]').forEach((c) => finishCard(c));
   doc.querySelectorAll('[data-count]').forEach((el) => { el.textContent = formatCount(Number(el.dataset.count), countOpts(el)); });
   doc.querySelectorAll('[data-split]').forEach((el) => el.style.setProperty('--amb-fill', `${el.dataset.split}%`));
   doc.querySelectorAll('[data-confirm]').forEach((el) => el.classList.add('is-confirmed'));
+}
+
+const FILL_MS = 280;      // gap between prefilled fields appearing
+const STEP_MS = 1100;     // gap between status changes
+const timers = new WeakMap();
+
+function clearCard(card, win) {
+  (timers.get(card) || []).forEach((id) => win.clearTimeout(id));
+  timers.set(card, []);
+}
+
+function finishCard(card) {
+  card.querySelectorAll('[data-fill]').forEach((el) => el.classList.add('is-filled'));
+  setStatus(card, STATUS_STEPS.length - 1);
+  const btn = card.querySelector('[data-replay]');
+  if (btn) btn.textContent = 'Replay';
+}
+
+// One pass: everything Ambler already knows fills in, then people confirm, then it ships. Ends on Shipped.
+export function play(card, win) {
+  clearCard(card, win);
+  const fills = [...card.querySelectorAll('[data-fill]')].sort((a, b) => Number(a.dataset.fillOrder) - Number(b.dataset.fillOrder));
+  fills.forEach((el) => el.classList.remove('is-filled'));
+  setStatus(card, 0);
+  const btn = card.querySelector('[data-replay]');
+  if (btn) {
+    btn.textContent = 'Skip';
+    if (!btn.dataset.bound) {
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', () => {
+        if (btn.textContent === 'Skip') { clearCard(card, win); finishCard(card); } else play(card, win);
+      });
+    }
+  }
+  const ids = [];
+  const at = (ms, fn) => ids.push(win.setTimeout(fn, ms));
+  fills.forEach((el, n) => at(400 + n * FILL_MS, () => el.classList.add('is-filled')));
+  const prefilledBy = 400 + fills.length * FILL_MS;
+  for (let i = 1; i < STATUS_STEPS.length; i++) {
+    const last = i === STATUS_STEPS.length - 1;
+    at(prefilledBy + i * STEP_MS, () => { setStatus(card, i); if (last) { timers.set(card, []); if (btn) btn.textContent = 'Replay'; } });
+  }
+  timers.set(card, ids);
 }
 
 function countUp(el, win) {
@@ -80,10 +123,7 @@ export function init(doc, win) {
   doc.querySelectorAll('[data-count]').forEach((el) => { el.textContent = formatCount(0, countOpts(el)); io.observe(el); });
   doc.querySelectorAll('[data-split]').forEach((el) => { if (!el.closest('[data-status-card]')) { el.style.setProperty('--amb-fill', '0%'); io.observe(el); } });
 
-  doc.querySelectorAll('[data-status-card]').forEach((card) => {
-    let i = 0; setStatus(card, i);
-    win.setInterval(() => { i = nextIndex(i); setStatus(card, i); }, 1800);
-  });
+  doc.querySelectorAll('[data-status-card]').forEach((card) => play(card, win));
   return 'animated';
 }
 

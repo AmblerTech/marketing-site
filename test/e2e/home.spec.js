@@ -60,7 +60,7 @@ test('animated: badge cycles and no console errors', async ({ page }) => {
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
   await page.goto('/preview/index.html');
   await expect(page.locator('[data-status-badge]')).toHaveText('Draft');
-  await expect(page.locator('[data-status-badge]')).toHaveText('Artist input', { timeout: 3000 });
+  await expect(page.locator('[data-status-badge]')).toHaveText('Artist input', { timeout: 7000 });
   await page.locator('[data-count="93"]').scrollIntoViewIfNeeded();
   await expect(page.locator('[data-count="93"]')).toHaveText('93%', { timeout: 4000 });
   expect(errors).toEqual([]);
@@ -79,4 +79,23 @@ test('animated: reveals start hidden and come in on scroll', async ({ page }) =>
   expect(await last.evaluate((e) => getComputedStyle(e).opacity)).toBe('0');
   await last.scrollIntoViewIfNeeded();
   await expect.poll(() => last.evaluate((e) => getComputedStyle(e).opacity), { timeout: 3000 }).toBe('1');
+});
+
+test('hero: prefilled fields arrive first, then it ships once and offers Replay', async ({ page }) => {
+  await page.goto('/preview/index.html');
+  const card = page.locator('[data-status-card]');
+  await expect(card.locator('[data-replay]')).toHaveText('Skip');
+  await expect(page.locator('[data-status-badge]')).toHaveText('Artist input', { timeout: 7000 });
+  expect(await card.locator('[data-fill]:not(.is-filled)').count()).toBe(0);
+  await expect(page.locator('[data-status-badge]')).toHaveText('Shipped', { timeout: 10000 });
+  await expect(card.locator('[data-replay]')).toHaveText('Replay');
+  await expect(card.locator('[data-isrc]')).toBeVisible();
+});
+
+test('hero: Skip stops the animation on the final state', async ({ page }) => {
+  await page.goto('/preview/index.html');
+  await page.locator('[data-replay]').click();
+  await expect(page.locator('[data-status-badge]')).toHaveText('Shipped');
+  await page.waitForTimeout(2500);
+  await expect(page.locator('[data-status-badge]')).toHaveText('Shipped');
 });

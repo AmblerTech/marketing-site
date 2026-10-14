@@ -26,7 +26,7 @@ describe('status sequence', () => {
 describe('card footer follows the animation', () => {
   beforeEach(() => { document.body.innerHTML = card; });
   it('mid-sequence: footer matches bar and says waiting', () => {
-    const win = { matchMedia: () => ({ matches: false }), IntersectionObserver: class { observe() {} unobserve() {} }, setInterval: () => 1, requestAnimationFrame: () => 1 };
+    const win = { matchMedia: () => ({ matches: false }), IntersectionObserver: class { observe() {} unobserve() {} }, setTimeout: () => 1, clearTimeout() {}, requestAnimationFrame: () => 1 };
     init(document, win); // sets step 0 (Draft)
     const c = document.querySelector('[data-status-card]');
     const fill = c.querySelector('[data-split]').style.getPropertyValue('--amb-fill');
@@ -79,14 +79,14 @@ describe('applyFinal / init', () => {
     expect(init(document, win)).toBe('final');
   });
   it('normal → animated, amb-motion class set', () => {
-    const win = { matchMedia: () => ({ matches: false }), IntersectionObserver: class { observe() {} unobserve() {} }, setInterval: () => 1, requestAnimationFrame: () => 1 };
+    const win = { matchMedia: () => ({ matches: false }), IntersectionObserver: class { observe() {} unobserve() {} }, setTimeout: () => 1, clearTimeout() {}, requestAnimationFrame: () => 1 };
     expect(init(document, win)).toBe('animated');
     expect(document.documentElement.classList.contains('amb-motion')).toBe(true);
   });
 });
 
 describe('start (bundle entry)', () => {
-  const win = { matchMedia: () => ({ matches: false }), IntersectionObserver: class { observe() {} unobserve() {} }, setInterval: () => 1, clearInterval() {}, requestAnimationFrame: () => 1 };
+  const win = { matchMedia: () => ({ matches: false }), IntersectionObserver: class { observe() {} unobserve() {} }, setTimeout: () => 1, clearTimeout() {}, requestAnimationFrame: () => 1 };
   beforeEach(() => { document.documentElement.className = 'amb-v2'; });
   it('waits for DOMContentLoaded while the document is still loading', () => {
     const listeners = {};
