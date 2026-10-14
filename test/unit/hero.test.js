@@ -70,3 +70,25 @@ describe('hero sequence (returning label)', () => {
     expect(filled()).toBe(3);
   });
 });
+
+describe('hero starts when it is seen', () => {
+  it('waits for the card to enter the viewport', async () => {
+    const { init } = await import('../../src/motion.js');
+    document.body.innerHTML = card;
+    document.documentElement.className = 'amb-v2';
+    const observers = [];
+    const win = {
+      matchMedia: () => ({ matches: false }), requestAnimationFrame: () => 1,
+      setTimeout: (fn, ms) => setTimeout(fn, ms), clearTimeout: (id) => clearTimeout(id),
+      IntersectionObserver: class { constructor(cb) { this.cb = cb; this.els = []; observers.push(this); } observe(el) { this.els.push(el); } unobserve() {} },
+    };
+    init(document, win);
+    const c = document.querySelector('[data-status-card]');
+    expect(badge()).toBe('Draft');                 // rewound, waiting
+    const obs = observers.find((o) => o.els.includes(c));
+    expect(obs).toBeTruthy();
+    expect(button().textContent).toBe('Play');
+    obs.cb([{ target: c, isIntersecting: true }]);
+    expect(button().textContent).toBe('Skip');     // playing now
+  });
+});

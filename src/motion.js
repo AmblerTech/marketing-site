@@ -66,22 +66,27 @@ function finishCard(card) {
   if (btn) btn.textContent = 'Replay';
 }
 
-// One pass: everything Ambler already knows fills in, then people confirm, then it ships. Ends on Shipped.
-export function play(card, win) {
+// Empty card at Draft, waiting to be seen. The button plays it on demand.
+function rewind(card, win, label) {
   clearCard(card, win);
-  const fills = [...card.querySelectorAll('[data-fill]')].sort((a, b) => Number(a.dataset.fillOrder) - Number(b.dataset.fillOrder));
-  fills.forEach((el) => el.classList.remove('is-filled'));
+  card.querySelectorAll('[data-fill]').forEach((el) => el.classList.remove('is-filled'));
   setStatus(card, 0);
   const btn = card.querySelector('[data-replay]');
-  if (btn) {
-    btn.textContent = 'Skip';
-    if (!btn.dataset.bound) {
-      btn.dataset.bound = '1';
-      btn.addEventListener('click', () => {
-        if (btn.textContent === 'Skip') { clearCard(card, win); finishCard(card); } else play(card, win);
-      });
-    }
+  if (!btn) return null;
+  btn.textContent = label;
+  if (!btn.dataset.bound) {
+    btn.dataset.bound = '1';
+    btn.addEventListener('click', () => {
+      if (btn.textContent === 'Skip') { clearCard(card, win); finishCard(card); } else play(card, win);
+    });
   }
+  return btn;
+}
+
+// One pass: everything Ambler already knows fills in, then people confirm, then it ships. Ends on Shipped.
+export function play(card, win) {
+  const btn = rewind(card, win, 'Skip');
+  const fills = [...card.querySelectorAll('[data-fill]')].sort((a, b) => Number(a.dataset.fillOrder) - Number(b.dataset.fillOrder));
   const ids = [];
   const at = (ms, fn) => ids.push(win.setTimeout(fn, ms));
   fills.forEach((el, n) => at(400 + n * FILL_MS, () => el.classList.add('is-filled')));
@@ -115,6 +120,7 @@ export function init(doc, win) {
       el.classList.add('is-in');
       if (el.matches('[data-count]')) countUp(el, win);
       if (el.matches('[data-split]') && !el.closest('[data-status-card]')) el.style.setProperty('--amb-fill', `${el.dataset.split}%`);
+      if (el.matches('[data-status-card]')) play(el, win);
       io.unobserve(el);
     }
   }, { threshold: 0.2 });
@@ -123,7 +129,8 @@ export function init(doc, win) {
   doc.querySelectorAll('[data-count]').forEach((el) => { el.textContent = formatCount(0, countOpts(el)); io.observe(el); });
   doc.querySelectorAll('[data-split]').forEach((el) => { if (!el.closest('[data-status-card]')) { el.style.setProperty('--amb-fill', '0%'); io.observe(el); } });
 
-  doc.querySelectorAll('[data-status-card]').forEach((card) => play(card, win));
+  // The hero plays when it is first seen (on phones it sits below the headline).
+  doc.querySelectorAll('[data-status-card]').forEach((card) => { rewind(card, win, 'Play'); io.observe(card); });
   return 'animated';
 }
 
