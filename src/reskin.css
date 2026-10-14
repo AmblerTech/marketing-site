@@ -53,7 +53,11 @@
   & .sqs-block-html :is(h1, h2, h3, h4) { overflow-wrap: anywhere; }
 
   /* Unknown blocks: never dark-on-dark. */
-  & :is(.summary-item, .sqs-block-quote, .image-caption, .sqs-block-summary-v2) :is(p, span, a, h1, h2, h3, h4, blockquote, figcaption, cite) { color: var(--amb-on-page); }
+  & :is(.summary-item, .sqs-block-quote, .image-caption, .sqs-block-summary-v2) :is(p, span, a, h1, h2, h3, h4, blockquote, figcaption, cite):not(:is(.blog-item-content-wrapper, .sqs-background-enabled, .accordion-item) *) { color: var(--amb-on-page); }
+  /* Light surfaces: every text element gets card colours, whatever block it came from. */
+  & :is(.blog-item-content-wrapper, .sqs-background-enabled, .accordion-item) :is(p, span, li, td, th, blockquote, figcaption, cite, em, small, time) { color: var(--amb-card-text); }
+  & :is(.blog-item-content-wrapper, .sqs-background-enabled, .accordion-item) :is(h1, h2, h3, h4, strong, b) { color: var(--amb-card-ink); }
+  & :is(.blog-item-content-wrapper, .sqs-background-enabled, .accordion-item) a { color: var(--amb-brand-ink); }
 
 
   /* Rich text with a colour picked in the editor: follow the surface instead (dark text on dark otherwise). */

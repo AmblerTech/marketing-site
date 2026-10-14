@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { noHorizontalScroll, lowContrast, visibleTextCount } from './helpers.js';
 
-const pages = ['home', 'blog', 'post', 'faq', 'partner', 'privacy'];
+const pages = ['home', 'blog', 'post', 'faq', 'partner', 'privacy', 'kitchen'];
 const widths = [375, 1440];
 
 for (const name of pages) {
