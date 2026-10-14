@@ -1,1 +1,81 @@
-/* base — filled by later tasks */
+/* Everything nests under .amb-v2 (scope test enforces it). */
+.amb-v2 {
+  background: var(--amb-page);
+
+  & body { background: var(--amb-page); color: var(--amb-on-page); font-family: var(--amb-font); }
+
+  /* Squarespace 7.1 colour themes: force every section, header and footer dark. */
+  & body,
+  & [data-section-theme] {
+    --siteBackgroundColor: var(--amb-page);
+    --siteTitleColor: var(--amb-on-page);
+    --headingExtraLargeColor: var(--amb-on-page);
+    --headingLargeColor: var(--amb-on-page);
+    --headingMediumColor: var(--amb-on-page);
+    --headingSmallColor: var(--amb-on-page);
+    --headingLinkColor: var(--amb-on-page);
+    --paragraphLargeColor: var(--amb-on-page-muted);
+    --paragraphMediumColor: var(--amb-on-page-muted);
+    --paragraphSmallColor: var(--amb-on-page-muted);
+    --paragraphLinkColor: #fb7c8c;
+    --navigationLinkColor: var(--amb-on-page);
+    --menuOverlayBackgroundColor: var(--amb-page);
+    --menuOverlayNavigationLinkColor: var(--amb-on-page);
+    --menuOverlayButtonBackgroundColor: var(--amb-brand);
+    --menuOverlayButtonTextColor: #ffffff;
+    --primaryButtonBackgroundColor: var(--amb-brand);
+    --primaryButtonTextColor: #ffffff;
+    --secondaryButtonBackgroundColor: transparent;
+    --secondaryButtonTextColor: var(--amb-on-page);
+    --headerBorderColor: var(--amb-line-on-page);
+    --section-divider-stroke-color: var(--amb-line-on-page);
+    --tweak-newsletter-block-title-color: var(--amb-on-page);
+    --tweak-newsletter-block-description-color: var(--amb-on-page-muted);
+    --tweak-newsletter-block-footnote-color: var(--amb-on-page-muted);
+    --tweak-newsletter-block-button-background-color: var(--amb-brand);
+    --tweak-newsletter-block-button-text-color: #ffffff;
+    --tweak-form-block-field-fill-color: var(--amb-page-raised);
+    --tweak-form-block-field-input-color: var(--amb-on-page);
+    --tweak-form-block-field-border-color: var(--amb-line-on-page);
+    --tweak-accordion-block-divider-color: var(--amb-line-on-page);
+    --tweak-accordion-block-icon-color: var(--amb-on-page);
+  }
+
+  & .section-background,
+  & #footer-sections .section-background { background-color: var(--amb-page) !important; }
+  & .section-background img,
+  & .section-background .section-background-overlay { opacity: 0.15; }
+
+  & h1, & h2, & h3, & h4, & p, & li, & a, & button, & input { font-family: var(--amb-font); }
+
+  /* Header: translucent on black, gradient CTA. */
+  & #header .header-announcement-bar-wrapper,
+  & #header .header-background-solid { background: rgba(11, 11, 15, 0.72) !important; backdrop-filter: blur(12px); }
+  & #header { border-bottom: 1px solid var(--amb-line-on-page); }
+  & #header .header-title-logo img { filter: brightness(0) invert(1); }
+  & #header .header-actions-action--cta .btn,
+  & .header-menu-cta .btn {
+    background: var(--amb-gradient) !important; color: var(--amb-card-ink) !important;
+    border-radius: var(--amb-radius-full); font-weight: 600;
+  }
+
+  /* Footer */
+  & #footer-sections { border-top: 1px solid var(--amb-line-on-page); }
+
+  /* Utilities for sections/*.html */
+  & .amb-wrap { width: 100%; max-width: var(--amb-max); margin-inline: auto; padding-inline: var(--amb-gutter); box-sizing: border-box; }
+  & .amb-eyebrow { font-size: 14px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #fb7c8c; margin: 0 0 12px; }
+  & .amb-h1 { font-size: clamp(40px, 6vw, 72px); line-height: 1.04; font-weight: 600; letter-spacing: -0.02em; color: var(--amb-on-page); margin: 0; }
+  & .amb-h2 { font-size: clamp(30px, 4vw, 48px); line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; color: var(--amb-on-page); margin: 0; }
+  & .amb-lede { font-size: clamp(17px, 1.6vw, 20px); line-height: 1.55; color: var(--amb-on-page-muted); margin: 16px 0 0; max-width: 62ch; }
+  & .amb-gradient-text { background: var(--amb-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  & .amb-btn {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px;
+    border-radius: var(--amb-radius-full); font-size: 16px; font-weight: 600; text-decoration: none;
+    border: 1px solid var(--amb-line-on-page); color: var(--amb-on-page); transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  & .amb-btn:hover { transform: translateY(-1px); }
+  & .amb-btn--primary { background: var(--amb-gradient); color: var(--amb-card-ink); border-color: transparent; box-shadow: 0 8px 24px -8px rgba(251, 124, 140, 0.6); }
+  & .amb-btn--ghost { background: transparent; }
+  & .amb-btn:focus-visible { outline: 2px solid #fb7c8c; outline-offset: 3px; }
+}
