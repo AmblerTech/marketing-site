@@ -8,7 +8,7 @@ const text = html.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s+/g,
 test('copy is server-rendered HTML (crawler-visible)', () => {
   for (const s of ['Register releases. Confirm credits. Ship clean data.', 'One workflow. Every stakeholder.',
     'Built for labels. Free for everyone else.', 'Validated by the industry', 'CWR · DDEX ERN · DDEX RDR-N',
-    'Free during the pilot, then 50% off for 12 months.', 'Label creates', 'Data delivered']) expect(text).toContain(s);
+    'Design Partner Programme — now accepting Cohort 2', '3-month trial — then 50% off for the first year', 'our first cohort is live', 'Label creates', 'Data delivered']) expect(text).toContain(s);
 });
 test('no prices, no retired formats, fictional data only', () => {
   expect(html).not.toMatch(/€|EUR|\bMWN\b|\bRIN\b/);

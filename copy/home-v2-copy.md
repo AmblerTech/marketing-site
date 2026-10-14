@@ -1,4 +1,4 @@
-# Home v2 — light copy edit (14 Oct 2026)
+# Home v2 — light copy edit (14 Oct 2026) — APPROVED by Alexander 14 Oct
 Changes vs live are marked ✎. Everything else is today's text.
 
 ## Hero
@@ -27,12 +27,12 @@ Changes vs live are marked ✎. Everything else is today's text.
 ## Proof
 - H2: Validated by the industry
 - Lede: Ambler is built with direct input from label managers, rights experts, and collection societies.
-- Tiles: **12+** label manager interviews confirming metadata management as their #1 operational pain point · ✎ **Design partners** onboarding now — independent labels testing with real releases and real data · ✎ **Standards compliant** — CWR · DDEX ERN · DDEX RDR-N, in the formats CMOs, PROs and distributors require
+- Tiles: **12+** label manager interviews confirming metadata management as their #1 operational pain point · ✎ **Design partners** — our first cohort is live, testing with real releases and real data · ✎ **Standards compliant** — CWR · DDEX ERN · DDEX RDR-N, in the formats CMOs, PROs and distributors require
 
 ## Team — as live.
 
 ## Design Partner
-- H2: Design Partner Programme — Limited to 20 labels
-- Lede: Shape the product with us.
-- ✎ Free access: Free during the pilot, then 50% off for 12 months.
+- H2 ✎: Design Partner Programme — now accepting Cohort 2 ("Limited to 20 labels" dropped)
+- Lede ✎: Shape the product with us. Our first design partners are live.
+- ✎ 3-month trial — then 50% off for the first year (Cohort 2 terms, Alexander 14 Oct)
 - Other bullets and eligibility line as live. Button: Apply for Design Partner Access
