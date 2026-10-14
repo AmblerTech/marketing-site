@@ -1,1 +1,103 @@
-/* reskin — filled by later tasks */
+.amb-v2 {
+  /* Blog list (side-by-side layout today; selectors also cover grid layouts). */
+  & .view-list .blog-item,
+  & .view-list article.blog-item {
+    background: var(--amb-card); border: 1px solid var(--amb-card-line); border-radius: var(--amb-radius-2xl);
+    box-shadow: var(--amb-shadow-card); padding: clamp(16px, 3vw, 28px); margin-bottom: 24px; box-sizing: border-box; max-width: 100%;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    --headingMediumColor: var(--amb-card-ink); --headingLargeColor: var(--amb-card-ink); --headingSmallColor: var(--amb-card-ink);
+    --paragraphMediumColor: var(--amb-card-text); --paragraphLargeColor: var(--amb-card-text); --paragraphSmallColor: var(--amb-card-text);
+    --tweak-blog-side-by-side-list-title-color: var(--amb-card-ink);
+    --tweak-blog-side-by-side-list-excerpt-color: var(--amb-card-text);
+    --tweak-blog-side-by-side-list-meta-color: var(--amb-card-text);
+    --tweak-blog-side-by-side-list-read-more-color: var(--amb-brand-ink);
+    --tweak-blog-basic-grid-list-title-color: var(--amb-card-ink);
+    --tweak-blog-basic-grid-list-excerpt-color: var(--amb-card-text);
+    --tweak-blog-basic-grid-list-meta-color: var(--amb-card-text);
+    --tweak-blog-basic-grid-list-read-more-color: var(--amb-brand-ink);
+  }
+  & .view-list .blog-item:hover { transform: translateY(-3px); }
+  & .view-list .blog-item * { color: var(--amb-card-text); }
+  & .view-list .blog-item .blog-title, & .view-list .blog-item .blog-title a { color: var(--amb-card-ink); }
+  & .view-list .blog-item .blog-more-link { color: var(--amb-brand-ink); font-weight: 600; }
+  & .view-list .blog-image-wrapper img { border-radius: var(--amb-radius-xl); }
+
+  /* Blog post: dark header, light reading panel. */
+  & .view-item .blog-item-title h1,
+  & .view-item .entry-title { color: var(--amb-on-page); font-size: clamp(32px, 4.5vw, 52px); line-height: 1.1; letter-spacing: -0.02em; overflow-wrap: anywhere; }
+  & .view-item .blog-item-meta-wrapper, & .view-item .blog-item-meta-wrapper * { color: var(--amb-on-page-muted); }
+  & .view-item .blog-item-content-wrapper {
+    background: var(--amb-card); border-radius: var(--amb-radius-2xl); box-shadow: var(--amb-shadow-card);
+    padding: clamp(20px, 5vw, 56px); margin-top: 24px; box-sizing: border-box; max-width: 100%;
+  }
+  & .view-item .blog-item-content-wrapper,
+  & .view-item .blog-item-content-wrapper [data-section-theme] {
+    --headingLargeColor: var(--amb-card-ink); --headingMediumColor: var(--amb-card-ink); --headingSmallColor: var(--amb-card-ink);
+    --paragraphLargeColor: var(--amb-card-text); --paragraphMediumColor: var(--amb-card-text); --paragraphSmallColor: var(--amb-card-text);
+    --paragraphLinkColor: var(--amb-brand-ink);
+  }
+  & .view-item .blog-item-content-wrapper :is(h1, h2, h3, h4, strong) { color: var(--amb-card-ink); }
+  & .view-item .blog-item-content-wrapper :is(p, li, td, th, blockquote, figcaption) { color: var(--amb-card-text); }
+  & .view-item .blog-item-content-wrapper a { color: var(--amb-brand-ink); }
+  & .view-item .blog-item-content-wrapper :is(table, pre) { display: block; max-width: 100%; overflow-x: auto; }
+  & .view-item .blog-item-content-wrapper img { max-width: 100%; height: auto; border-radius: var(--amb-radius-xl); }
+  & .view-item .blog-item-pagination *, & .view-item .blog-item-author-profile-wrapper * { color: var(--amb-on-page-muted); }
+
+  /* Content pages: accordion items become light cards. */
+  & .accordion-item {
+    background: var(--amb-card); border-radius: var(--amb-radius-xl); margin-bottom: 12px; padding: 4px 20px;
+    border: 1px solid var(--amb-card-line);
+  }
+  & .accordion-item :is(.accordion-item__title, .accordion-item__description, p, li, span) { color: var(--amb-card-ink); }
+  & .accordion-item .accordion-icon-container * { stroke: var(--amb-card-ink); background-color: var(--amb-card-ink); }
+  & .sqs-block-html :is(h1, h2, h3, h4) { overflow-wrap: anywhere; }
+
+  /* Unknown blocks: never dark-on-dark. */
+  & :is(.summary-item, .sqs-block-quote, .image-caption, .sqs-block-summary-v2) :is(p, span, a, h1, h2, h3, h4, blockquote, figcaption, cite) { color: var(--amb-on-page); }
+
+
+  /* Rich text with a colour picked in the editor: follow the surface instead (dark text on dark otherwise). */
+  & .sqs-html-content [class*='sqsrte-text-color--']:not(.sqsrte-text-color--white):not(.sqsrte-text-color--lightAccent) { color: inherit !important; }
+  /* Blocks given a background colour in the editor become light app cards. */
+  & .sqs-block.sqs-background-enabled { background-color: var(--amb-card) !important; border-radius: var(--amb-radius-2xl); box-shadow: var(--amb-shadow-card); }
+  & .sqs-block.sqs-background-enabled .sqs-html-content :is(h1, h2, h3, h4, strong) { color: var(--amb-card-ink) !important; }
+  & .sqs-block.sqs-background-enabled .sqs-html-content :is(p, li, span, em) { color: var(--amb-card-text) !important; }
+  & .sqs-block.sqs-background-enabled .sqs-html-content :is(h1, h2, h3, h4) span { color: var(--amb-card-ink) !important; }
+
+  /* Lists, pagination, forms, shapes. */
+  & [data-section-theme] {
+    --list-section-title-color: var(--amb-on-page);
+    --list-section-simple-card-title-color: var(--amb-on-page);
+    --list-section-simple-card-description-color: var(--amb-on-page-muted);
+    --list-section-carousel-card-title-color: var(--amb-on-page);
+    --list-section-carousel-card-description-color: var(--amb-on-page-muted);
+    --list-section-carousel-title-color: var(--amb-on-page);
+    --list-section-banner-slideshow-card-title-color: var(--amb-on-page);
+    --list-section-banner-slideshow-card-description-color: var(--amb-on-page-muted);
+    --tweak-blog-item-pagination-title-color: var(--amb-on-page);
+    --tweak-blog-item-pagination-meta-color: var(--amb-on-page-muted);
+    --tweak-blog-item-pagination-icon-color: var(--amb-on-page);
+    --tweak-form-block-button-background-color: #fb7c8c;
+    --tweak-form-block-button-text-color: var(--amb-card-ink);
+    --tweak-form-block-title-color: var(--amb-on-page);
+    --tweak-form-block-description-color: var(--amb-on-page-muted);
+    --tweak-form-block-caption-color: var(--amb-on-page-muted);
+    --tweak-form-block-option-color: var(--amb-on-page);
+  }
+  & .user-items-list :is(.list-section-title, .list-item-content__title, .list-item-content__description) :is(p, h2, h3, span, a) { color: inherit; }
+  & .user-items-list :is(.list-section-title, .list-item-content__title) { color: var(--amb-on-page); }
+  & .user-items-list .list-item-content__description { color: var(--amb-on-page-muted); }
+  & .item-pagination :is(.item-pagination-title, h2, span) { color: var(--amb-on-page) !important; }
+  & :is(.form-submit-button, .newsletter-form-button, .header-skip-link) { background: #fb7c8c !important; color: var(--amb-card-ink) !important; }
+  & :is(.form-submit-button, .newsletter-form-button) * { color: var(--amb-card-ink) !important; }
+  & .sqs-shape-block-container, & [data-sqsp-shape-block-shape] { background-color: var(--amb-page-raised) !important; fill: var(--amb-page-raised) !important; }
+
+  /* Time-back calculator: existing widget, light card via its own variables. */
+  & #ambler-calc {
+    --ink: #181d27; --text: #414651; --muted: #535862; --line: #e9eaeb; --soft: #fafafa;
+    --accent: #b42f04; --accent-hover: #8f2503;
+    --heading: var(--amb-font); --body: var(--amb-font); --button: var(--amb-font);
+    background: var(--amb-card); border-radius: var(--amb-radius-2xl); box-shadow: var(--amb-shadow-card);
+    padding: clamp(20px, 4vw, 40px); box-sizing: border-box; max-width: 100%;
+  }
+}

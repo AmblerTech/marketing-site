@@ -21,10 +21,10 @@
     --navigationLinkColor: var(--amb-on-page);
     --menuOverlayBackgroundColor: var(--amb-page);
     --menuOverlayNavigationLinkColor: var(--amb-on-page);
-    --menuOverlayButtonBackgroundColor: var(--amb-brand);
-    --menuOverlayButtonTextColor: #ffffff;
-    --primaryButtonBackgroundColor: var(--amb-brand);
-    --primaryButtonTextColor: #ffffff;
+    --menuOverlayButtonBackgroundColor: #fb7c8c;
+    --menuOverlayButtonTextColor: var(--amb-card-ink);
+    --primaryButtonBackgroundColor: #fb7c8c;
+    --primaryButtonTextColor: var(--amb-card-ink);
     --secondaryButtonBackgroundColor: transparent;
     --secondaryButtonTextColor: var(--amb-on-page);
     --headerBorderColor: var(--amb-line-on-page);
@@ -32,8 +32,8 @@
     --tweak-newsletter-block-title-color: var(--amb-on-page);
     --tweak-newsletter-block-description-color: var(--amb-on-page-muted);
     --tweak-newsletter-block-footnote-color: var(--amb-on-page-muted);
-    --tweak-newsletter-block-button-background-color: var(--amb-brand);
-    --tweak-newsletter-block-button-text-color: #ffffff;
+    --tweak-newsletter-block-button-background-color: #fb7c8c;
+    --tweak-newsletter-block-button-text-color: var(--amb-card-ink);
     --tweak-form-block-field-fill-color: var(--amb-page-raised);
     --tweak-form-block-field-input-color: var(--amb-on-page);
     --tweak-form-block-field-border-color: var(--amb-line-on-page);
