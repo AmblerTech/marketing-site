@@ -34,3 +34,15 @@ test('blog post: article sits on a light reading panel', async ({ page }) => {
   const bg = await page.locator('.blog-item-content-wrapper').first().evaluate((e) => getComputedStyle(e).backgroundColor);
   expect(bg).toBe('rgb(255, 255, 255)');
 });
+
+test('header logo: uses the dark-background logo file, not a filtered (flattened) light one', async ({ page }) => {
+  await page.goto('/test/fixtures/blog.v2.html');
+  const s = await page.locator('#header .header-title-logo img').first().evaluate((img) => {
+    const cs = getComputedStyle(img);
+    return { filter: cs.filter, bg: cs.backgroundImage, objectPosition: cs.objectPosition, alt: img.alt };
+  });
+  expect(s.filter).toBe('none');
+  expect(s.bg).toContain('bafa68d3-4b56-4028-9b4d-d0ab0fad905b');
+  expect(s.objectPosition).toBe('-9999px 0px');
+  expect(s.alt.length).toBeGreaterThan(0);
+});

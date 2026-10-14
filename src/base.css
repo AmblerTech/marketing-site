@@ -52,7 +52,12 @@
   & #header .header-announcement-bar-wrapper,
   & #header .header-background-solid { background: rgba(11, 11, 15, 0.72) !important; backdrop-filter: blur(12px); }
   & #header { border-bottom: 1px solid var(--amb-line-on-page); }
-  & #header .header-title-logo img { filter: brightness(0) invert(1); }
+  /* Header logo: show the site's own dark-background logo (white ring + gradient orb, as in the footer).
+     The <img> stays in place (alt text, link, size); only its picture is swapped. */
+  & #header .header-title-logo img {
+    filter: none; object-position: -9999px 0;
+    background: url('https://images.squarespace-cdn.com/content/v1/68da5cb1661bbe41f3f1fb06/bafa68d3-4b56-4028-9b4d-d0ab0fad905b/Frame+1.png?format=500w') left center / contain no-repeat;
+  }
   & #header .header-actions-action--cta .btn,
   & .header-menu-cta .btn {
     background: var(--amb-gradient) !important; color: var(--amb-card-ink) !important;
