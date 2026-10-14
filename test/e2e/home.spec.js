@@ -34,7 +34,7 @@ test('mobile: hero card sits below the headline', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 900 });
   await page.goto('/preview/index.html');
   const h1 = await page.locator('h1').boundingBox();
-  const card = await page.locator('[data-status-card]').boundingBox();
+  const card = await page.locator('[data-demo]').boundingBox();
   expect(card.y).toBeGreaterThan(h1.y + h1.height);
 });
 
@@ -60,7 +60,7 @@ test('animated: badge cycles and no console errors', async ({ page }) => {
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
   await page.goto('/preview/index.html');
   await expect(page.locator('[data-status-badge]')).toHaveText('Draft');
-  await expect(page.locator('[data-status-badge]')).toHaveText('Artist input', { timeout: 7000 });
+  await expect(page.locator('[data-status-badge]')).toHaveText('Sent to Artist', { timeout: 8000 });
   await page.locator('[data-count="93"]').scrollIntoViewIfNeeded();
   await expect(page.locator('[data-count="93"]')).toHaveText('93%', { timeout: 4000 });
   expect(errors).toEqual([]);
@@ -81,15 +81,17 @@ test('animated: reveals start hidden and come in on scroll', async ({ page }) =>
   await expect.poll(() => last.evaluate((e) => getComputedStyle(e).opacity), { timeout: 3000 }).toBe('1');
 });
 
-test('hero: prefilled fields arrive first, then it ships once and offers Replay', async ({ page }) => {
+test('hero: create (prefilled) → artist confirms → ships once, then offers Replay', async ({ page }) => {
   await page.goto('/preview/index.html');
-  const card = page.locator('[data-status-card]');
-  await expect(card.locator('[data-replay]')).toHaveText('Skip');
-  await expect(page.locator('[data-status-badge]')).toHaveText('Artist input', { timeout: 7000 });
-  expect(await card.locator('[data-fill]:not(.is-filled)').count()).toBe(0);
-  await expect(page.locator('[data-status-badge]')).toHaveText('Shipped', { timeout: 10000 });
-  await expect(card.locator('[data-replay]')).toHaveText('Replay');
-  await expect(card.locator('[data-isrc]')).toBeVisible();
+  const demo = page.locator('[data-demo]');
+  await expect(demo.locator('[data-replay]')).toHaveText('Skip');
+  await expect(demo.locator('[data-screen="create"]')).toHaveClass(/is-active/);
+  await expect(demo.locator('[data-screen="confirm"]')).toHaveClass(/is-active/, { timeout: 8000 });
+  expect(await demo.locator('[data-fill]:not(.is-filled)').count()).toBe(0);
+  await expect(demo.locator('[data-screen="confirm"]')).toContainText('Suggested by Harmattan Records');
+  await expect(demo.locator('[data-screen="deliver"]')).toHaveClass(/is-active/, { timeout: 6000 });
+  await expect(page.locator('[data-status-badge]')).toHaveText('Shipped', { timeout: 6000 });
+  await expect(demo.locator('[data-replay]')).toHaveText('Replay');
 });
 
 test('hero: Skip stops the animation on the final state', async ({ page }) => {
@@ -98,4 +100,14 @@ test('hero: Skip stops the animation on the final state', async ({ page }) => {
   await expect(page.locator('[data-status-badge]')).toHaveText('Shipped');
   await page.waitForTimeout(2500);
   await expect(page.locator('[data-status-badge]')).toHaveText('Shipped');
+});
+
+test('hero @375: the three step tabs fit inside the demo', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 900 });
+  await page.goto('/preview/index.html');
+  const fits = await page.evaluate(() => {
+    const d = document.querySelector('[data-demo]').getBoundingClientRect();
+    return [...document.querySelectorAll('[data-demo-tab]')].every((t) => t.getBoundingClientRect().right <= d.right + 1);
+  });
+  expect(fits).toBe(true);
 });

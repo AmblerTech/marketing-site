@@ -14,30 +14,12 @@ const card = `
   <div data-reveal>Hello</div>`;
 
 describe('status sequence', () => {
-  it('follows the real registration states', () => {
-    expect(STATUS_STEPS.map((s) => s.label)).toEqual(['Draft', 'Artist input', 'Contributor input', 'QA review', 'Ready to ship', 'Shipped']);
+  it('follows the real registration states, with the app badge labels', () => {
+    expect(STATUS_STEPS.map((s) => s.label)).toEqual(['Draft', 'Sent to Artist', 'Contributor Input', 'Pending Approval', 'Ready to Ship', 'Shipped']);
   });
   it('loops', () => { expect(nextIndex(0)).toBe(1); expect(nextIndex(5)).toBe(0); });
   it('ISRC appears at Ready to ship (where the app mints it)', () => {
     expect(isrcShown(3)).toBe(false); expect(isrcShown(4)).toBe(true); expect(isrcShown(5)).toBe(true);
-  });
-});
-
-describe('card footer follows the animation', () => {
-  beforeEach(() => { document.body.innerHTML = card; });
-  it('mid-sequence: footer matches bar and says waiting', () => {
-    const win = { matchMedia: () => ({ matches: false }), IntersectionObserver: class { observe() {} unobserve() {} }, setTimeout: () => 1, clearTimeout() {}, requestAnimationFrame: () => 1 };
-    init(document, win); // sets step 0 (Draft)
-    const c = document.querySelector('[data-status-card]');
-    const fill = c.querySelector('[data-split]').style.getPropertyValue('--amb-fill');
-    expect(c.querySelector('[data-confirm-pct]').textContent).toBe(fill);
-    expect(c.querySelector('[data-confirm-label]').textContent).toBe('Waiting for contributors');
-  });
-  it('final: all confirmed, 100%', () => {
-    applyFinal(document);
-    const c = document.querySelector('[data-status-card]');
-    expect(c.querySelector('[data-confirm-pct]').textContent).toBe('100%');
-    expect(c.querySelector('[data-confirm-label]').textContent).toBe('Confirmed by all contributors');
   });
 });
 

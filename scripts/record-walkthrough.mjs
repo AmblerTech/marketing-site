@@ -46,8 +46,8 @@ for (const r of runs) {
   // 1. Homepage: watch the hero play out, Replay, then Skip.
   await page.goto(`${base}/preview/index.html`);
   await page.mouse.move(r.viewport.width / 2, r.viewport.height / 2);
-  if (r.name === 'phone') { await page.waitForTimeout(1200); await page.locator('[data-status-card]').scrollIntoViewIfNeeded(); }
-  await page.waitForTimeout(11500);
+  if (r.name === 'phone') { await page.waitForTimeout(1200); await page.locator('[data-demo]').scrollIntoViewIfNeeded(); }
+  await page.waitForTimeout(14500);
   await clickOn(page, page.locator('[data-replay]'));     // Replay
   await page.waitForTimeout(2500);
   await clickOn(page, page.locator('[data-replay]'));     // Skip
