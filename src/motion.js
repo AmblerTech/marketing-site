@@ -86,3 +86,10 @@ export function init(doc, win) {
   });
   return 'animated';
 }
+
+// Bundle entry. The loader inserts ambler.js from script, so `defer` is ignored and the file can run
+// before the body is parsed — wait for DOMContentLoaded in that case.
+export function start(doc, win) {
+  if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', () => init(doc, win), { once: true });
+  else init(doc, win);
+}

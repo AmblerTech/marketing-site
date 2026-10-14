@@ -14,7 +14,7 @@ await esbuild.build({
 });
 await esbuild.build({
   entryPoints: ['src/motion.js'], outfile: 'dist/ambler.js', bundle: true, minify: true, format: 'iife', target,
-  footer: { js: 'window.__ambMotion&&window.__ambMotion.init(document,window);' },
+  footer: { js: 'window.__ambMotion&&window.__ambMotion.start(document,window);' },
   globalName: '__ambMotion',
 });
 const loader = await esbuild.build({

@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect, beforeEach } from 'vitest';
-import { STATUS_STEPS, nextIndex, isrcShown, confirmedCount, formatCount, applyFinal, init } from '../../src/motion.js';
+import { STATUS_STEPS, nextIndex, isrcShown, confirmedCount, formatCount, applyFinal, init, start } from '../../src/motion.js';
 
 const card = `
   <div data-status-card><span class="amb-badge amb-badge--draft" data-status-badge data-key="draft">Draft</span>
@@ -81,6 +81,28 @@ describe('applyFinal / init', () => {
   it('normal → animated, amb-motion class set', () => {
     const win = { matchMedia: () => ({ matches: false }), IntersectionObserver: class { observe() {} unobserve() {} }, setInterval: () => 1, requestAnimationFrame: () => 1 };
     expect(init(document, win)).toBe('animated');
+    expect(document.documentElement.classList.contains('amb-motion')).toBe(true);
+  });
+});
+
+describe('start (bundle entry)', () => {
+  const win = { matchMedia: () => ({ matches: false }), IntersectionObserver: class { observe() {} unobserve() {} }, setInterval: () => 1, clearInterval() {}, requestAnimationFrame: () => 1 };
+  beforeEach(() => { document.documentElement.className = 'amb-v2'; });
+  it('waits for DOMContentLoaded while the document is still loading', () => {
+    const listeners = {};
+    const doc = ({
+      readyState: 'loading',
+      addEventListener: (t, fn) => { listeners[t] = fn; },
+      documentElement: document.documentElement,
+      querySelectorAll: (s) => document.querySelectorAll(s),
+    });
+    start(doc, win);
+    expect(document.documentElement.classList.contains('amb-motion')).toBe(false);
+    listeners.DOMContentLoaded();
+    expect(document.documentElement.classList.contains('amb-motion')).toBe(true);
+  });
+  it('runs immediately once the document is parsed', () => {
+    start(document, win);
     expect(document.documentElement.classList.contains('amb-motion')).toBe(true);
   });
 });
