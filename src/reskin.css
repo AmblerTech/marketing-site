@@ -102,7 +102,7 @@
     --ink: #181d27; --text: #414651; --muted: #535862; --line: #e9eaeb; --soft: #fafafa;
     --accent: #b42f04; --accent-hover: #8f2503; --on-dark-muted: #a4a7ae;
     --heading: var(--amb-font); --body: var(--amb-font); --button: var(--amb-font);
-    width: calc(100% - 2 * var(--amb-gutter)); max-width: 720px; margin: 0 auto clamp(64px, 10vw, 128px);
+    width: calc(100% - 2 * var(--amb-gutter)); max-width: 720px; margin: 0 auto;
     border: 1px solid var(--amb-card-line); border-radius: var(--amb-radius-2xl); box-shadow: var(--amb-shadow-card);
     overflow: hidden; box-sizing: border-box;
   }

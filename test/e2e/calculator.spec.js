@@ -37,3 +37,12 @@ test('calculator: restyled to the app look (Supreme, rounded, gradient primary b
   expect(s.btnBg).toContain('linear-gradient');
   expect(parseFloat(s.btnRadius)).toBeGreaterThan(100);
 });
+
+test('calculator: its Squarespace section adds no template padding or extra gap', async ({ page }) => {
+  await page.goto('/preview/index.html');
+  const s = await page.locator('#ambler-calc').evaluate((el) => {
+    const sec = el.closest('.page-section');
+    return { pt: getComputedStyle(sec).paddingTop, pb: getComputedStyle(sec).paddingBottom, mb: getComputedStyle(el).marginBottom };
+  });
+  expect(s).toEqual({ pt: '0px', pb: '0px', mb: '0px' });
+});

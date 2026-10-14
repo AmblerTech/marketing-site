@@ -1,8 +1,8 @@
 .amb-v2 {
   /* Squarespace sections that hold an .amb-home block: full width, no template padding. */
-  & .page-section:has(.amb-home) { padding-block: 0 !important; min-height: 0 !important; }
-  & .page-section:has(.amb-home) .content-wrapper { padding: 0 !important; max-width: none !important; }
-  & .page-section:has(.amb-home) .fluid-engine { display: block; }
+  & .page-section:is(:has(.amb-home), :has(#ambler-calc)) { padding-block: 0 !important; min-height: 0 !important; }
+  & .page-section:is(:has(.amb-home), :has(#ambler-calc)) .content-wrapper { padding: 0 !important; max-width: none !important; }
+  & .page-section:is(:has(.amb-home), :has(#ambler-calc)) .fluid-engine { display: block; }
 
   & .amb-home { position: relative; color: var(--amb-on-page); font-family: var(--amb-font); overflow: hidden; }
   & .amb-home *, & .amb-home *::before, & .amb-home *::after { box-sizing: border-box; }
