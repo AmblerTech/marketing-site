@@ -1,0 +1,2 @@
+var __ambMotion=(()=>{var c=Object.defineProperty;var f=Object.getOwnPropertyDescriptor;var p=Object.getOwnPropertyNames;var r=Object.prototype.hasOwnProperty;var u=(n,i)=>{for(var o in i)c(n,o,{get:i[o],enumerable:!0})},x=(n,i,o,e)=>{if(i&&typeof i=="object"||typeof i=="function")for(let t of p(i))!r.call(n,t)&&t!==o&&c(n,t,{get:()=>i[t],enumerable:!(e=f(i,t))||e.enumerable});return n};var a=n=>x(c({},"__esModule",{value:!0}),n);var d={};u(d,{init:()=>b});function b(){}return a(d);})();
+window.__ambMotion&&window.__ambMotion.init(document,window);

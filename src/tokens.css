@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'Supreme';
+  src: url('../fonts/Supreme-Variable.woff2') format('woff2-variations');
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+.amb-v2 {
+  --amb-font: 'Supreme', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --amb-page: #0b0b0f;
+  --amb-page-raised: #15151b;
+  --amb-on-page: #f5f5f5;
+  --amb-on-page-muted: #a4a7ae;
+  --amb-line-on-page: rgba(255, 255, 255, 0.12);
+  --amb-card: #ffffff;
+  --amb-card-ink: #181d27;
+  --amb-card-text: #535862;
+  --amb-card-line: #e9eaeb;
+  --amb-card-soft: #fafafa;
+  --amb-brand: #e76237;
+  --amb-brand-ink: #b42f04;
+  --amb-gradient: linear-gradient(165deg, #fff6b7 12.09%, #fb7c8c 72.19%, #d46879 104%);
+  --amb-progress: #7a5af8;
+  --amb-success-bg: #ecfdf3; --amb-success-ink: #067647;
+  --amb-warning-bg: #fffaeb; --amb-warning-ink: #b54708;
+  --amb-blue-bg: #eff8ff;    --amb-blue-ink: #175cd3;
+  --amb-gray-bg: #f5f5f5;    --amb-gray-ink: #414651;
+  --amb-radius-md: 8px; --amb-radius-xl: 12px; --amb-radius-2xl: 16px; --amb-radius-full: 9999px;
+  --amb-shadow-card: 0 12px 32px -8px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(10, 13, 18, 0.12);
+  --amb-shadow-sm: 0 1px 3px rgba(10, 13, 18, 0.1), 0 1px 2px -1px rgba(10, 13, 18, 0.1);
+  --amb-gutter: clamp(16px, 4vw, 32px);
+  --amb-max: 1200px;
+}
