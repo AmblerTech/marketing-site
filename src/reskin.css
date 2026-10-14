@@ -96,12 +96,37 @@
   & :is(.form-submit-button, .newsletter-form-button) * { color: var(--amb-card-ink) !important; }
   & .sqs-shape-block-container, & [data-sqsp-shape-block-shape] { background-color: var(--amb-page-raised) !important; fill: var(--amb-page-raised) !important; }
 
-  /* Time-back calculator: existing widget, light card via its own variables. */
+  /* Time-back calculator — Alexander's lead-capture code block, unchanged. Design only, via its own
+     variables and #ambler-calc classes: a light app card, rounded controls, gradient primary button. */
   & #ambler-calc {
     --ink: #181d27; --text: #414651; --muted: #535862; --line: #e9eaeb; --soft: #fafafa;
-    --accent: #b42f04; --accent-hover: #8f2503;
+    --accent: #b42f04; --accent-hover: #8f2503; --on-dark-muted: #a4a7ae;
     --heading: var(--amb-font); --body: var(--amb-font); --button: var(--amb-font);
-    background: var(--amb-card); border-radius: var(--amb-radius-2xl); box-shadow: var(--amb-shadow-card);
-    padding: clamp(20px, 4vw, 40px); box-sizing: border-box; max-width: 100%;
+    width: calc(100% - 2 * var(--amb-gutter)); max-width: 720px; margin: 0 auto clamp(64px, 10vw, 128px);
+    border: 1px solid var(--amb-card-line); border-radius: var(--amb-radius-2xl); box-shadow: var(--amb-shadow-card);
+    overflow: hidden; box-sizing: border-box;
   }
+  & #ambler-calc .ac-label { font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; font-size: 13px; }
+  & #ambler-calc h2 { font-weight: 600; }
+  & #ambler-calc .ac-progress span { height: 4px; border-radius: var(--amb-radius-full); }
+  & #ambler-calc .ac-progress span.on { background: var(--amb-progress); }
+  & #ambler-calc input[type=range] { accent-color: var(--amb-progress); }
+  & #ambler-calc :is(.ac-num, .ac-field input) { border-radius: var(--amb-radius-md); border-color: var(--amb-card-line); box-shadow: var(--amb-shadow-sm); }
+  & #ambler-calc .ac-chip { border-radius: var(--amb-radius-full); border-color: var(--amb-card-line); }
+  & #ambler-calc .ac-chip[aria-pressed=true]::before { color: #fb7c8c; }
+  & #ambler-calc :is(.ac-stepper, .ac-seg) { border-radius: var(--amb-radius-md); border-color: var(--amb-card-line); overflow: hidden; }
+  & #ambler-calc .ac-btn {
+    min-height: 44px; padding: 12px 24px; border-radius: var(--amb-radius-full); font-weight: 600;
+    background: var(--amb-gradient); border-color: transparent; color: var(--amb-card-ink);
+    box-shadow: 0 8px 24px -8px rgba(251, 124, 140, 0.6);
+  }
+  & #ambler-calc .ac-btn:hover { background: var(--amb-gradient); transform: translateY(-1px); }
+  & #ambler-calc .ac-btn.ghost { background: transparent; box-shadow: none; border-color: var(--amb-card-line); }
+  & #ambler-calc button:focus-visible, & #ambler-calc input:focus-visible { outline-color: var(--amb-brand-ink); }
+  /* Result panel stays dark (it reads as the payoff) — pink accent so it stays readable. */
+  & #ambler-calc .ac-result { --accent: #fb7c8c; margin: 0 clamp(12px, 2vw, 20px); border-radius: var(--amb-radius-xl); }
+  & #ambler-calc .ac-facts { border-radius: var(--amb-radius-md); overflow: hidden; }
+  & #ambler-calc form, & #ambler-calc .ac-done { background: transparent; }
+  & #ambler-calc .ac-done .ac-q, & #ambler-calc form .ac-q { color: var(--amb-card-ink); }
+  & #ambler-calc .ac-restart { color: var(--amb-on-page-muted); }
 }

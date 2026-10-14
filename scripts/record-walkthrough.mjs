@@ -52,7 +52,15 @@ for (const r of runs) {
   await page.waitForTimeout(2500);
   await clickOn(page, page.locator('[data-replay]'));     // Skip
   await page.waitForTimeout(1500);
-  // 2. Scroll the whole page; hover the audience cards on desktop.
+  // 2. Time-back calculator: answer the three questions, show the result and the email prompt. Never submits.
+  const calc = page.locator('#ambler-calc');
+  if (await calc.count()) {
+    await calc.scrollIntoViewIfNeeded(); await page.waitForTimeout(800);
+    for (let i = 0; i < 3; i++) { await clickOn(page, calc.locator('#ac-next')); await page.waitForTimeout(1100); }
+    await calc.locator('#ac-result-wrap').scrollIntoViewIfNeeded(); await page.waitForTimeout(1500);
+    await calc.locator('#ac-form').scrollIntoViewIfNeeded(); await page.waitForTimeout(1800);
+  }
+  // 3. Scroll the whole page; hover the audience cards on desktop.
   await page.evaluate(() => scrollTo({ top: 0 })); await page.waitForTimeout(600);
   await slowScroll(page, r.step);
   await page.waitForTimeout(1200);
@@ -60,7 +68,7 @@ for (const r of runs) {
     const aud = page.locator('.amb-aud');
     for (let i = 0; i < await aud.count(); i++) { await aud.nth(i).scrollIntoViewIfNeeded(); await aud.nth(i).hover(); await page.waitForTimeout(500); }
   }
-  // 3. Reskinned pages (saved copies of the live site with the v2 class).
+  // 4. Reskinned pages (saved copies of the live site with the v2 class).
   for (const f of ['blog', 'post', 'faq']) {
     await page.goto(`${base}/test/fixtures/${f}.v2.html`);
     await page.waitForTimeout(1200);
