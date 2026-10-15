@@ -2,13 +2,14 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 const pages = {
   home: '/', blog: '/blog', post: '/blog/what-is-music-metadata-registration',
-  faq: '/faq', partner: '/become-design-partner', privacy: '/privacy',
+  faq: '/faq', partner: '/become-design-partner', privacy: '/privacy', homev2: '/home-v2',
 };
 mkdirSync('test/fixtures', { recursive: true });
 for (const [name, path] of Object.entries(pages)) {
   const res = await fetch('https://www.useambler.io' + path, { headers: { 'user-agent': 'Mozilla/5.0' } });
   let html = await res.text();
   html = html.replace(/<script\b[\s\S]*?<\/script>/gi, '')
+    .replace(/<style>html\.amb-v2[^<]*<\/style>/g, '') // the live loader's pre-paint style (test-only removal)
     .replace(/<img([^>]*?)data-src="([^"]+)"/gi, '<img$1src="$2"')
     .replace('</head>', '<link rel="stylesheet" href="../../dist/ambler.css"></head>')
     // Test-only: Squarespace's own JS reveals [data-animation-role] content; scripts are stripped, so show the revealed state.

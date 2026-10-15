@@ -67,6 +67,8 @@
   /* Primitives */
   & .amb-sec { position: relative; font-family: var(--amb-body); }
   & .amb-sec *, & .amb-sec *::before, & .amb-sec *::after { box-sizing: border-box; }
+  /* Squarespace colours h1–h4/p by theme variables; inside our sections text follows the section ground. */
+  & .amb-sec :is(h1, h2, h3, h4, p, li, figcaption) { color: inherit; }
   & .amb-sec--ink { background: var(--amb-ink); color: #ffffff; }
   & .amb-sec--paper {
     background-color: var(--amb-paper); color: var(--amb-ink);
