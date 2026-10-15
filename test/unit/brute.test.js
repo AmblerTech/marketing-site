@@ -21,3 +21,20 @@ describe('Brute Mono tokens', () => {
     expect(tokens).toMatch(/--amb-display:\s*'Anton', Impact, 'Arial Narrow Bold', sans-serif/);
   });
 });
+
+import { readdirSync, statSync } from 'node:fs';
+
+describe('assets', () => {
+  const required = ['kayo', 'amara', 'tobs', 'selasi', 'nia', 'midnight', 'honey-season', 'scene-chaos', 'scene-studio', 'team-alexander', 'team-kristian', 'team-selim'];
+  it('every required photo exists and is ≤ 200 KB', () => {
+    for (const n of required) {
+      const p = `assets/${n}.jpg`;
+      expect(existsSync(p), p).toBe(true);
+      expect(statSync(p).size, p).toBeLessThanOrEqual(200 * 1024);
+    }
+  });
+  it('every asset has a credit line', () => {
+    const credits = readFileSync('assets/CREDITS.md', 'utf8');
+    for (const f of readdirSync('assets').filter((f) => f.endsWith('.jpg'))) expect(credits, f).toContain(f);
+  });
+});
