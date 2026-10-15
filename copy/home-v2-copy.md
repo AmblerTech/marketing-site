@@ -20,7 +20,7 @@ Changes vs live are marked ✎. Everything else is today's text.
 
 ## Audiences
 - H2: Built for labels. Free for everyone else.
-- Lede: Ambler's revenue comes from labels. Artists, contributors, publishers, and CMOs use the platform at no cost.
+- Lede: Labels subscribe. Artists and contributors get their own app, and CMOs, PROs, neighbouring-rights societies and publishers receive the clean data — both for free.
 - For Labels ✎ (formats): … ships directly to CMOs, PROs, and publishers — in CWR, DDEX ERN and DDEX RDR-N. Integrates with your distributor.
 - For Publishers / For CMOs & PROs: as live.
 
