@@ -5,7 +5,7 @@ const tag = `v${JSON.parse(readFileSync('package.json', 'utf8')).version}`;
 const base = `https://cdn.jsdelivr.net/gh/AmblerTech/marketing-site@${tag}/`;
 const files = ['dist/ambler.css', 'dist/ambler.js',
   ...readdirSync('dist/fonts').map((f) => `dist/fonts/${f}`),
-  ...readdirSync('assets').filter((f) => f.endsWith('.jpg')).map((f) => `assets/${f}`)];
+  ...readdirSync('assets').filter((f) => /\.(jpg|png)$/.test(f)).map((f) => `assets/${f}`)];
 let bad = 0;
 for (const f of files) {
   let status = 0;

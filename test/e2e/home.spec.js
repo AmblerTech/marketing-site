@@ -17,6 +17,11 @@ test('no prices, no retired formats, fictional data only', () => {
   expect(html).toContain('Harmattan Records');
   expect(html).toContain('GB-K3A-26-00109');
 });
+test('guides strip links crawlers to at least six guides and the blog index', () => {
+  const guides = new Set([...html.matchAll(/href="(\/blog\/[a-z0-9-]+)"/g)].map((m) => m[1]));
+  expect(guides.size).toBeGreaterThanOrEqual(6);
+  expect(html).toMatch(/href="\/blog"/);
+});
 test('every image has alt text', () => {
   for (const img of html.match(/<img\b[^>]*>/g) ?? []) expect(img).toMatch(/\balt="[^"]+"/);
 });
@@ -117,7 +122,7 @@ test('hero @375: the three step tabs fit inside the demo', async ({ page }) => {
 test('grounds alternate ink / paper / ink as specified', async ({ page }) => {
   await page.goto('/preview/index.html');
   const grounds = await page.$$eval('.amb-sec', (els) => els.map((e) => [...e.classList].find((c) => c.startsWith('amb-sec--'))));
-  expect(grounds).toEqual(['amb-sec--ink', 'amb-sec--paper', 'amb-sec--ink', 'amb-sec--ink', 'amb-sec--paper', 'amb-sec--ink', 'amb-sec--paper', 'amb-sec--coral']);
+  expect(grounds).toEqual(['amb-sec--ink', 'amb-sec--paper', 'amb-sec--ink', 'amb-sec--ink', 'amb-sec--paper', 'amb-sec--ink', 'amb-sec--paper', 'amb-sec--coral', 'amb-sec--paper']);
 });
 
 test('@375 with fonts blocked: Anton fallback keeps headlines inside the viewport', async ({ page }) => {
