@@ -6,9 +6,11 @@ const html = readdirSync('sections').filter((f) => f.endsWith('.html')).map((f) 
 const text = html.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s+/g, ' ');
 
 test('copy is server-rendered HTML (crawler-visible)', () => {
-  for (const s of ['Register releases. Confirm credits. Ship clean data.', 'One workflow. Every stakeholder.',
-    'Built for labels. Free for everyone else.', 'Validated by the industry', 'CWR · DDEX ERN · DDEX RDR-N',
-    'Design Partner Programme — now accepting Cohort 2', '3-month trial — then 50% off for the first year', 'our first cohort is live', 'Label creates', 'Data delivered']) expect(text).toContain(s);
+  for (const s of ['Register releases.', 'Confirm credits.', 'Ship clean data.', 'One single.', 'Four people.', 'One record.',
+    'Metadata work costs hours', 'on every release.', 'One workflow.', 'Confirmed at source.', 'Built for labels.',
+    'Free for everyone else.', 'Register once.', 'Ship everywhere.', 'We did this job by hand.', 'Then we built the fix.',
+    'Now accepting', 'Cohort 2.', '3-month trial — then 50% off for the first year', 'CWR · DDEX ERN · DDEX RDR-N',
+    "We don't release music, collect royalties or publish. We make sure the data is right.", 'Label creates', 'Data delivered']) expect(text).toContain(s);
 });
 test('no prices, no retired formats, fictional data only', () => {
   expect(html).not.toMatch(/€|EUR|\bMWN\b|\bRIN\b/);
@@ -26,7 +28,7 @@ for (const w of [375, 768, 1440]) {
     await page.goto('/preview/index.html');
     expect(await noHorizontalScroll(page)).toBe(true);
     expect(await lowContrast(page)).toEqual([]);
-    await expect(page.locator('h1')).toHaveText('Register releases. Confirm credits. Ship clean data.');
+    await expect(page.locator('h1')).toHaveText(/Register releases\.\s*Confirm credits\.\s*Ship clean data\./);
   });
 }
 
@@ -110,4 +112,32 @@ test('hero @375: the three step tabs fit inside the demo', async ({ page }) => {
     return [...document.querySelectorAll('[data-demo-tab]')].every((t) => t.getBoundingClientRect().right <= d.right + 1);
   });
   expect(fits).toBe(true);
+});
+
+test('grounds alternate ink / paper / ink as specified', async ({ page }) => {
+  await page.goto('/preview/index.html');
+  const grounds = await page.$$eval('.amb-sec', (els) => els.map((e) => [...e.classList].find((c) => c.startsWith('amb-sec--'))));
+  expect(grounds).toEqual(['amb-sec--ink', 'amb-sec--paper', 'amb-sec--ink', 'amb-sec--ink', 'amb-sec--paper', 'amb-sec--ink', 'amb-sec--paper', 'amb-sec--coral']);
+});
+
+test('@375 with fonts blocked: Anton fallback keeps headlines inside the viewport', async ({ page }) => {
+  await page.route('**/*.woff2', (r) => r.abort());
+  await page.setViewportSize({ width: 375, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/preview/index.html');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  const clipped = await page.$$eval('.amb-h1, .amb-h2', (els) => els.filter((e) => e.scrollWidth > e.clientWidth + 1).length);
+  expect(clipped).toBe(0);
+});
+
+test('coral text on paper uses coral-deep', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/preview/index.html');
+  // Coral #F0747E is only allowed where the text actually sits on ink (e.g. the featured black card).
+  const bad = await page.$$eval('.amb-sec--paper *', (els) => els.filter((e) => {
+    if (getComputedStyle(e).color !== 'rgb(240, 116, 126)' || !e.textContent.trim()) return false;
+    for (let a = e; a; a = a.parentElement) { const bg = getComputedStyle(a).backgroundColor; if (bg !== 'rgba(0, 0, 0, 0)') return bg !== 'rgb(12, 12, 12)'; }
+    return true;
+  }).map((e) => e.textContent.trim().slice(0, 30)));
+  expect(bad).toEqual([]);
 });

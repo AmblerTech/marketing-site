@@ -4,6 +4,7 @@ import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 
 const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
 const tag = `v${pkg.version}`;
 const cdn = `https://cdn.jsdelivr.net/gh/AmblerTech/marketing-site@${tag}/dist/`;
+const assetsCdn = `https://cdn.jsdelivr.net/gh/AmblerTech/marketing-site@${tag}/assets/`;
 const alwaysOn = process.env.AMB_ALWAYS_ON === '1';
 const target = ['chrome100', 'safari15', 'firefox100', 'edge100'];
 mkdirSync('dist', { recursive: true });
@@ -23,7 +24,7 @@ const loader = await esbuild.build({
 });
 writeFileSync('dist/head-injection.html',
   `<!-- Ambler v2 loader ${tag}${alwaysOn ? ' (always on)' : ' (preview flag)'} -->\n` +
-  `<style>html.amb-v2,html.amb-v2 body{background:#0b0b0f}</style>\n` +
+  `<style>html.amb-v2,html.amb-v2 body{background:#f4f4f0}</style>\n` +
   `<script>${loader.outputFiles[0].text.trim()}</script>\n`);
 
 // The time-back calculator is Alexander's existing Squarespace code block (lead capture). It is never
@@ -32,8 +33,13 @@ const calcPath = process.env.AMB_CALC_PATH || '../ambler-internal-tools/website/
 const calc = existsSync(calcPath) ? readFileSync(calcPath, 'utf8') : null;
 if (!calc) console.warn(`calculator not found at ${calcPath} — preview built without it`);
 const block = (html) => `<section class="page-section" data-section-theme="white"><div class="content-wrapper"><div class="sqs-block-code">${html}</div></div></section>`;
-const sections = readdirSync('sections').filter((f) => f.endsWith('.html')).sort()
-  .flatMap((f) => [block(readFileSync(`sections/${f}`, 'utf8')), ...(f.startsWith('02-') && calc ? [block(calc)] : [])])
+// Sections use __ASSETS__/ for photos: the preview points at the local files, the paste-ready copies in
+// dist/sections/ (what goes into Squarespace) point at jsDelivr for this tag.
+const files = readdirSync('sections').filter((f) => f.endsWith('.html')).sort();
+mkdirSync('dist/sections', { recursive: true });
+for (const f of files) writeFileSync(`dist/sections/${f}`, readFileSync(`sections/${f}`, 'utf8').replaceAll('__ASSETS__/', assetsCdn));
+const sections = files
+  .flatMap((f) => [block(readFileSync(`sections/${f}`, 'utf8').replaceAll('__ASSETS__/', '../assets/')), ...(f.startsWith('03-') && calc ? [block(calc)] : [])])
   .join('\n');
 mkdirSync('preview', { recursive: true });
 writeFileSync('preview/index.html', `<!doctype html>
