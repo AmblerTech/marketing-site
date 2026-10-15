@@ -75,7 +75,7 @@ function scrollToField(el) {
 }
 
 function finishDemo(demo) {
-  demo.querySelectorAll('[data-fill]').forEach((el) => el.classList.add('is-filled'));
+  demo.querySelectorAll('[data-fill], [data-tick]').forEach((el) => el.classList.add('is-filled'));
   demo.querySelectorAll('[data-accept]').forEach((el) => el.classList.add('is-accepted'));
   demo.querySelectorAll('[data-press]').forEach((el) => el.classList.remove('is-pressed'));
   demo.querySelectorAll('[data-status-card]').forEach((c) => finishCard(c));
@@ -91,7 +91,7 @@ function finishCard(card) {
 // Back to an empty Create screen at Draft. The button plays it on demand.
 function rewind(demo, win, label) {
   clearDemo(demo, win);
-  demo.querySelectorAll('[data-fill]').forEach((el) => el.classList.remove('is-filled'));
+  demo.querySelectorAll('[data-fill], [data-tick]').forEach((el) => el.classList.remove('is-filled'));
   demo.querySelectorAll('[data-prefilled]').forEach((el) => el.classList.remove('is-flash'));
   demo.querySelectorAll('[data-accept]').forEach((el) => el.classList.remove('is-accepted'));
   demo.querySelectorAll('[data-status-card]').forEach((c) => setStatus(c, 0));
@@ -120,7 +120,7 @@ export function play(demo, win) {
   let t = T.first;
   const at = (fn) => ids.push(win.setTimeout(fn, t));
 
-  const fills = [...demo.querySelectorAll('[data-fill]')].sort((a, b) => Number(a.dataset.fillOrder) - Number(b.dataset.fillOrder));
+  const fills = [...demo.querySelectorAll('[data-fill], [data-tick]')].sort((a, b) => Number(a.dataset.fillOrder) - Number(b.dataset.fillOrder));
   fills.forEach((el) => { at(() => { el.classList.add('is-filled'); scrollToField(el); }); t += T.fill; });
   // Glide past everything that was already filled in, down to the invite.
   const prefilled = [...demo.querySelectorAll('[data-scroll] [data-prefilled]')];

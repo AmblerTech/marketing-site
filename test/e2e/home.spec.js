@@ -62,7 +62,7 @@ test('animated: badge cycles and no console errors', async ({ page }) => {
   page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
   await page.goto('/preview/index.html');
   await expect(page.locator('[data-status-badge]')).toHaveText('Draft');
-  await expect(page.locator('[data-status-badge]')).toHaveText('Sent to Artist', { timeout: 8000 });
+  await expect(page.locator('[data-status-badge]')).toHaveText('Sent to Artist', { timeout: 12000 });
   await page.locator('[data-count="93"]').scrollIntoViewIfNeeded();
   await expect(page.locator('[data-count="93"]')).toHaveText('93%', { timeout: 4000 });
   expect(errors).toEqual([]);
@@ -88,10 +88,10 @@ test('hero: create (prefilled) → artist confirms → ships once, then offers R
   const demo = page.locator('[data-demo]');
   await expect(demo.locator('[data-replay]')).toHaveText('Skip');
   await expect(demo.locator('[data-screen="create"]')).toHaveClass(/is-active/);
-  await expect(demo.locator('[data-screen="confirm"]')).toHaveClass(/is-active/, { timeout: 8000 });
+  await expect(demo.locator('[data-screen="confirm"]')).toHaveClass(/is-active/, { timeout: 15000 });
   expect(await demo.locator('[data-fill]:not(.is-filled)').count()).toBe(0);
   await expect(demo.locator('[data-screen="confirm"]')).toContainText('Suggested by Harmattan Records');
-  await expect(demo.locator('[data-screen="deliver"]')).toHaveClass(/is-active/, { timeout: 6000 });
+  await expect(demo.locator('[data-screen="deliver"]')).toHaveClass(/is-active/, { timeout: 12000 });
   await expect(page.locator('[data-status-badge]')).toHaveText('Shipped', { timeout: 6000 });
   await expect(demo.locator('[data-replay]')).toHaveText('Replay');
 });
@@ -140,4 +140,22 @@ test('coral text on paper uses coral-deep', async ({ page }) => {
     return true;
   }).map((e) => e.textContent.trim().slice(0, 30)));
   expect(bad).toEqual([]);
+});
+
+test('hero @375: square frame fits and Skip is reachable', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 760 });
+  await page.goto('/preview/index.html');
+  const demo = page.locator('[data-demo]'); await demo.scrollIntoViewIfNeeded();
+  const box = await demo.boundingBox();
+  expect(box.x + box.width).toBeLessThanOrEqual(375);
+  await page.locator('[data-replay]').scrollIntoViewIfNeeded();
+  await expect(page.locator('[data-replay]')).toBeInViewport();
+});
+
+test('hero: ISRC is never typed — it appears on the Ship screen', async ({ page }) => {
+  await page.goto('/preview/index.html');
+  await expect(page.locator('[data-screen="create"]')).not.toContainText('GB-K3A-26-00109');
+  await expect(page.locator('[data-screen="create"]')).toContainText('Ambler will assign an ISRC automatically when this registration is locked.');
+  await expect(page.locator('[data-status-badge]')).toHaveText('Shipped', { timeout: 20000 });
+  await expect(page.locator('[data-screen="deliver"] [data-isrc]')).toBeVisible();
 });

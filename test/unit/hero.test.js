@@ -129,3 +129,31 @@ describe('hero starts when it is seen', () => {
     expect(button().textContent).toBe('Skip');
   });
 });
+
+describe('staging modal sequence', () => {
+  const html = `<div data-demo>
+    <section data-screen="create" data-caption="c"><div data-scroll>
+      <span data-prefilled>Harmattan Records Ltd</span>
+      <span data-fill data-fill-order="1" class="is-filled">Midnight</span>
+      <span data-tick data-fill-order="2" class="is-filled"></span>
+      <button data-press>Send invite</button></div></section>
+    <section data-screen="confirm" data-caption="f"><div data-scroll><div data-accept></div></div></section>
+    <section data-screen="deliver" class="is-active" data-caption="d"><div data-status-card><span data-status-badge>Shipped</span><span data-isrc data-shown="true">GB-K3A-26-00109</span></div></section>
+    <p data-caption-out></p><button data-replay>Replay</button></div>`;
+  beforeEach(() => { vi.useFakeTimers(); document.body.innerHTML = html; });
+  afterEach(() => vi.useRealTimers());
+  it('ticks are cleared on rewind and set in fill order', () => {
+    play(document.querySelector('[data-demo]'), window);
+    expect(document.querySelector('[data-tick]').classList.contains('is-filled')).toBe(false);
+    vi.advanceTimersByTime(30000);
+    expect(document.querySelector('[data-tick]').classList.contains('is-filled')).toBe(true);
+  });
+  it('ISRC is hidden until Ready to Ship, then shown', () => {
+    play(document.querySelector('[data-demo]'), window);
+    expect(document.querySelector('[data-isrc]').dataset.shown).toBe('false');
+    for (let t = 0; t < 30000; t += 50) { vi.advanceTimersByTime(50); if (document.querySelector('[data-status-badge]').textContent === 'Pending Approval') break; }
+    expect(document.querySelector('[data-isrc]').dataset.shown).toBe('false');
+    vi.advanceTimersByTime(30000);
+    expect(document.querySelector('[data-isrc]').dataset.shown).toBe('true');
+  });
+});
