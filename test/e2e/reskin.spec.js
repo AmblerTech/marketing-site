@@ -8,14 +8,14 @@ for (const name of pages) {
   test(`${name}: without the flag, dist CSS changes nothing visible`, async ({ page }) => {
     await page.goto(`/test/fixtures/${name}.html`);
     const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-    expect(bg).not.toBe('rgb(11, 11, 15)');
+    expect(bg).not.toBe('rgb(244, 244, 240)');
   });
   for (const w of widths) {
-    test(`${name} @${w}: dark, readable, no sideways scroll`, async ({ page }) => {
+    test(`${name} @${w}: paper, readable, no sideways scroll`, async ({ page }) => {
       await page.setViewportSize({ width: w, height: 900 });
       await page.goto(`/test/fixtures/${name}.v2.html`);
       await page.waitForLoadState('networkidle');
-      expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)).toBe('rgb(11, 11, 15)');
+      expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)).toBe('rgb(244, 244, 240)');
       expect(await visibleTextCount(page)).toBeGreaterThan(20); // contrast check must see real content
       expect(await lowContrast(page)).toEqual([]);
       expect(await noHorizontalScroll(page)).toBe(true);
@@ -23,16 +23,16 @@ for (const name of pages) {
   }
 }
 
-test('blog list: posts render as light cards', async ({ page }) => {
+test('blog list: posts are square 1.5px boxes', async ({ page }) => {
   await page.goto('/test/fixtures/blog.v2.html');
-  const bg = await page.locator('.view-list article.blog-item').first().evaluate((e) => getComputedStyle(e).backgroundColor);
-  expect(bg).toBe('rgb(255, 255, 255)');
+  const s = await page.locator('.view-list article.blog-item').first().evaluate((e) => { const c = getComputedStyle(e); return [c.borderTopWidth, c.borderTopLeftRadius]; });
+  expect(['1px', '1.5px']).toContain(s[0]); expect(s[1]).toBe('0px'); // 1.5px rounds to 1px on 1x screens
 });
 
-test('blog post: article sits on a light reading panel', async ({ page }) => {
+test('blog post: article in a square 1.5px reading column', async ({ page }) => {
   await page.goto('/test/fixtures/post.v2.html');
-  const bg = await page.locator('.blog-item-content-wrapper').first().evaluate((e) => getComputedStyle(e).backgroundColor);
-  expect(bg).toBe('rgb(255, 255, 255)');
+  const s = await page.locator('.blog-item-content-wrapper').first().evaluate((e) => { const c = getComputedStyle(e); return [c.borderTopWidth, c.borderTopLeftRadius]; });
+  expect(['1px', '1.5px']).toContain(s[0]); expect(s[1]).toBe('0px'); // 1.5px rounds to 1px on 1x screens
 });
 
 test('header logo: uses the dark-background logo file, not a filtered (flattened) light one', async ({ page }) => {

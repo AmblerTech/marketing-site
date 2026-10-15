@@ -22,7 +22,10 @@
     --tweak-blog-item-pagination-title-color: var(--amb-ink); --tweak-blog-item-pagination-meta-color: var(--amb-grey);
   }
   & .section-background { background-color: var(--amb-paper) !important; }
-  & .section-background img, & .section-background .section-background-overlay { filter: grayscale(1); opacity: 0.2; }
+  /* Sections with a background photo: black base, photo greyscale at 55% — editor text on them is usually white */
+  & .page-section:has(.section-background img) { background: var(--amb-ink); }
+  & .page-section:has(.section-background img) .section-background { background-color: var(--amb-ink) !important; }
+  & .section-background img { filter: grayscale(1); opacity: 0.55; }
   & :is(h1, h2, h3, h4, p, li, a, button, input) { font-family: var(--amb-body); }
   & :is(h1, h2) { font-family: var(--amb-display); text-transform: uppercase; font-weight: 400; letter-spacing: 0.005em; line-height: 0.96; }
 
@@ -57,7 +60,7 @@
     --tweak-form-block-field-fill-color: transparent; --tweak-form-block-field-input-color: #ffffff; --tweak-form-block-field-border-color: #ffffff;
   }
   & #footer-sections .section-background { background-color: var(--amb-ink) !important; }
-  & #footer-sections { border-top: var(--amb-line) #ffffff; }
+  & #footer-sections { border-top: var(--amb-line) #ffffff; background: var(--amb-ink); color: #ffffff; }
   & #footer-sections :is(input, .newsletter-form-button, button) { border-radius: 0 !important; }
   & #footer-sections .newsletter-form-button { background: var(--amb-coral) !important; color: var(--amb-ink) !important; }
 

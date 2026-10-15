@@ -21,6 +21,9 @@ export const lowContrast = (page, min = 4.5) => page.evaluate((min) => {
     const s = getComputedStyle(el); const r = el.getBoundingClientRect();
     if (s.visibility === 'hidden' || s.display === 'none' || r.width === 0 || Number(s.opacity) === 0) continue;
     if (s.color === 'rgba(0, 0, 0, 0)') continue; // gradient text
+    // Text drawn over a photo (e.g. a Squarespace text block layered on an image block) can't be measured from colours.
+    const cx = r.left + Math.min(r.width, 40) / 2, cy = r.top + r.height / 2;
+    if (cx >= 0 && cy >= 0 && cx <= innerWidth && cy <= innerHeight && document.elementsFromPoint(cx, cy).some((x) => x.tagName === 'IMG')) continue;
     const bg = bgOf(el); if (!bg) continue;
     const a = lum(parse(s.color)); const b = lum(bg);
     const ratio = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
