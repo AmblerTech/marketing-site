@@ -11,10 +11,10 @@ for (const w of [375, 1440]) {
     const calc = page.locator('#ambler-calc');
     await expect(calc).toHaveCount(1);
     const order = await page.evaluate(() => {
-      const all = [...document.querySelectorAll('.amb-home, #ambler-calc')];
+      const all = [...document.querySelectorAll('.amb-sec, #ambler-calc')];
       return all.map((e) => (e.id === 'ambler-calc' ? 'calc' : e.querySelector('h1,h2')?.textContent.slice(0, 12)));
     });
-    expect(order.indexOf('calc')).toBe(2); // hero, problem, calculator, workflow…
+    expect(order.indexOf('calc')).toBe(3); // hero, people, problem, calculator, workflow…
     expect(await lowContrast(page)).toEqual([]);
     for (let i = 0; i < 3; i++) await calc.locator('#ac-next').click();
     await expect(calc.locator('#ac-result-wrap')).toBeVisible();
@@ -25,17 +25,19 @@ for (const w of [375, 1440]) {
   });
 }
 
-test('calculator: restyled to the app look (Supreme, rounded, gradient primary button)', async ({ page }) => {
+test('calculator: restyled Brute Mono (square, Roboto, Anton title, coral button)', async ({ page }) => {
   await page.goto('/preview/index.html');
   const calc = page.locator('#ambler-calc');
   const s = await calc.evaluate((el) => {
     const cs = getComputedStyle(el); const btn = getComputedStyle(el.querySelector('#ac-next'));
     return { radius: cs.borderTopLeftRadius, font: cs.fontFamily, btnBg: btn.backgroundImage, btnRadius: btn.borderTopLeftRadius };
   });
-  expect(s.radius).toBe('16px');
-  expect(s.font).toContain('Supreme');
-  expect(s.btnBg).toContain('linear-gradient');
-  expect(parseFloat(s.btnRadius)).toBeGreaterThan(100);
+  expect(s.radius).toBe('0px');
+  expect(s.font).toMatch(/Roboto/);
+  expect(s.btnBg).toBe('none');
+  expect(parseFloat(s.btnRadius)).toBe(0);
+  const title = await calc.evaluate((el) => getComputedStyle(el.querySelector('h2')).fontFamily);
+  expect(title).toMatch(/Anton/);
 });
 
 test('calculator: its Squarespace section adds no template padding or extra gap', async ({ page }) => {
@@ -45,4 +47,12 @@ test('calculator: its Squarespace section adds no template padding or extra gap'
     return { pt: getComputedStyle(sec).paddingTop, pb: getComputedStyle(sec).paddingBottom, mb: getComputedStyle(el).marginBottom };
   });
   expect(s).toEqual({ pt: '0px', pb: '0px', mb: '0px' });
+});
+
+test('calculator: progress shows how far you are (filled vs unfilled differ)', async ({ page }) => {
+  await page.goto('/preview/index.html');
+  const calc = page.locator('#ambler-calc');
+  await calc.locator('#ac-next').click();
+  const bgs = await calc.locator('.ac-progress span').evaluateAll((els) => els.map((e) => getComputedStyle(e).backgroundColor));
+  expect(new Set(bgs).size).toBe(2);
 });

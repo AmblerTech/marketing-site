@@ -96,37 +96,30 @@
   & :is(.form-submit-button, .newsletter-form-button) * { color: var(--amb-card-ink) !important; }
   & .sqs-shape-block-container, & [data-sqsp-shape-block-shape] { background-color: var(--amb-page-raised) !important; fill: var(--amb-page-raised) !important; }
 
-  /* Time-back calculator — Alexander's lead-capture code block, unchanged. Design only, via its own
-     variables and #ambler-calc classes: a light app card, rounded controls, gradient primary button. */
+  /* Time-back calculator — Alexander's lead-capture code block, unchanged. Design only (Brute Mono). */
+  & .page-section:has(#ambler-calc) { background-color: var(--amb-paper); background-image: linear-gradient(var(--amb-rule) 1px, transparent 1px), linear-gradient(90deg, var(--amb-rule) 1px, transparent 1px); background-size: 48px 48px; padding-block: clamp(48px, 8vw, 96px) !important; }
   & #ambler-calc {
-    --ink: #181d27; --text: #414651; --muted: #535862; --line: #e9eaeb; --soft: #fafafa;
-    --accent: #b42f04; --accent-hover: #8f2503; --on-dark-muted: #a4a7ae;
-    --heading: var(--amb-font); --body: var(--amb-font); --button: var(--amb-font);
+    --ink: #0c0c0c; --text: #3c3c38; --muted: #6e6e68; --line: #0c0c0c; --soft: #f4f4f0;
+    --accent: #b42f04; --accent-hover: #8f2503; --on-dark-muted: #c9c9c3;
+    --heading: var(--amb-display); --body: var(--amb-body); --button: var(--amb-body);
     width: calc(100% - 2 * var(--amb-gutter)); max-width: 720px; margin: 0 auto;
-    border: 1px solid var(--amb-card-line); border-radius: var(--amb-radius-2xl); box-shadow: var(--amb-shadow-card);
-    overflow: hidden; box-sizing: border-box;
+    border: var(--amb-line) var(--amb-ink); border-radius: 0; box-shadow: none; background: #ffffff; overflow: hidden; box-sizing: border-box;
   }
-  & #ambler-calc .ac-label { font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; font-size: 13px; }
-  & #ambler-calc h2 { font-weight: 600; }
-  & #ambler-calc .ac-progress span { height: 4px; border-radius: var(--amb-radius-full); }
-  & #ambler-calc .ac-progress span.on { background: var(--amb-progress); }
-  & #ambler-calc input[type=range] { accent-color: var(--amb-progress); }
-  & #ambler-calc :is(.ac-num, .ac-field input) { border-radius: var(--amb-radius-md); border-color: var(--amb-card-line); box-shadow: var(--amb-shadow-sm); }
-  & #ambler-calc .ac-chip { border-radius: var(--amb-radius-full); border-color: var(--amb-card-line); }
-  & #ambler-calc .ac-chip[aria-pressed=true]::before { color: #fb7c8c; }
-  & #ambler-calc :is(.ac-stepper, .ac-seg) { border-radius: var(--amb-radius-md); border-color: var(--amb-card-line); overflow: hidden; }
-  & #ambler-calc .ac-btn {
-    min-height: 44px; padding: 12px 24px; border-radius: var(--amb-radius-full); font-weight: 600;
-    background: var(--amb-gradient); border-color: transparent; color: var(--amb-card-ink);
-    box-shadow: 0 8px 24px -8px rgba(251, 124, 140, 0.6);
-  }
-  & #ambler-calc .ac-btn:hover { background: var(--amb-gradient); transform: translateY(-1px); }
-  & #ambler-calc .ac-btn.ghost { background: transparent; box-shadow: none; border-color: var(--amb-card-line); }
-  & #ambler-calc button:focus-visible, & #ambler-calc input:focus-visible { outline-color: var(--amb-brand-ink); }
-  /* Result panel stays dark (it reads as the payoff) — pink accent so it stays readable. */
-  & #ambler-calc .ac-result { --accent: #fb7c8c; margin: 0 clamp(12px, 2vw, 20px); border-radius: var(--amb-radius-xl); }
-  & #ambler-calc .ac-facts { border-radius: var(--amb-radius-md); overflow: hidden; }
-  & #ambler-calc form, & #ambler-calc .ac-done { background: transparent; }
-  & #ambler-calc .ac-done .ac-q, & #ambler-calc form .ac-q { color: var(--amb-card-ink); }
-  & #ambler-calc .ac-restart { color: var(--amb-on-page-muted); }
+  & #ambler-calc h2 { font-family: var(--amb-display); text-transform: uppercase; font-weight: 400; line-height: 0.98; }
+  & #ambler-calc .ac-label { font-family: var(--amb-mono); letter-spacing: 0.14em; text-transform: uppercase; font-size: 11px; color: var(--amb-ink); }
+  & #ambler-calc .ac-progress span { height: 4px; border-radius: 0; background: var(--amb-rule); }
+  & #ambler-calc .ac-progress span.on { background: var(--amb-ink); }
+  & #ambler-calc input[type=range] { accent-color: var(--amb-coral-deep); }
+  & #ambler-calc :is(.ac-num, .ac-field input, .ac-chip, .ac-stepper, .ac-seg) { border-radius: 0; border: var(--amb-line) var(--amb-ink); box-shadow: none; }
+  & #ambler-calc .ac-chip[aria-pressed=true] { background: var(--amb-ink); color: #ffffff; }
+  & #ambler-calc .ac-chip[aria-pressed=true]::before { color: var(--amb-coral); }
+  & #ambler-calc .ac-btn { border-radius: 0; background: var(--amb-coral); background-image: none; border: var(--amb-line) var(--amb-coral); color: var(--amb-ink); font-weight: 600; min-height: 44px; padding: 12px 24px; box-shadow: none; }
+  & #ambler-calc .ac-btn:hover { background: var(--amb-coral); filter: brightness(0.95); }
+  & #ambler-calc .ac-btn.ghost { background: transparent; border-color: var(--amb-ink); }
+  & #ambler-calc button:focus-visible, & #ambler-calc input:focus-visible { outline-color: var(--amb-ink); }
+  & #ambler-calc .ac-result { --accent: #f0747e; margin: 0; border-radius: 0; background: var(--amb-ink); }
+  & #ambler-calc .ac-result .ac-big { font-family: var(--amb-display); font-weight: 400; }
+  & #ambler-calc .ac-facts { border-radius: 0; }
+  & #ambler-calc form, & #ambler-calc .ac-done { background: #ffffff; }
+  & #ambler-calc .ac-restart { color: var(--amb-on-ink-muted); }
 }
