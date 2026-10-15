@@ -94,6 +94,9 @@
   & .amb-btn--ink { background: var(--amb-ink); border-color: var(--amb-ink); color: #ffffff; }
   & .amb-btn--outline { background: transparent; }
   & .amb-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+  /* Focus rings follow the ground, not the button text (ink text on coral buttons would vanish on ink) */
+  & .amb-sec :is(a, button):focus-visible { outline: 2px solid var(--amb-ink); outline-offset: 3px; }
+  & :is(.amb-sec--ink, .amb-aud--feat, .amb-demo) :is(a, button):focus-visible { outline-color: #ffffff; }
   & .amb-btns { display: flex; flex-wrap: wrap; gap: 10px; }
   & .amb-boxes { display: grid; border: var(--amb-line) currentColor; }
   & .amb-boxes > * { padding: clamp(18px, 2.4vw, 26px); border-bottom: var(--amb-line) currentColor; }

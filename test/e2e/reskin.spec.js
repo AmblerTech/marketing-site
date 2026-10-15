@@ -46,3 +46,11 @@ test('header logo: uses the dark-background logo file, not a filtered (flattened
   expect(s.objectPosition).toBe('-9999px 0px');
   expect(s.alt.length).toBeGreaterThan(0);
 });
+
+test('FAQ page title is Anton; Design Partner form card is square', async ({ page }) => {
+  await page.goto('/test/fixtures/faq.v2.html');
+  expect(await page.locator('h3', { hasText: 'Frequently Asked Questions' }).evaluate((e) => getComputedStyle(e).fontFamily)).toMatch(/Anton/);
+  await page.goto('/test/fixtures/partner.v2.html');
+  const radii = await page.$$eval('.sqs-block-form', (els) => els.map((e) => getComputedStyle(e).borderTopLeftRadius));
+  expect(radii.every((r) => r === '0px')).toBe(true);
+});

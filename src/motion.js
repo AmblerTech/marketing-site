@@ -26,8 +26,16 @@ export function formatCount(v, { prefix = '', suffix = '', decimals = 0 } = {}) 
 }
 const countOpts = (el) => ({ prefix: el.dataset.prefix || '', suffix: el.dataset.suffix || '', decimals: Number(el.dataset.decimals || 0) });
 
+// Progress shown on the Ship row for each status (draft → shipped).
+const STATUS_PCT = [5, 20, 45, 75, 90, 100];
+
 function setStatus(card, i) {
   const s = STATUS_STEPS[i];
+  const rowPct = `${STATUS_PCT[i]}%`;
+  const rowBar = card.querySelector('[data-status-bar]');
+  if (rowBar) rowBar.style.width = rowPct;
+  const rowPctEl = card.querySelector('[data-status-pct]');
+  if (rowPctEl) rowPctEl.textContent = rowPct;
   const badge = card.querySelector('[data-status-badge]');
   if (badge) { badge.classList.remove(...BADGE_CLASSES); badge.classList.add(s.cls); badge.dataset.key = s.key; badge.textContent = s.label; }
   const isrc = card.querySelector('[data-isrc]');
@@ -153,7 +161,11 @@ function countUp(el, win) {
 
 export function init(doc, win) {
   const reduced = win.matchMedia && win.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced || typeof win.IntersectionObserver !== 'function') { applyFinal(doc); return 'final'; }
+  if (reduced || typeof win.IntersectionObserver !== 'function') {
+    applyFinal(doc);
+    doc.querySelectorAll('[data-replay]').forEach((b) => { b.hidden = true; }); // nothing to replay without motion
+    return 'final';
+  }
   doc.documentElement.classList.add('amb-motion');
 
   const io = new win.IntersectionObserver((entries) => {
@@ -177,9 +189,24 @@ export function init(doc, win) {
   return 'animated';
 }
 
+// jsDelivr can answer 503 for a minute after a new tag while it fetches from GitHub. A photo that failed
+// that way gets one retry after 1.5 s (with a cache-buster) instead of staying a broken image.
+export function retryImages(doc, win) {
+  doc.querySelectorAll('img[src*="cdn.jsdelivr.net"]').forEach((img) => {
+    const retry = () => {
+      if (img.dataset.retried) return;
+      img.dataset.retried = '1';
+      win.setTimeout(() => { img.setAttribute('src', `${img.getAttribute('src').split('?')[0]}?retry=1`); }, 1500);
+    };
+    img.addEventListener('error', retry);
+    if (img.complete && img.naturalWidth === 0 && img.getAttribute('src')) retry();
+  });
+}
+
 // Bundle entry. The loader inserts ambler.js from script, so `defer` is ignored and the file can run
 // before the body is parsed — wait for DOMContentLoaded in that case.
 export function start(doc, win) {
-  if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', () => init(doc, win), { once: true });
-  else init(doc, win);
+  const run = () => { retryImages(doc, win); init(doc, win); };
+  if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', run, { once: true });
+  else run();
 }

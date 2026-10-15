@@ -47,7 +47,7 @@ for (const r of runs) {
   await page.goto(`${base}/preview/index.html`);
   await page.mouse.move(r.viewport.width / 2, r.viewport.height / 2);
   if (r.name === 'phone') { await page.waitForTimeout(1200); await page.locator('[data-demo]').scrollIntoViewIfNeeded(); }
-  await page.waitForTimeout(14500);
+  await page.waitForTimeout(21000);
   await clickOn(page, page.locator('[data-replay]'));     // Replay
   await page.waitForTimeout(2500);
   await clickOn(page, page.locator('[data-replay]'));     // Skip

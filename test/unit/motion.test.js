@@ -88,3 +88,21 @@ describe('start (bundle entry)', () => {
     expect(document.documentElement.classList.contains('amb-motion')).toBe(true);
   });
 });
+
+describe('image retry (jsDelivr cold-cache 503s)', () => {
+  it('retries a failed CDN image once after a delay, with a cache-buster', async () => {
+    const { retryImages } = await import('../../src/motion.js');
+    document.body.innerHTML = '<img id="a" src="https://cdn.jsdelivr.net/gh/x/y@v1/assets/k.jpg"><img id="b" src="https://example.com/k.jpg">';
+    const timers = [];
+    const win = { setTimeout: (fn, ms) => { timers.push([fn, ms]); return 1; } };
+    retryImages(document, win);
+    document.getElementById('a').dispatchEvent(new Event('error'));
+    document.getElementById('b').dispatchEvent(new Event('error'));
+    expect(timers.length).toBe(1);
+    expect(timers[0][1]).toBe(1500);
+    timers[0][0]();
+    expect(document.getElementById('a').getAttribute('src')).toBe('https://cdn.jsdelivr.net/gh/x/y@v1/assets/k.jpg?retry=1');
+    document.getElementById('a').dispatchEvent(new Event('error'));
+    expect(timers.length).toBe(1); // only one retry
+  });
+});

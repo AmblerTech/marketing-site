@@ -157,3 +157,26 @@ describe('staging modal sequence', () => {
     expect(document.querySelector('[data-isrc]').dataset.shown).toBe('true');
   });
 });
+
+describe('Ship row follows the status', () => {
+  const html = `<div data-demo>
+    <section data-screen="create" data-caption="c"><div data-scroll><span data-fill data-fill-order="1" class="is-filled">x</span><button data-press></button></div></section>
+    <section data-screen="confirm" data-caption="f"><div data-scroll><div data-accept></div></div></section>
+    <section data-screen="deliver" class="is-active" data-caption="d"><ul><li data-status-card>
+      <span>Kayo • 1 track<span data-isrc data-shown="true"> · ISRC GB-K3A-26-00109</span></span>
+      <span data-status-badge>Shipped</span><span><i data-status-bar style="width:100%"></i></span><span data-status-pct>100%</span>
+    </li></ul></section>
+    <p data-caption-out></p><button data-replay>Replay</button></div>`;
+  beforeEach(() => { vi.useFakeTimers(); document.body.innerHTML = html; });
+  afterEach(() => vi.useRealTimers());
+  it('bar and % track the status; the whole ISRC fragment is hidden until Ready to Ship', () => {
+    play(document.querySelector('[data-demo]'), window);
+    for (let t = 0; t < 30000; t += 50) { vi.advanceTimersByTime(50); if (document.querySelector('[data-status-badge]').textContent === 'Contributor Input') break; }
+    expect(document.querySelector('[data-status-pct]').textContent).toBe('45%');
+    expect(document.querySelector('[data-status-bar]').style.width).toBe('45%');
+    expect(document.querySelector('[data-isrc]').dataset.shown).toBe('false');
+    vi.advanceTimersByTime(30000);
+    expect(document.querySelector('[data-status-pct]').textContent).toBe('100%');
+    expect(document.querySelector('[data-status-bar]').style.width).toBe('100%');
+  });
+});

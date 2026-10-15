@@ -53,6 +53,6 @@ test('calculator: progress shows how far you are (filled vs unfilled differ)', a
   await page.goto('/preview/index.html');
   const calc = page.locator('#ambler-calc');
   await calc.locator('#ac-next').click();
-  const bgs = await calc.locator('.ac-progress span').evaluateAll((els) => els.map((e) => getComputedStyle(e).backgroundColor));
-  expect(new Set(bgs).size).toBe(2);
+  // the widget fades segment colours over 0.2s — wait for it to settle
+  await expect.poll(() => calc.locator('.ac-progress span').evaluateAll((els) => new Set(els.map((e) => getComputedStyle(e).backgroundColor)).size)).toBe(2);
 });

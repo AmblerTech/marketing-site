@@ -9,7 +9,7 @@ Ambler workspace: `product/decisions/2026-10-14_marketing-site-v2-*.md`.
 
 ## Release
 1. Bump `version` in package.json → `npm run build` → commit.
-2. `git tag v<version> && git push --tags`.
+2. `git tag v<version> && git push --tags`, then `node scripts/warm-cdn.mjs` — waits until jsDelivr serves every file (it answers 503 for about a minute after a new tag).
 3. Paste `dist/head-injection.html` into Squarespace › Website › Pages › Custom Code › Code Injection › Header
    (replacing the previous Ambler v2 loader block). Only with Alexander's yes.
 4. Rollback: paste the previous tag's `dist/head-injection.html`.

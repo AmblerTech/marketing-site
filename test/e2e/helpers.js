@@ -7,7 +7,9 @@ export const lowContrast = (page, min = 4.5) => page.evaluate((min) => {
   const bgOf = (el) => {
     for (let e = el; e; e = e.parentElement) {
       const s = getComputedStyle(e);
-      if (s.backgroundImage !== 'none' && !/url\(/.test(s.backgroundImage)) return null; // gradient: skip, checked visually
+      const c0 = parse(s.backgroundColor);
+      // gradient grounds (paper grid, tinted rows): measure against their solid background-color when it is opaque
+      if (s.backgroundImage !== 'none' && !/url\(/.test(s.backgroundImage) && (c0[3] ?? 1) <= 0.5) return null;
       const c = parse(s.backgroundColor);
       if ((c[3] ?? 1) > 0.5) return c;
     }

@@ -159,3 +159,38 @@ test('hero: ISRC is never typed — it appears on the Ship screen', async ({ pag
   await expect(page.locator('[data-status-badge]')).toHaveText('Shipped', { timeout: 20000 });
   await expect(page.locator('[data-screen="deliver"] [data-isrc]')).toBeVisible();
 });
+
+test('keyboard focus is visible on every ground', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/preview/index.html');
+  const ring = async (sel) => { await page.locator(sel).first().focus(); return page.locator(sel).first().evaluate((e) => getComputedStyle(e).outlineColor); };
+  expect(await ring('.amb-sec--ink .amb-btn--primary')).toBe('rgb(255, 255, 255)');
+  expect(await ring('.amb-aud--feat .amb-btn--primary')).toBe('rgb(255, 255, 255)');
+  expect(await ring('.amb-sec--coral .amb-btn--ink')).toBe('rgb(12, 12, 12)');
+  expect(await ring('.amb-sec--paper .amb-link')).toBe('rgb(12, 12, 12)');
+});
+
+test('app screens use the app font (Supreme) throughout', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/preview/index.html');
+  const fonts = await page.$$eval('.amb-list__t b, .amb-list__t span, .amb-step3 span, .amb-list .amb-badge', (els) => els.map((e) => getComputedStyle(e).fontFamily));
+  expect(fonts.length).toBeGreaterThan(5);
+  expect(fonts.every((f) => f.startsWith('Supreme'))).toBe(true);
+});
+
+test('demo tabs are not cut off at 375 px', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.goto('/preview/index.html');
+  const cut = await page.$$eval('[data-demo-tab]', (els) => els.filter((e) => e.scrollWidth > e.clientWidth + 1).length);
+  expect(cut).toBe(0);
+});
+
+test('reduced motion: no inert Replay button', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/preview/index.html');
+  await expect(page.locator('[data-replay]')).toBeHidden();
+});
+
+test('team photos name the person and role in alt text', () => {
+  for (const img of html.match(/<img[^>]*team-[a-z]+\.jpg[^>]*>/g)) expect(img).toMatch(/alt="[^"]+ — [^"]+"/);
+});

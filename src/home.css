@@ -92,10 +92,11 @@
   & .amb-demo__foot p { margin: 0; padding: 11px 12px; color: var(--amb-on-ink-muted); font-size: 13px; }
   & .amb-replay { background: transparent; color: #ffffff; border: 0; border-left: var(--amb-line) #ffffff; padding: 0 18px; font-size: 10px; min-height: 44px; cursor: pointer; flex: none; }
   & .amb-replay:focus-visible { outline: 2px solid var(--amb-coral); outline-offset: -4px; }
-  @media (max-width: 480px) { & .amb-demo__tabs li { font-size: 9px; padding: 9px 6px; } & .amb-demo__stage { padding: 10px; } }
+  @media (max-width: 480px) { & .amb-demo__tabs li { font-size: 9px; padding: 9px 6px; } & .amb-demo__role { display: none; } & .amb-demo__stage { padding: 10px; } }
 
   & .amb-screen { grid-area: 1 / 1; min-width: 0; visibility: hidden; opacity: 0; transition: opacity 0.45s ease, visibility 0s linear 0.45s; font-family: var(--amb-app); }
   & .amb-screen.is-active { visibility: visible; opacity: 1; transition: opacity 0.45s ease; }
+  & .amb-screen :is(h1, h2, h3, h4, p, li, a, button, input) { font-family: inherit; }
   & .amb-screen svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 
   /* 1 · Create registration (staging) */

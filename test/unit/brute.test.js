@@ -25,13 +25,17 @@ describe('Brute Mono tokens', () => {
 import { readdirSync, statSync } from 'node:fs';
 
 describe('assets', () => {
-  const required = ['kayo', 'amara', 'tobs', 'selasi', 'nia', 'midnight', 'honey-season', 'scene-chaos', 'scene-studio', 'team-alexander', 'team-kristian', 'team-selim'];
+  const required = ['kayo', 'amara', 'tobs', 'selasi', 'midnight', 'scene-chaos', 'scene-studio', 'team-alexander', 'team-kristian', 'team-selim'];
   it('every required photo exists and is ≤ 200 KB', () => {
     for (const n of required) {
       const p = `assets/${n}.jpg`;
       expect(existsSync(p), p).toBe(true);
       expect(statSync(p).size, p).toBeLessThanOrEqual(200 * 1024);
     }
+  });
+  it('no unused assets (every asset is referenced by a section)', () => {
+    const html = readdirSync('sections').map((f) => readFileSync(`sections/${f}`, 'utf8')).join('');
+    for (const f of readdirSync('assets').filter((f) => f.endsWith('.jpg'))) expect(html, f).toContain(`__ASSETS__/${f}`);
   });
   it('every asset has a credit line', () => {
     const credits = readFileSync('assets/CREDITS.md', 'utf8');

@@ -29,6 +29,9 @@
 
   /* FAQ / content pages */
   & .sqs-block-html :is(h1, h2) { overflow-wrap: anywhere; }
+  /* A lone, centred h3 is a page title (FAQ) — Anton like the deck. Quotes etc. stay Roboto. */
+  & .sqs-html-content > h3:only-child[style*="text-align:center"] { font-family: var(--amb-display); text-transform: uppercase; font-weight: 400; font-size: clamp(36px, 4.6vw, 58px); line-height: 0.96; }
+  & .sqs-block-form.sqs-background-enabled { border-radius: 0 !important; border: var(--amb-line) var(--amb-ink); }
   & .accordion-item { background: #ffffff; border: var(--amb-line) var(--amb-ink); border-radius: 0; margin-bottom: 10px; padding: 4px 18px; }
   & .accordion-item * { color: var(--amb-ink); }
   & :is(.form-submit-button, .newsletter-form-button) { border-radius: 0 !important; background: var(--amb-coral) !important; color: var(--amb-ink) !important; }
