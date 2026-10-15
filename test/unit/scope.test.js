@@ -16,6 +16,6 @@ describe('dist/ambler.css scoping', () => {
   });
   it('defines the base utilities', () => {
     const css = readFileSync('dist/ambler.css', 'utf8');
-    for (const cls of ['.amb-btn', '.amb-btn--primary', '.amb-wrap', '.amb-h1', '.amb-h2', '.amb-lede']) expect(css).toContain(cls);
+    for (const cls of ['.amb-sec--ink', '.amb-sec--paper', '.amb-sec--coral', '.amb-rail', '.amb-h1', '.amb-h2', '.amb-accent', '.amb-btn--primary', '.amb-btn--outline', '.amb-boxes', '.amb-big', '.amb-plate', '.amb-band', '.amb-duo']) expect(css).toContain(cls);
   });
 });

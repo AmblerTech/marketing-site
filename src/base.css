@@ -1,86 +1,113 @@
-/* Everything nests under .amb-v2 (scope test enforces it). */
+/* Brute Mono base. Everything nests under .amb-v2 (scope test enforces it). */
 .amb-v2 {
-  background: var(--amb-page);
+  background: var(--amb-paper);
 
-  & body { background: var(--amb-page); color: var(--amb-on-page); font-family: var(--amb-font); }
+  & body { background: var(--amb-paper); color: var(--amb-ink); font-family: var(--amb-body); }
 
-  /* Squarespace 7.1 colour themes: force every section, header and footer dark. */
-  & body,
-  & [data-section-theme] {
-    --siteBackgroundColor: var(--amb-page);
-    --siteTitleColor: var(--amb-on-page);
-    --headingExtraLargeColor: var(--amb-on-page);
-    --headingLargeColor: var(--amb-on-page);
-    --headingMediumColor: var(--amb-on-page);
-    --headingSmallColor: var(--amb-on-page);
-    --headingLinkColor: var(--amb-on-page);
-    --paragraphLargeColor: var(--amb-on-page-muted);
-    --paragraphMediumColor: var(--amb-on-page-muted);
-    --paragraphSmallColor: var(--amb-on-page-muted);
-    --paragraphLinkColor: #fb7c8c;
-    --navigationLinkColor: var(--amb-on-page);
-    --menuOverlayBackgroundColor: var(--amb-page);
-    --menuOverlayNavigationLinkColor: var(--amb-on-page);
-    --menuOverlayButtonBackgroundColor: #fb7c8c;
-    --menuOverlayButtonTextColor: var(--amb-card-ink);
-    --primaryButtonBackgroundColor: #fb7c8c;
-    --primaryButtonTextColor: var(--amb-card-ink);
-    --secondaryButtonBackgroundColor: transparent;
-    --secondaryButtonTextColor: var(--amb-on-page);
-    --headerBorderColor: var(--amb-line-on-page);
-    --section-divider-stroke-color: var(--amb-line-on-page);
-    --tweak-newsletter-block-title-color: var(--amb-on-page);
-    --tweak-newsletter-block-description-color: var(--amb-on-page-muted);
-    --tweak-newsletter-block-footnote-color: var(--amb-on-page-muted);
-    --tweak-newsletter-block-button-background-color: #fb7c8c;
-    --tweak-newsletter-block-button-text-color: var(--amb-card-ink);
-    --tweak-form-block-field-fill-color: var(--amb-page-raised);
-    --tweak-form-block-field-input-color: var(--amb-on-page);
-    --tweak-form-block-field-border-color: var(--amb-line-on-page);
-    --tweak-accordion-block-divider-color: var(--amb-line-on-page);
-    --tweak-accordion-block-icon-color: var(--amb-on-page);
+  /* Squarespace themes → paper by default */
+  & body, & [data-section-theme] {
+    --siteBackgroundColor: var(--amb-paper);
+    --headingExtraLargeColor: var(--amb-ink); --headingLargeColor: var(--amb-ink);
+    --headingMediumColor: var(--amb-ink); --headingSmallColor: var(--amb-ink); --headingLinkColor: var(--amb-ink);
+    --paragraphLargeColor: #3c3c38; --paragraphMediumColor: #3c3c38; --paragraphSmallColor: var(--amb-grey);
+    --paragraphLinkColor: var(--amb-ink);
+    --primaryButtonBackgroundColor: var(--amb-coral); --primaryButtonTextColor: var(--amb-ink);
+    --secondaryButtonBackgroundColor: transparent; --secondaryButtonTextColor: var(--amb-ink);
+    --section-divider-stroke-color: var(--amb-ink);
+    --tweak-form-block-field-fill-color: #ffffff; --tweak-form-block-field-input-color: var(--amb-ink);
+    --tweak-form-block-field-border-color: var(--amb-ink);
+    --tweak-form-block-button-background-color: var(--amb-coral); --tweak-form-block-button-text-color: var(--amb-ink);
+    --tweak-accordion-block-divider-color: var(--amb-ink); --tweak-accordion-block-icon-color: var(--amb-ink);
+    --list-section-title-color: var(--amb-ink); --list-section-simple-card-title-color: var(--amb-ink);
+    --tweak-blog-item-pagination-title-color: var(--amb-ink); --tweak-blog-item-pagination-meta-color: var(--amb-grey);
   }
+  & .section-background { background-color: var(--amb-paper) !important; }
+  & .section-background img, & .section-background .section-background-overlay { filter: grayscale(1); opacity: 0.2; }
+  & :is(h1, h2, h3, h4, p, li, a, button, input) { font-family: var(--amb-body); }
+  & :is(h1, h2) { font-family: var(--amb-display); text-transform: uppercase; font-weight: 400; letter-spacing: 0.005em; line-height: 0.96; }
 
-  & .section-background,
-  & #footer-sections .section-background { background-color: var(--amb-page) !important; }
-  & .section-background img,
-  & .section-background .section-background-overlay { opacity: 0.15; }
-
-  & h1, & h2, & h3, & h4, & p, & li, & a, & button, & input { font-family: var(--amb-font); }
-
-  /* Header: translucent on black, gradient CTA. */
-  & #header .header-announcement-bar-wrapper,
-  & #header .header-background-solid { background: rgba(11, 11, 15, 0.72) !important; backdrop-filter: blur(12px); }
-  & #header { border-bottom: 1px solid var(--amb-line-on-page); }
-  /* Header logo: show the site's own dark-background logo (white ring + gradient orb, as in the footer).
-     The <img> stays in place (alt text, link, size); only its picture is swapped. */
+  /* Header: ink with a 1.5px rule; mono nav; square coral CTA */
+  & #header, & #header [data-section-theme] {
+    --navigationLinkColor: #ffffff; --menuOverlayBackgroundColor: var(--amb-ink);
+    --menuOverlayNavigationLinkColor: #ffffff; --menuOverlayButtonBackgroundColor: var(--amb-coral); --menuOverlayButtonTextColor: var(--amb-ink);
+    --headerBorderColor: #ffffff;
+  }
+  & #header .header-announcement-bar-wrapper, & #header .header-background-solid { background: var(--amb-ink) !important; }
+  & #header { border-bottom: var(--amb-line) #ffffff; }
+  & #header .header-nav-item a, & .header-menu-nav-item a { font-family: var(--amb-mono) !important; text-transform: uppercase; letter-spacing: 0.14em; font-size: 12px !important; }
+  & #header .header-actions-action--cta .btn, & .header-menu-cta .btn, & .header-skip-link {
+    background: var(--amb-coral) !important; color: var(--amb-ink) !important; border-radius: 0 !important;
+    font-family: var(--amb-body); font-weight: 600;
+  }
   & #header .header-title-logo img {
     filter: none; object-position: -9999px 0;
     background: url('https://images.squarespace-cdn.com/content/v1/68da5cb1661bbe41f3f1fb06/bafa68d3-4b56-4028-9b4d-d0ab0fad905b/Frame+1.png?format=500w') left center / contain no-repeat;
   }
-  & #header .header-actions-action--cta .btn,
-  & .header-menu-cta .btn {
-    background: var(--amb-gradient) !important; color: var(--amb-card-ink) !important;
-    border-radius: var(--amb-radius-full); font-weight: 600;
-  }
 
-  /* Footer */
-  & #footer-sections { border-top: 1px solid var(--amb-line-on-page); }
-
-  /* Utilities for sections/*.html */
-  & .amb-wrap { width: 100%; max-width: var(--amb-max); margin-inline: auto; padding-inline: var(--amb-gutter); box-sizing: border-box; }
-  & .amb-eyebrow { font-size: 14px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #fb7c8c; margin: 0 0 12px; }
-  & .amb-h1 { font-size: clamp(40px, 6vw, 72px); line-height: 1.04; font-weight: 600; letter-spacing: -0.02em; color: var(--amb-on-page); margin: 0; }
-  & .amb-h2 { font-size: clamp(30px, 4vw, 48px); line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; color: var(--amb-on-page); margin: 0; }
-  & .amb-lede { font-size: clamp(17px, 1.6vw, 20px); line-height: 1.55; color: var(--amb-on-page-muted); margin: 16px 0 0; max-width: 62ch; }
-  & .amb-gradient-text { background: var(--amb-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  & .amb-btn {
-    display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px;
-    border-radius: var(--amb-radius-full); font-size: 16px; font-weight: 600; text-decoration: none;
-    border: 1px solid var(--amb-line-on-page); color: var(--amb-on-page); transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* Footer: ink. Its "Not ready to demo? Stay in the loop." heading is Squarespace's own text block —
+     it gets Anton via the h1/h2 rule but no coral second line (that would need editing the footer text). */
+  & #footer-sections, & #footer-sections [data-section-theme] {
+    --siteBackgroundColor: var(--amb-ink);
+    --headingExtraLargeColor: #ffffff; --headingLargeColor: #ffffff; --headingMediumColor: #ffffff; --headingSmallColor: var(--amb-coral);
+    --paragraphLargeColor: var(--amb-on-ink-muted); --paragraphMediumColor: var(--amb-on-ink-muted); --paragraphSmallColor: var(--amb-on-ink-muted);
+    --paragraphLinkColor: #ffffff;
+    --tweak-newsletter-block-title-color: #ffffff; --tweak-newsletter-block-description-color: var(--amb-on-ink-muted);
+    --tweak-newsletter-block-footnote-color: var(--amb-on-ink-muted);
+    --tweak-newsletter-block-button-background-color: var(--amb-coral); --tweak-newsletter-block-button-text-color: var(--amb-ink);
+    --tweak-form-block-field-fill-color: transparent; --tweak-form-block-field-input-color: #ffffff; --tweak-form-block-field-border-color: #ffffff;
   }
-  & .amb-btn:hover { transform: translateY(-1px); }
-  & .amb-btn--primary { background: var(--amb-gradient); color: var(--amb-card-ink); border-color: transparent; box-shadow: 0 8px 24px -8px rgba(251, 124, 140, 0.6); }
-  & .amb-btn--ghost { background: transparent; }
-  & .amb-btn:focus-visible { outline: 2px solid #fb7c8c; outline-offset: 3px; }
+  & #footer-sections .section-background { background-color: var(--amb-ink) !important; }
+  & #footer-sections { border-top: var(--amb-line) #ffffff; }
+  & #footer-sections :is(input, .newsletter-form-button, button) { border-radius: 0 !important; }
+  & #footer-sections .newsletter-form-button { background: var(--amb-coral) !important; color: var(--amb-ink) !important; }
+
+  /* Primitives */
+  & .amb-sec { position: relative; font-family: var(--amb-body); }
+  & .amb-sec *, & .amb-sec *::before, & .amb-sec *::after { box-sizing: border-box; }
+  & .amb-sec--ink { background: var(--amb-ink); color: #ffffff; }
+  & .amb-sec--paper {
+    background-color: var(--amb-paper); color: var(--amb-ink);
+    background-image: linear-gradient(var(--amb-rule) 1px, transparent 1px), linear-gradient(90deg, var(--amb-rule) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  & .amb-sec--coral { background: var(--amb-coral); color: var(--amb-ink); }
+  & .amb-wrap { width: 100%; max-width: var(--amb-max); margin-inline: auto; padding-inline: var(--amb-gutter); }
+  & .amb-pad { padding-block: clamp(48px, 8vw, 96px); }
+  & .amb-rail { display: flex; justify-content: space-between; gap: 16px; padding: 16px var(--amb-gutter); border-bottom: var(--amb-line) currentColor; }
+  & .amb-mono, & .amb-rail { font-family: var(--amb-mono); text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+  & .amb-h1, & .amb-h2 { font-family: var(--amb-display); text-transform: uppercase; font-weight: 400; line-height: 0.96; letter-spacing: 0.005em; margin: 0; overflow-wrap: break-word; }
+  & .amb-h1 { font-size: clamp(44px, 6.2vw, 80px); }
+  & .amb-h2 { font-size: clamp(36px, 4.6vw, 58px); }
+  & .amb-sec--ink .amb-accent { color: var(--amb-coral); }
+  & .amb-sec--paper .amb-accent { color: var(--amb-coral-deep); }
+  & .amb-sec--coral .amb-accent { color: var(--amb-ink); }
+  & .amb-lede { font-size: clamp(16px, 1.4vw, 18px); line-height: 1.55; max-width: 60ch; margin: 20px 0 28px; }
+  & .amb-sec--ink .amb-lede { color: var(--amb-on-ink-muted); }
+  & .amb-sec--paper .amb-lede { color: #3c3c38; }
+  & .amb-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 13px 22px; font: 600 15px/1 var(--amb-body); text-decoration: none; border: var(--amb-line) currentColor; color: inherit; background: transparent; border-radius: 0; }
+  & .amb-btn--primary { background: var(--amb-coral); border-color: var(--amb-coral); color: var(--amb-ink); }
+  & .amb-btn--ink { background: var(--amb-ink); border-color: var(--amb-ink); color: #ffffff; }
+  & .amb-btn--outline { background: transparent; }
+  & .amb-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+  & .amb-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+  & .amb-boxes { display: grid; border: var(--amb-line) currentColor; }
+  & .amb-boxes > * { padding: clamp(18px, 2.4vw, 26px); border-bottom: var(--amb-line) currentColor; }
+  & .amb-boxes > *:last-child { border-bottom: 0; }
+  @media (min-width: 768px) {
+    & .amb-boxes--3 { grid-template-columns: repeat(3, 1fr); }
+    & .amb-boxes--3 > * { border-bottom: 0; border-right: var(--amb-line) currentColor; }
+    & .amb-boxes--3 > *:last-child { border-right: 0; }
+  }
+  & .amb-boxes p { margin: 0; font-size: 14px; line-height: 1.5; }
+  & .amb-sec--ink .amb-boxes p { color: var(--amb-on-ink-muted); }
+  & .amb-boxes .amb-big { font: 400 clamp(44px, 5vw, 64px)/1 var(--amb-display); margin: 0 0 10px; }
+  & .amb-sec--ink .amb-boxes .amb-big { color: var(--amb-coral); }
+  & .amb-sec--paper .amb-boxes .amb-big { color: var(--amb-coral-deep); }
+  & .amb-plate { border: var(--amb-line) currentColor; background: #ffffff; color: var(--amb-ink); }
+  & .amb-sec--ink .amb-plate { border-color: #ffffff; }
+  & .amb-plate__cap { display: flex; justify-content: space-between; gap: 12px; padding: 8px 12px; border-bottom: var(--amb-line) var(--amb-ink); font: 10px var(--amb-mono); letter-spacing: 0.14em; text-transform: uppercase; }
+  & .amb-band { background: var(--amb-coral); color: var(--amb-ink); padding: 14px var(--amb-gutter); font: 12px/1.4 var(--amb-mono); letter-spacing: 0.14em; text-transform: uppercase; }
+  & .amb-duo { position: relative; overflow: hidden; background: var(--amb-ink); }
+  & .amb-duo img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.1); }
+  & .amb-duo::after { content: ''; position: absolute; inset: 0; background: var(--amb-coral); mix-blend-mode: multiply; opacity: 0.45; pointer-events: none; }
 }

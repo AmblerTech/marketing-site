@@ -38,3 +38,17 @@ describe('assets', () => {
     for (const f of readdirSync('assets').filter((f) => f.endsWith('.jpg'))) expect(credits, f).toContain(f);
   });
 });
+
+import postcss from 'postcss';
+describe('square edges', () => {
+  it('no border-radius outside app screens', () => {
+    const root = postcss.parse(readFileSync('dist/ambler.css', 'utf8'));
+    const bad = [];
+    root.walkDecls(/^border(-.*)?-radius$/, (d) => {
+      const sel = d.parent.selector || '';
+      const allowed = /\.amb-screen|\.amb-m\b|\.amb-m__|\.amb-phone|\.amb-rc|\.amb-list|\.amb-badge|\.amb-f__|\.amb-radio|\.amb-cb|\.amb-tg|\.amb-isrc|#ambler-calc input\[type=range\]|\.amb-avatar|\.amb-step3/.test(sel);
+      if (!allowed && d.value.trim() !== '0' && d.value.trim() !== '0px') bad.push(`${sel} { ${d.prop}: ${d.value} }`);
+    });
+    expect(bad).toEqual([]);
+  });
+});
