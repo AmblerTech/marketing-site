@@ -46,4 +46,14 @@ writeFileSync('preview/index.html', `<!doctype html>
 <html lang="en" class="amb-v2"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ambler v2 preview</title><link rel="stylesheet" href="../dist/ambler.css"></head>
 <body><main id="page">${sections}</main><script src="../dist/ambler.js" defer></script></body></html>`);
+// Standalone pages (e.g. FAQ): one paste-ready code block each, plus a preview page.
+mkdirSync('dist/pages', { recursive: true });
+for (const f of readdirSync('pages').filter((f) => f.endsWith('.html'))) {
+  const src = readFileSync(`pages/${f}`, 'utf8');
+  writeFileSync(`dist/pages/${f}`, src.replaceAll('__ASSETS__/', assetsCdn));
+  writeFileSync(`preview/${f}`, `<!doctype html>
+<html lang="en" class="amb-v2"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ambler v2 preview — ${f}</title><link rel="stylesheet" href="../dist/ambler.css"></head>
+<body><main id="page">${block(src.replaceAll('__ASSETS__/', '../assets/'))}</main><script src="../dist/ambler.js" defer></script></body></html>`);
+}
 console.log(`built ${tag} (alwaysOn=${alwaysOn})`);
