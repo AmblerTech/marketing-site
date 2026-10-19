@@ -62,7 +62,11 @@ for (const w of [375, 1440]) {
     await page.waitForLoadState('networkidle');
     const size = () => page.locator('.blog-title').first().evaluate((e) => getComputedStyle(e).fontSize);
     const before = await size();
+    // Squarespace puts its pre-animation class on the titles, then animates the element it found at load.
+    await page.evaluate(() => document.querySelectorAll('h1.blog-title').forEach((h) => h.classList.add('preFlex')));
     await page.addScriptTag({ url: '/dist/ambler.js' });
+    const shown = await page.locator('h2.blog-title').evaluateAll((els) => els.every((e) => getComputedStyle(e).opacity === '1'));
+    expect(shown).toBe(true);
     await expect(page.locator('h1')).toHaveCount(1);
     await expect(page.locator('h1')).toHaveText(/Music registration,\s*explained\./);
     await expect(page.locator('h2.blog-title')).toHaveCount(12);
