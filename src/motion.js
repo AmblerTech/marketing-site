@@ -1,3 +1,4 @@
+import { fixBlogHeadings } from './blog.js';
 // Progressive enhancement only. HTML already holds final states;
 // we rewind them only when we are sure we can animate forward again.
 export const STATUS_STEPS = [
@@ -206,7 +207,7 @@ export function retryImages(doc, win) {
 // Bundle entry. The loader inserts ambler.js from script, so `defer` is ignored and the file can run
 // before the body is parsed — wait for DOMContentLoaded in that case.
 export function start(doc, win) {
-  const run = () => { retryImages(doc, win); init(doc, win); };
+  const run = () => { fixBlogHeadings(doc); retryImages(doc, win); init(doc, win); };
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', run, { once: true });
   else run();
 }

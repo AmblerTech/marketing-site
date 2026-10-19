@@ -6,6 +6,8 @@
   & .view-list article.blog-item :is(.blog-date, .blog-author) { font-family: var(--amb-mono); text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
   & .view-list article.blog-item .blog-more-link { color: var(--amb-ink); font-weight: 600; border-bottom: var(--amb-line) var(--amb-coral-deep); }
   & .view-list .blog-image-wrapper img { border-radius: 0; filter: grayscale(0.15); }
+  & .amb-blog-h1 { color: var(--amb-ink); margin: 8px 0 28px; }
+  & .amb-blog-h1 .amb-accent { color: var(--amb-coral-deep); }
 
   /* Blog post: black title band, article in a 1.5px reading column on paper */
   & .view-item .blog-item-top-wrapper { background: var(--amb-ink); padding: clamp(28px, 5vw, 56px) var(--amb-gutter); margin-inline: calc(-1 * var(--amb-gutter)); }

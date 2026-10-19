@@ -54,3 +54,19 @@ test('FAQ page title is Anton; Design Partner form card is square', async ({ pag
   const radii = await page.$$eval('.sqs-block-form', (els) => els.map((e) => getComputedStyle(e).borderTopLeftRadius));
   expect(radii.every((r) => r === '0px')).toBe(true);
 });
+
+for (const w of [375, 1440]) {
+  test(`blog list @${w}: one h1, titles as h2 at the same size, no sideways scroll`, async ({ page }) => {
+    await page.setViewportSize({ width: w, height: 900 });
+    await page.goto('/test/fixtures/blog.v2.html');
+    await page.waitForLoadState('networkidle');
+    const size = () => page.locator('.blog-title').first().evaluate((e) => getComputedStyle(e).fontSize);
+    const before = await size();
+    await page.addScriptTag({ url: '/dist/ambler.js' });
+    await expect(page.locator('h1')).toHaveCount(1);
+    await expect(page.locator('h1')).toHaveText(/Music registration,\s*explained\./);
+    await expect(page.locator('h2.blog-title')).toHaveCount(12);
+    expect(await size()).toBe(before);
+    expect(await noHorizontalScroll(page)).toBe(true);
+  });
+}
