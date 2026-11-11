@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Complete a release on your artist's behalf · planned screens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f4f6; --ink:#181d27; --ink2:#414651; --muted:#717680; --line:#e9eaeb; --line2:#d5d7da;
+    --brand:#ff6b35; --brand50:#fff3ed; --grad:linear-gradient(90deg,#fff6b7 0%,#fb7c8c 60%,#d46879 100%);
+    --green:#079455; --green50:#ecfdf3; --greenline:#abefc6;
+    --blue:#2563eb; --blue50:#eff4ff; --blueline:#b2ccff;
+    --fus:#ba24d5; --fus50:#fdf4ff; --fusline:#f6d0fe; --fus700:#9f1ab1;
+    --amber:#dc6803; --amber50:#fffaeb; --amberline:#fedf89;
+    --purple:#6938ef; --purple50:#f4f3ff;
+    --new:#c11574;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45;padding:32px}
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-size:26px;margin:0 0 6px}
+  .lede{color:var(--muted);max-width:80ch;margin:0 0 20px;font-size:14px}
+  h2{font-size:18px;margin:48px 0 6px}
+  h2 .id{display:inline-block;background:var(--ink);color:#fff;border-radius:6px;font-size:12px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  .where{font-size:13px;color:var(--ink2);margin:0 0 12px}
+  code{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:12px}
+  .why{font-size:13px;color:var(--ink2);max-width:82ch;margin:12px 0 0}
+  .why b{color:var(--ink)}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .sw{width:14px;height:14px;border-radius:50%;display:inline-block}
+  .browser{background:#fff;border:1px solid var(--line2);border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.06)}
+  .url{background:#f5f5f5;border-bottom:1px solid var(--line);padding:7px 12px;font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:center}
+  .url i{width:9px;height:9px;border-radius:50%;background:#d5d7da;display:inline-block}
+  .url .addr{background:#fff;border:1px solid var(--line);border-radius:6px;padding:2px 10px;margin-left:8px;flex:1;max-width:560px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topnav{display:flex;align-items:center;gap:4px;padding:10px 24px;border-bottom:1px solid var(--line);background:#fff;flex-wrap:wrap}
+  .logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;margin-right:14px}
+  .logo i{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#c7b8ff,#3b2a8a);display:inline-block}
+  .topnav a{font-size:13px;color:var(--ink2);padding:5px 9px;border-radius:6px;font-weight:500}
+  .topnav a.on{background:#f5f5f5;color:var(--ink)}
+  .topnav .right{margin-left:auto;display:flex;gap:10px;align-items:center}
+  .topnav .right i{width:16px;height:16px;border-radius:50%;border:1.5px solid #a4a7ae;display:inline-block}
+  .topnav .right b{width:26px;height:26px;border-radius:50%;background:#7a5a48;display:inline-block}
+  .page{background:linear-gradient(135deg,#eef0f6 0%,#fafafa 40%,#f5f6f9 100%);padding:22px 24px 28px}
+  .ph{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;gap:12px}
+  .ph h3{margin:0;font-size:20px}
+  .ph p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 2px rgba(16,24,40,.05);padding:16px}
+  .card h4{margin:0;font-size:15px}
+  .card .sub{font-size:12px;color:var(--muted);margin:1px 0 0}
+  .ci{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
+  .ico{width:32px;height:32px;border-radius:50%;background:var(--brand50);border:5px solid #fff;box-shadow:0 0 0 1px #fdd9c8;flex:none;position:relative}
+  .ico::after{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--brand)}
+  .btn{display:inline-flex;align-items:center;gap:6px;font:600 13px Inter,sans-serif;border-radius:8px;padding:8px 14px;border:1px solid var(--line2);background:#fff;color:var(--ink2);white-space:nowrap}
+  .btn.pri{background:var(--grad);border-color:transparent;color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.15)}
+  .btn.dis{opacity:.45}
+  .btn.sm{padding:5px 10px;font-size:12px}
+  .btn.ap{background:linear-gradient(90deg,#7a5af8,#6938ef);color:#fff;border:none}
+  .badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;border-radius:999px;padding:1px 8px;border:1px solid;white-space:nowrap}
+  .b-blue{color:#175cd3;background:var(--blue50);border-color:var(--blueline)}
+  .b-amber{color:#b54708;background:var(--amber50);border-color:var(--amberline)}
+  .b-green{color:#067647;background:var(--green50);border-color:var(--greenline)}
+  .b-gray{color:#414651;background:#fafafa;border-color:var(--line2)}
+  .b-signed{color:#fff;background:var(--fus);border-color:var(--fus)}
+  .b-fus{color:var(--fus700);background:var(--fus50);border-color:var(--fusline)}
+  .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:12px 0 6px;font-weight:500}
+  .kv{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;font-size:12px}
+  .kv div span{display:block;color:var(--muted)}
+  .kv div b{font-weight:600;font-size:13px}
+  .kv div span.badge{display:inline-flex;margin-left:4px;vertical-align:1px}
+  .inp{border:1px solid var(--line2);border-radius:8px;padding:7px 10px;font-size:13px;background:#fff;color:var(--ink);min-height:34px}
+  .inp.ph{color:#a4a7ae}
+  .inp.lock{background:#fafafa;color:var(--muted)}
+  .inp.lb{border-color:var(--fusline);background:#fefaff}
+  .fld{margin-bottom:10px}
+  .fld label{display:block;font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:4px}
+  .fld label em{color:var(--brand);font-style:normal}
+  .row{display:flex;gap:10px}.row>*{flex:1;min-width:0}
+  .seg{display:flex;gap:6px;flex-wrap:wrap}
+  .seg span{font-size:12px;border:1px solid var(--line2);border-radius:8px;padding:5px 10px;background:#fff;color:var(--ink2)}
+  .seg span.on{border-color:var(--brand);background:var(--brand50);color:#b42f04;font-weight:600}
+  .opt{border:1px solid var(--line2);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:13px;display:flex;gap:10px}
+  .opt .r{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--line2);flex:none;margin-top:2px}
+  .opt.on{border-color:var(--brand);background:#fffaf7}
+  .opt.on .r{border:5px solid var(--brand)}
+  .opt small{display:block;color:var(--muted);font-size:12px}
+  .sec{border-top:1px solid var(--line);padding:12px 0 4px}
+  .sec h5{margin:0 0 8px;font-size:13px}
+  .collapsed{color:var(--muted);font-size:12px}
+  .new{position:relative;outline:2px dashed var(--new);outline-offset:4px;border-radius:10px}
+  .tag{position:absolute;top:-14px;right:-6px;background:var(--new);color:#fff;font-size:10px;font-weight:700;letter-spacing:.04em;border-radius:5px;padding:2px 6px;z-index:2;white-space:nowrap}
+  .tag.chg{background:#9e165f}
+  .scrim{background:rgba(12,17,29,.55);padding:26px;display:flex;justify-content:center}
+  .modal{background:#fff;border-radius:16px;width:640px;max-width:100%;box-shadow:0 20px 24px -4px rgba(16,24,40,.18);overflow:visible}
+  .mh{padding:18px 20px 12px;display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--line)}
+  .mh h4{margin:0;font-size:16px}.mh p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+  .mb{padding:14px 20px}
+  .mf{padding:12px 20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+  .steps{display:flex;gap:6px;padding:14px 20px 10px;border-bottom:1px solid var(--line);font-size:12px}
+  .steps span{flex:1;border-top:3px solid var(--line2);padding-top:6px;color:var(--muted)}
+  .steps span.done{border-color:var(--brand);color:var(--ink2)}
+  .steps span.cur{border-color:var(--brand);color:var(--ink);font-weight:600}
+  .steps span.skip{text-decoration:line-through}
+  .pr{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:13px}
+  .pr.ok{border-left:4px solid var(--green)}
+  .pr.need{border-left:4px solid var(--fus)}
+  .pr .meta{font-size:12px;color:var(--muted)}
+  .tl{font-size:13px}
+  .tl .cat{font-size:11px;text-transform:uppercase;color:var(--muted);margin:12px 0 6px;font-weight:500}
+  .st{display:flex;gap:10px;align-items:flex-start;padding:5px 0}
+  .dot{width:18px;height:18px;border-radius:50%;flex:none;margin-top:1px;border:1.5px solid var(--line2);background:#fff}
+  .dot.g{background:var(--green);border-color:var(--green)}
+  .dot.b{background:var(--fus);border-color:var(--fus)}
+  .st .t{flex:1}.st .t b{font-weight:500}
+  .st .who{font-size:12px;color:var(--muted)}
+  .st .who.b{color:var(--fus700)}
+  .st .who.g{color:#067647}
+  .tblw{overflow-x:auto}
+  table.tbl{width:100%;border-collapse:collapse;font-size:12px;min-width:640px}
+  .tbl th{text-align:left;font-weight:500;color:var(--muted);padding:9px 10px;border-bottom:1px solid var(--line);background:#fcfcfd}
+  .tbl td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}
+  .tbl td small{display:block;color:#a4a7ae;font-size:10px}
+  .bar{height:6px;width:46px;border-radius:4px;background:#eee;display:inline-block;vertical-align:middle;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--brand)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  .banner{border-radius:12px;padding:14px 16px;background:linear-gradient(#fff,#fff) padding-box,var(--grad) border-box;border:2px solid transparent;margin-bottom:14px;font-size:13px}
+  .banner b{font-size:14px}
+  .hdr{display:flex;align-items:center;gap:12px;background:#fff;border-bottom:1px solid var(--line);padding:12px 16px;margin:-22px -24px 16px;flex-wrap:wrap}
+  .hdr .sq{width:34px;height:34px;border-radius:8px;background:var(--brand)}
+  .hdr h3{margin:0;font-size:22px;font-weight:600;flex:1}
+  .note-blue{background:var(--fus50);border:1px solid var(--fusline);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--fus700)}
+  .phone{width:340px;max-width:100%;border:10px solid #111;border-radius:34px;overflow:hidden;background:#fbfaff}
+  .phone .ah{padding:14px 16px 8px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .phone .ah i{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#43cbff,#9708cc)}
+  .phone .pc{padding:0 14px 14px}
+  .phone .bn{display:flex;justify-content:space-around;border-top:1px solid var(--line);padding:9px 0 12px;font-size:11px;color:var(--muted);background:#fff}
+  .phone .bn b{color:var(--purple)}
+  .flex{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}
+  .map{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);font-size:13px}
+  .map th,.map td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .map th{background:#fafafa;color:var(--muted);font-weight:500;font-size:12px}
+  .foot{margin-top:48px;border-top:1px solid var(--line2);padding-top:14px;font-size:12px;color:var(--muted)}
+  @media (max-width:760px){
+    body{padding:16px}.grid2,.grid3{grid-template-columns:1fr}.row{flex-direction:column;gap:0}
+    .scrim{padding:10px}.page{padding:16px}.hdr{margin:-16px -16px 16px}
+  }
+</style>
+</head>
+<body><div style="max-width:1180px;margin:16px auto 0;padding:10px 16px;border-radius:10px;background:#fff3ed;border:1px solid #ffd6c2;font:14px/1.45 Inter,-apple-system,sans-serif;color:#181d27"><b>Design preview.</b> These are early sketches of the planned screens, filled in with example data. Details will change as we build and test them with you.</div><div class="wrap">
+
+<h1>Label Full Take-Over — Mockups</h1>
+
+
+
+<div class="legend">
+  <span><i class="sw" style="background:var(--green)"></i><b>Green</b> — the person it belongs to did it</span>
+  <span><i class="sw" style="background:var(--fus)"></i><b>Fuchsia</b> — the label handled it on their behalf (signed, with a reason; always icon + "Signed by label", never colour alone). Blue stays the existing <i>Sent to Artist</i> badge</span>
+  <span><i class="sw" style="border:1.5px solid var(--line2)"></i>Grey — not done yet</span>
+  <span><i class="sw" style="outline:2px dashed var(--new);outline-offset:1px"></i><b style="color:var(--new)">NEW / CHANGED</b> — added or altered by </span>
+</div>
+
+
+<h2><span class="id">M1</span>Where this touches the dashboard</h2>
+
+<div class="tblw"><table class="map">
+  <tr><th>Page</th><th>Route</th><th>Change</th><th>Mockup</th></tr>
+  <tr><td><b>Registrations</b> — All Registrations table</td><td></td><td><i>Label-signed</i> marker beside the status badge</td><td>M2</td></tr>
+  <tr><td>Create registration modal (from <b>New registration</b>)</td><td>modal</td><td>Three options for the artist's part; option 3 adds fields; <i>Sold as</i> moves to Track information</td><td>M3, M4</td></tr>
+  <tr><td>Registration detail — header, Artist &amp; Contributors data cards</td><td></td><td><b>Complete as label</b> button; fill the added fields</td><td>M5</td></tr>
+  <tr><td>Registration detail — Complete as label modal</td><td></td><td>New sign-off modal</td><td>M6</td></tr>
+  <tr><td>Registration detail — "{title} Registration" timeline card</td><td></td><td>Green/fuchsia, real names, signer + reason</td><td>M7</td></tr>
+  <tr><td><b>Projects</b> › product detail — approval banner</td><td></td><td><i>Ship without their approval</i> asks for a reason</td><td>M8</td></tr>
+  <tr><td><b>Projects</b> › release product detail (EP / album)</td><td></td><td>Complete as label for the whole release; carousel <i>Approve on their behalf</i> opens the same sheet for one track</td><td>M9, M9b</td></tr>
+  <tr><td>Artist app › <b>Products</b> › product › My data</td><td></td><td>Fuchsia banner, <b>Confirm</b>, existing <i>Flag this as wrong</i></td><td>M10</td></tr>
+</table></div>
+
+
+<h2><span class="id">M2</span>Registrations — the label-signed marker</h2>
+
+<div class="browser">
+  <div class="url"><i></i><i></i><i></i><span class="addr">
+  <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a>Projects</a><a class="on">Registrations</a><a>Assets</a><a>Rights &amp; Splits</a><a>Collaborators</a><a>Integrations</a><a>Deliveries</a><span class="right"><i></i><i></i><i></i><b></b></span></div>
+  <div class="page">
+    <div class="ph"><div><h3>Registrations</h3><p>Manage your music asset registrations and track their process</p></div><span class="btn pri">+ New registration</span></div>
+    <div class="card" style="padding:0">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:14px 16px"><div><h4>All Registrations</h4><div class="sub">1-4 of 4 registrations</div></div><div style="display:flex;gap:8px"><span class="btn sm">All statuses ▾</span><span class="btn sm">More filters ▾</span><span class="inp ph" style="width:150px;min-height:0;padding:5px 10px">Search</span></div></div>
+      <div class="tblw"><table class="tbl">
+        <tr><th>Registration</th><th>Artist</th><th>Label</th><th>Status</th><th>Tracks</th><th>Registrations</th><th>Progress</th></tr>
+        <tr><td><b>Harbour Lights</b><small>3c1e…f2a1</small></td><td>Nia</td><td>Harmattan Records Ltd</td><td><span class="badge b-green">Ready to Ship</span> <span class="new" style="display:inline-block;margin-left:6px;outline-offset:2px"><span class="tag" style="top:-16px">NEW</span><span class="badge b-signed">Label-signed · 3</span></span></td><td>1</td><td>03/11/2026</td><td><span class="bar"><i style="width:85%"></i></span> 85%</td></tr>
+        <tr><td><b>Boomin</b><small>67fa1d6c…bd1c9f</small></td><td>Kayo</td><td>Harmattan Records Ltd</td><td><span class="badge b-blue">Sent to Artist</span></td><td>1</td><td>03/09/2026</td><td><span class="bar"><i style="width:38%"></i></span> 38%</td></tr>
+        <tr><td><b>Happy Days</b><small>99a10bdf…f062b54</small></td><td>Nia</td><td>Harmattan Records Ltd</td><td><span class="badge b-amber">Pending Approval</span></td><td>1</td><td>03/09/2026</td><td><span class="bar"><i style="width:56%"></i></span> 56%</td></tr>
+        <tr><td><b>Slow Burn</b><small>1a391f38…e07d34</small></td><td>Nia</td><td>Harmattan Records Ltd</td><td><span class="badge b-green">Shipped</span></td><td>1</td><td>13/08/2026</td><td><span class="bar"><i style="width:100%"></i></span> 100%</td></tr>
+      </table></div>
+    </div>
+  </div>
+</div>
+
+
+
+<h2><span class="id">M3</span>Create registration — who completes the artist's part</h2>
+
+<div class="browser">
+  <div class="url"><i></i><i></i><i></i><span class="addr"> — Create registration (modal)</span></div>
+  <div class="scrim">
+    <div class="modal">
+      <div class="mh"><span class="ico"></span><div><h4>Create registration</h4><p>Start by typing some basic information of the song you want to register</p></div></div>
+      <div class="steps"><span class="done">✓ Create project</span><span class="cur">Create registration</span><span class="skip new" style="outline-offset:2px">Invite artist<span class="tag chg" style="top:-12px">SKIPPED · OPTION 3</span></span></div>
+      <div class="mb">
+        <div class="collapsed">Track information · ISRC code · Upload responsibility — <i>unchanged (Sold as added to Track information, see M4)</i></div>
+        <div class="sec">
+          <h5>Main artist</h5>
+          <div class="new" style="margin:16px 0 14px;padding:10px">
+            <span class="tag">NEW</span>
+            <div class="fld"><label>Who completes the artist's part?</label></div>
+            <div class="opt"><span class="r"></span><div><b>Invite the artist</b><small>They fill in and confirm their own part. Email and phone required.</small></div></div>
+            <div class="opt"><span class="r"></span><div><b>Fill it in for them, send for approval</b><small>You pre-fill; they review and confirm. Email and phone required.</small></div></div>
+            <div class="opt on"><span class="r"></span><div><b>I'll complete the artist's part myself</b><small>No invitation is sent. You'll sign for it at the end with how they agreed.</small></div></div>
+          </div>
+          <div class="row">
+            <div class="fld"><label>Artist name <em>*</em></label><div class="inp lb">Nia</div></div>
+            <div class="fld"><label>Master rights</label><div class="inp lb">80 %</div></div>
+            <div class="fld"><label>Performance (PR)</label><div class="inp lb">50 %</div></div>
+            <div class="fld"><label>Mechanical (MR)</label><div class="inp lb">50 % <small style="color:var(--muted)">follows PR</small></div></div>
+          </div>
+          <div class="new" style="padding:10px;margin:14px 0 12px">
+            <span class="tag">NEW · OPTION 3 ONLY</span>
+            <div class="row">
+              <div class="fld"><label>Name <em>*</em></label><div class="inp lb">Nia</div></div>
+              <div class="fld"><label>Surname <em>*</em></label><div class="inp lb">Adeyemi</div></div>
+            </div>
+            <div class="row">
+              <div class="fld"><label>Country of residence <em>*</em></label><div class="inp lb">Nigeria</div></div>
+              <div class="fld"><label>Roles <em>*</em></label><div class="inp lb">Main Artist, Composer &amp; Lyricist</div></div>
+            </div>
+            <div class="row">
+              <div class="fld"><label>IPI name number</label><div class="inp lb ph">Optional — writer roles</div></div>
+              <div class="fld"><label>Composition society</label><div class="inp lb">KODA</div></div>
+              <div class="fld"><label>NR society · Gramex no.</label><div class="inp lb ph">Optional</div></div>
+            </div>
+            <div style="font-size:12px;color:var(--muted);margin:-4px 0 10px">Same fields as the artist's own flow (one shared definition). Missing IPI / society does not block — the writer shows <i>Not handed off</i> until they supply it.</div>
+            <div class="fld"><label>Publisher <em>*</em></label><div class="seg"><span class="on">Yes</span><span>No publisher</span><span>Don't know</span></div></div>
+            <div class="row">
+              <div class="fld"><label>Publisher name <em>*</em></label><div class="inp lb">Nordic Song Publishing</div></div>
+              <div class="fld new" style="outline-offset:2px"><span class="tag chg">REQUIRED · REV 2</span><label>Publisher contact email <em>*</em></label><div class="inp lb">rights@nordicsong.dk</div><div style="font-size:11px;color:var(--muted);margin-top:4px">Where Ambler sends the CWR. Same rule in the artist's own flow.</div></div>
+            </div>
+            <div class="row">
+              <div class="fld"><label>Artist email</label><div class="inp ph">Optional</div></div>
+              <div class="fld"><label>Artist phone</label><div class="inp">+234 803 555 0142</div></div>
+            </div>
+            <div style="font-size:12px;color:var(--muted)">Master, performance and mechanical % are final — there is no one to accept or counter. Add a contact if you have one: it's how Nia can find this release if they join Ambler later.</div>
+          </div>
+        </div>
+        <div class="collapsed sec">Full track detail · Stage contributors — <i>see M4</i></div>
+        <div class="collapsed sec">Invite artist — <i>hidden under option 3</i></div>
+      </div>
+      <div class="mf"><span class="btn">Save as draft</span><span class="new" style="border-radius:8px"><span class="tag chg">WAS "SEND INVITE"</span><span class="btn pri">Create registration</span></span></div>
+    </div>
+  </div>
+</div>
+
+
+
+<h2><span class="id">M4</span>Create registration — the rest of option 3, and Sold as</h2>
+
+<div class="grid2">
+  <div class="card">
+    <div class="sec" style="border:0;padding-top:0">
+      <h5>Track information</h5>
+      <div class="row"><div class="fld"><label>Label</label><div class="inp lock">Harmattan Records Ltd</div></div><div class="fld"><label>Track title <em>*</em></label><div class="inp">Harbour Lights</div></div></div>
+      <div class="new" style="padding:8px;margin-top:10px"><span class="tag chg">MOVED HERE</span>
+        <div class="fld" style="margin:0"><label>Available for sale as</label><div class="seg"><span class="on">Single</span><span>EP</span><span class="on">Album</span></div></div>
+        <div style="font-size:12px;color:var(--muted);margin-top:6px">The label's decision under every option. No longer asked in the artist or contributor flow. Same values as Edit registration data.</div>
+      </div>
+    </div>
+    <div class="sec" style="margin-top:10px">
+      <h5>Full track detail</h5>
+      <div class="new" style="padding:8px;margin-top:14px"><span class="tag chg">REQUIRED UNDER OPTION 3</span>
+        <div class="row"><div class="fld"><label>Composition type <em>*</em></label><div class="inp lb">Original</div></div><div class="fld"><label>Language <em>*</em></label><div class="inp lb">English</div></div><div class="fld"><label>Explicit <em>*</em></label><div class="inp lb">No</div></div></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:8px">BPM, Duration, Key, Studio or live stay optional, as today.</div>
+    </div>
+    <div class="sec" style="margin-top:10px">
+      <h5>Stage contributors</h5>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px">"Left to artist" is not offered under option 3 — there is no artist to leave it to.</div>
+      <div class="pr" style="border-left:4px solid var(--fus)"><b>Kilah Bennett</b> · Producer · master 20 · PR 25 · MR 25 <span class="badge b-fus" style="float:right">Complete</span><div class="meta">No publisher · email added</div></div>
+      <div class="pr new" style="outline-offset:2px;margin-top:18px"><span class="tag">NEW FIELDS</span>
+        <div class="row"><div class="fld"><label>Name <em>*</em></label><div class="inp lb">M.</div></div><div class="fld"><label>Surname <em>*</em></label><div class="inp lb">Sørensen</div></div></div>
+        <div class="row"><div class="fld"><label>Artist name</label><div class="inp lb ph">—</div></div><div class="fld"><label>Country <em>*</em></label><div class="inp lb">Denmark</div></div></div>
+        <div class="row"><div class="fld"><label>IPI name number</label><div class="inp lb ph">—</div></div><div class="fld"><label>Composition society</label><div class="inp lb ph">—</div></div><div class="fld"><label>NR society · Gramex no.</label><div class="inp lb ph">—</div></div></div>
+        <div class="row"><div class="fld"><label>Roles <em>*</em></label><div class="inp lb">Composer</div></div><div class="fld"><label>Master %</label><div class="inp lb">0</div></div><div class="fld"><label>PR %</label><div class="inp lb">25</div></div><div class="fld"><label>MR %</label><div class="inp lb">25</div></div></div>
+        <div class="fld"><label>Publisher <em>*</em></label><div class="seg"><span>Yes</span><span>No publisher</span><span class="on">Don't know</span></div></div>
+        <div style="font-size:12px;color:var(--muted)">Don't know is stored as its own answer. Valid at sign-off — with no IPI / society, T. Williams shows <i>Not handed off</i>: nothing goes to KODA or a publisher until they supply it.</div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="scrim" style="border-radius:12px">
+      <div class="modal" style="width:420px">
+        <div class="mh"><span class="ico"></span><div><h4>Edit registration data</h4><p>Harbour Lights</p></div></div>
+        <div class="mb">
+          <div class="row"><div class="fld"><label>Explicit content</label><div class="inp">No</div></div><div class="fld"><label>Studio or live recording</label><div class="inp">Studio</div></div></div>
+          <div class="new" style="padding:8px;margin-top:14px"><span class="tag chg">FIX</span>
+            <div class="fld" style="margin:0"><label>Available for sale as</label><div class="inp">Single, Album ▾</div></div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px">Today there are three vocabularies: the wizard saves <i>track / album</i>, this field saves the string <i>"Single, EP"</i>, and the artist flow maps anything that is not <i>album</i> to <i>track</i> — and its answer never reaches the track. A wizard value opens empty here and is overwritten on save. After : one vocabulary, the value opens as saved.</div>
+          </div>
+        </div>
+        <div class="mf"><span class="btn">Cancel</span><span class="btn pri">Save</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<h2><span class="id">M5</span>Registration detail — Complete as label, and filling what's missing</h2>
+
+<div class="browser">
+  <div class="url"><i></i><i></i><i></i><span class="addr">
+  <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a>Projects</a><a class="on">Registrations</a><a>Assets</a><a>Rights &amp; Splits</a><a>Collaborators</a><a>Integrations</a><a>Deliveries</a><span class="right"><i></i><i></i><i></i><b></b></span></div>
+  <div class="page">
+    <div class="hdr"><span style="color:var(--muted)">‹</span><span class="sq"></span><h3>Boomin</h3>
+      <span class="new" style="border-radius:8px"><span class="tag">NEW</span><span class="btn pri">Complete as label</span></span>
+      <span class="btn">Go to project</span></div>
+    <div class="grid2" style="margin-bottom:16px">
+      <div class="card"><div class="ci"><span class="ico"></span><div><h4>Registration data</h4><div class="sub">This is the data collected on the product</div></div><span style="margin-left:auto;color:var(--muted)">✎</span></div>
+        <span class="badge b-gray">67fa1d6c-b6a0-…</span> <span class="badge b-blue">Sent to Artist</span>
+        <div class="lbl">Basic information</div><div class="kv"><div><span>Title</span><b>Boomin</b></div><div><span>Label</span><b>Harmattan Records Ltd</b></div></div>
+        <div class="lbl">ISRC code</div><div class="note-blue" style="background:var(--green50);border-color:var(--greenline);color:#067647">✓ Ambler will assign an ISRC automatically when this registration is locked.</div>
+      </div>
+      <div class="card"><div class="ci"><span class="ico"></span><div><h4>Dispute Chats</h4><div class="sub">Items requiring your attention</div></div><span class="btn sm pri" style="margin-left:auto">New chat</span></div><div class="seg" style="margin-bottom:8px"><span class="on" style="flex:1;text-align:center">Pending (0)</span><span style="flex:1;text-align:center">Resolved (0)</span></div><div style="text-align:center;color:var(--muted);font-size:12px;padding:18px 0">No pending chats</div></div>
+    </div>
+    <div class="grid3">
+      <div class="card new"><span class="tag chg">EDITABLE BY LABEL</span>
+        <div class="ci"><span class="ico"></span><div><h4>Artist</h4><div class="sub">Information about the artist only</div></div><span style="margin-left:auto;color:var(--brand)">✎</span></div>
+        <div class="kv" style="grid-template-columns:1fr">
+          <div><span>Artist name</span><b>Kayo</b></div>
+          <div><span>Name · Surname</span><b style="color:var(--fus700)">Kayode Mensah</b> <span class="badge b-fus">Filled by you</span></div>
+          <div><span>Role</span><b>Main Artist, Composer &amp; Lyricist</b></div>
+          <div><span>IPI · society</span><b>– · –</b> <span class="badge b-amber">Not handed off</span></div>
+          <div><span>Country of residence</span><b>United Kingdom</b></div>
+          <div><span>Publisher</span><b style="color:var(--fus700)">No publisher</b> <span class="badge b-fus">Filled by you</span></div>
+        </div>
+        <div class="kv"><div><span>Split (master)</span><b>99%</b></div><div><span>Split (performance)</span><b>40%</b></div><div><span>Split (mechanical)</span><b>40%</b></div></div>
+        <div style="font-size:12px;border-top:1px solid var(--line);padding-top:8px">Invitation: <b>Expired</b> <span class="badge b-green">Delivered</span></div>
+      </div>
+      <div class="card"><div class="ci"><span class="ico"></span><div><h4>Contributors data</h4><div class="sub">Information about the contributors</div></div></div><div style="text-align:center;color:var(--muted);font-size:12px;padding:30px 0">No contributors added yet</div></div>
+      <div class="card"><div class="ci"><span class="ico"></span><div><h4>Audio</h4><div class="sub">Information about the audio file</div></div></div><div style="border:1.5px dashed #f4a37f;border-radius:10px;text-align:center;font-size:12px;color:#b42f04;padding:22px 6px">Click or drag &amp; drop audio<br><span style="color:var(--muted)">WAV or FLAC preferred. Max 200 MB.</span></div></div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin:12px 0 0">Below these: the Stakeholders panel (unchanged, plus email-only invites — F1) and the "Boomin Registration" timeline card (M7).</p>
+  </div>
+</div>
+
+
+
+<h2><span class="id">M5b</span>Registration detail in Contributor Input — Waiting on splits, label-fill, a band member</h2>
+
+<div class="browser">
+  <div class="url"><i></i><i></i><i></i><span class="addr">
+  <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a>Projects</a><a class="on">Registrations</a><a>Assets</a><a>Rights &amp; Splits</a><a>Collaborators</a><a>Integrations</a><a>Deliveries</a><span class="right"><i></i><i></i><i></i><b></b></span></div>
+  <div class="page">
+    <div class="banner" style="display:flex;gap:12px;align-items:flex-start"><span class="ico" style="flex:none"></span><div style="flex:1"><b>Waiting on splits</b><div style="color:var(--muted);margin:2px 0 6px">This registration moves to QA automatically once splits are complete. Publishing 70%, Mechanical 70% (needs 95%).</div><a style="color:var(--brand);font-weight:500;text-decoration:underline">Review splits →</a></div>
+      <div class="new" style="padding:8px;max-width:300px;font-size:12px"><span class="tag">REV 2</span>Exists today (shows only in Contributor Input). With  it no longer stands in the label's way: <b>Complete as label</b> is in the header, and PR / MR below 100% never block — the work is <i>Not handed off</i> instead.</div></div>
+    <div class="hdr" style="margin-top:0;border-top:1px solid var(--line);border-radius:10px"><span style="color:var(--muted)">‹</span><span class="sq"></span><h3>Low Water</h3>
+      <span class="new" style="border-radius:8px"><span class="tag">NEW</span><span class="btn pri">Complete as label</span></span>
+      <span class="btn">Go to project</span></div>
+    <div class="grid2" style="margin-bottom:16px">
+      <div class="card"><div class="ci"><span class="ico"></span><div><h4>Registration data</h4><div class="sub">This is the data collected on the product</div></div><span style="margin-left:auto;color:var(--muted)">✎</span></div>
+        <span class="badge b-gray">3e1b…</span> <span class="badge" style="color:#5925dc;background:#f4f3ff;border-color:#d9d6fe">Contributor Input</span>
+        <div class="lbl">Basic information</div><div class="kv"><div><span>Title</span><b>Low Water</b></div><div><span>Label</span><b>Harmattan Records Ltd</b></div></div></div>
+      <div class="card"><div class="ci"><span class="ico"></span><div><h4>Dispute Chats</h4><div class="sub">Items requiring your attention</div></div><span class="btn sm pri" style="margin-left:auto">New chat</span></div><div class="seg" style="margin-bottom:8px"><span class="on" style="flex:1;text-align:center">Pending (0)</span><span style="flex:1;text-align:center">Resolved (0)</span></div><div style="text-align:center;color:var(--muted);font-size:12px;padding:18px 0">No pending chats</div></div>
+    </div>
+    <div class="grid3">
+      <div class="card"><div class="ci"><span class="ico"></span><div><h4>Artist</h4><div class="sub">Information about the artist only</div></div><span style="margin-left:auto;color:var(--muted)">✎</span></div>
+        <div class="kv" style="grid-template-columns:1fr"><div><span>Artist name</span><b>The Harbour Collective</b> <span class="badge b-gray">Band</span></div><div><span>Role</span><b>Main Artist</b></div></div>
+        <div class="lbl">Members</div>
+        <div class="pr" style="margin-bottom:6px"><b>Nia Adeyemi</b> · Vocals, Composer<div class="meta">IPI 00123456789 · KODA</div></div>
+        <div class="pr new" style="outline-offset:2px"><span class="tag chg">EXISTS · </span><b>Tomas Berg</b> · Guitar, Composer <span class="badge b-amber" style="float:right">Not handed off</span><div class="meta">IPI – · society – · unclaimed member</div><span class="btn sm" style="margin-top:6px">Edit member</span>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px"><i>Edit member</i> opens the same label-fill form as the Contributors card. What the label enters is label-entered (provisional); under take-over Tomas is signed for like anyone else.</div></div>
+      </div>
+      <div class="card new"><span class="tag chg">LABEL-FILL · SHARED FIELDS</span><div class="ci"><span class="ico"></span><div><h4>Contributors data</h4><div class="sub">Information about the contributors</div></div><span style="margin-left:auto;color:var(--brand)">✎</span></div>
+        <div class="pr"><b>T. Williams</b> · Composer <span class="badge b-fus" style="float:right">Filled by you</span>
+          <div class="row" style="margin-top:8px"><div class="fld"><label>Name</label><div class="inp lb">M.</div></div><div class="fld"><label>Surname</label><div class="inp lb">Sørensen</div></div></div>
+          <div class="row"><div class="fld"><label>Country</label><div class="inp lb">Denmark</div></div><div class="fld"><label>Publisher</label><div class="inp lb">Don't know</div></div></div>
+          <div class="row"><div class="fld"><label>IPI name number</label><div class="inp lb ph">—</div></div><div class="fld"><label>Composition society</label><div class="inp lb ph">—</div></div></div>
+          <div class="row"><div class="fld"><label>NR society · Gramex no.</label><div class="inp lb ph">—</div></div></div>
+          <div class="meta">Today's form: name, roles, credit, master / PR / MR, phone, email, IPI, composition + NR society. <b>Added:</b> surname, country, publisher, Gramex no. — from the shared field definitions (Slice P), stored as label-entered.</div>
+          <div style="margin-top:6px"><span class="badge b-amber">Not handed off</span> <span class="meta">— writer information not supplied</span></div></div>
+      </div>
+      <div class="card"><div class="ci"><span class="ico"></span><div><h4>Audio</h4><div class="sub">Information about the audio file</div></div></div><div class="pr ok" style="font-size:12px">low-water_master.wav · 24-bit · 4:12<div class="meta">Checksum ready</div></div></div>
+    </div>
+  </div>
+</div>
+
+
+
+<h2><span class="id">M6</span>Complete as label — the sign-off modal</h2>
+
+<div class="browser">
+  <div class="url"><i></i><i></i><i></i><span class="addr"> — Complete as label (modal)</span></div>
+  <div class="scrim">
+    <div class="modal new" style="outline-offset:6px"><span class="tag">NEW</span>
+      <div class="mh"><span class="ico"></span><div><h4>Complete as label</h4><p>Boomin · You're signing for everyone who hasn't confirmed their own part.</p></div></div>
+      <div class="mb">
+        <div class="pr ok"><b>Ada Okonkwo</b> · Producer <span class="badge b-green" style="float:right">Confirmed by them · Sep 14</span><div class="meta">Nothing needed</div></div>
+        <div class="pr need"><b>Kayo</b> · Main Artist <span class="badge b-amber" style="float:right">Needs your sign-off</span>
+          <div class="lbl" style="margin-top:8px">How did they agree?</div>
+          <div class="seg"><span class="on">Text message</span><span>Email</span><span>Phone call</span><span>In person</span><span>Written agreement</span><span>Other</span></div>
+          <div class="inp" style="margin-top:8px">OK'd splits 99/40 by SMS, 2 Nov</div>
+        </div>
+        <div class="pr need"><b>T. Williams</b> · Composer <span class="badge b-gray" style="float:right">Never invited</span>
+          <div class="lbl" style="margin-top:8px">How did they agree?</div>
+          <div class="seg"><span>Text message</span><span>Email</span><span>Phone call</span><span>In person</span><span>Written agreement</span><span>Other</span></div>
+          <div class="inp ph" style="margin-top:8px">Add a note (required for Other)</div>
+        </div>
+        <div class="lbl">Before you can sign</div>
+        <div style="font-size:12px;line-height:1.8"><span style="color:#067647">✓ Required fields complete</span><br><span style="color:#067647">✓ Master splits total 100%</span><br><span style="color:var(--muted)">○ Performance · Mechanical 100% — society-ready, never blocks</span><br><span style="color:#067647">✓ Audio, artwork, checksums ready</span><br><span style="color:#b42318">✕ 1 person still needs a reason</span></div>
+        <div class="new" style="padding:8px;margin-top:12px"><span class="tag">REV 2</span><div style="font-size:12px"><b>T. Williams — writer information not supplied</b> (IPI, composition society). The writer's responsibility to provide. You sign this line with the rest; they show <i>Not handed off</i> and nothing is sent to KODA until they supply it.</div></div>
+        <div style="font-size:12px;color:var(--muted);margin-top:8px">Same "Missing: …" wording as the QA approval banner — release-ready rules only; writer IPI / society / publisher never block.</div>
+      </div>
+      <div class="mf"><span style="font-size:12px;color:var(--muted)">Signing as <b style="color:var(--ink)">Ada Okonkwo</b> · moves to Ready to Ship, mints the ISRC, closes open invitations and stops reminders</span><span class="btn pri dis">Sign &amp; complete</span></div>
+    </div>
+  </div>
+</div>
+
+
+<h2><span class="id">M7</span>The "Boomin Registration" timeline card — green and fuchsia</h2>
+
+<div class="grid2">
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;gap:8px"><h4>Boomin Registration</h4><span style="font-size:12px;color:var(--muted)">100%</span></div>
+    <div style="margin:6px 0 8px"><span class="badge b-gray">67fa1d6c-b6a0-…</span> <span class="badge b-green">Ready to Ship</span></div>
+    <div class="tl">
+      <div class="cat">Label</div>
+      <div class="st"><span class="dot g"></span><div class="t"><b>Record Label Draft</b><div class="who g">Ada Okonkwo · Completed Sep 3, 2026</div></div><span class="badge b-green">Completed</span></div>
+      <div class="st"><span class="dot g"></span><div class="t"><b>Record Label Invite Artist</b><div class="who g">Ada Okonkwo · Completed Sep 3, 2026</div></div><span class="badge b-green">Completed</span></div>
+      <div class="cat">Artist</div>
+      <div class="st"><span class="dot g"></span><div class="t"><b>Artist Metadata Draft</b><div class="who g">Kayo · Completed Sep 14, 2026</div></div><span class="badge b-green">Completed</span></div>
+      <div class="st new" style="outline-offset:3px;margin-top:10px"><span class="tag">NEW</span><span class="dot b"></span><div class="t"><b>Artist Metadata Entry</b><div class="who b">Handled by Ada Okonkwo, Harmattan Records Ltd · Text message — "OK'd splits 99/40 by SMS, 2 Nov" · Nov 3, 2026</div></div><span class="badge b-signed">Label-signed</span></div>
+      <div class="st"><span class="dot g"></span><div class="t"><b>Master Uploaded</b><div class="who g">Ada Okonkwo · Completed Nov 1, 2026</div></div><span class="badge b-green">Completed</span></div>
+      <div class="st"><span class="dot g"></span><div class="t"><b>Artist Rights Validation</b><div class="who g">Kayo · Completed Sep 14, 2026</div></div><span class="badge b-green">Completed</span></div>
+      <div class="cat">Contributor</div>
+      <div class="st"><span class="dot g"></span><div class="t"><b>Ada Okonkwo · Metadata Entry + Rights Validation</b><div class="who g">Ada Okonkwo · Completed Sep 14, 2026</div></div><span class="badge b-green">Completed</span></div>
+      <div class="st"><span class="dot b"></span><div class="t"><b>T. Williams · Metadata Entry + Rights Validation</b><div class="who b">Handled by Ada Okonkwo · Written agreement — "Writer agreement 2025, cl. 4" · Nov 3, 2026</div></div><span class="badge b-signed">Label-signed</span></div>
+      <div class="cat">QA</div>
+      <div class="st"><span class="dot b"></span><div class="t"><b>QA Approved by Artist</b><div class="who b">Signed by Ada Okonkwo as part of take-over · Nov 3, 2026</div></div><span class="badge b-signed">Label-signed</span></div>
+      <div class="st"><span class="dot g"></span><div class="t"><b>QA Approved by Label</b><div class="who g">Ada Okonkwo · Completed Nov 3, 2026</div></div><span class="badge b-green">Completed</span></div>
+      <div class="cat">Shipping</div>
+      <div class="st"><span class="dot g"></span><div class="t"><b>Ready for Shipping by Label</b><div class="who g">Ada Okonkwo · Nov 3, 2026 · ISRC DKR7E2600141</div></div><span class="badge b-green">Completed</span></div>
+      <div class="st"><span class="dot"></span><div class="t"><b>Shipped by Label</b><div class="who">Ada Okonkwo · Estimated Pending</div></div><span class="badge b-gray">Pending</span></div>
+    </div>
+  </div>
+  <div>
+    <div class="card" style="margin-bottom:16px">
+      <h4 style="margin-bottom:14px">Later — after T. Williams joins and confirms</h4>
+      <div class="tl"><div class="st new" style="outline-offset:3px"><span class="tag">NEW</span><span class="dot b"></span><div class="t"><b>T. Williams · Metadata Entry + Rights Validation</b><div class="who b">Handled by Ada Okonkwo · Written agreement · Nov 3, 2026</div><div class="who g">✓ Confirmed by T. Williams · Nov 12, 2026</div></div><span class="badge b-signed">Label-signed</span></div></div>
+      <p style="font-size:12px;color:var(--muted);margin:10px 0 0">Stays fuchsia. The confirmation is added — it never replaces the record. From then on their part counts as confirmed for amendments.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-bottom:6px">What changes on this card</h4>
+      <ul style="font-size:12px;margin:0;padding-left:18px;color:var(--ink2)">
+        <li>Same steps, same order, same categories as today.</li>
+        <li>Every completed step names the <b>actual user</b> — never "Label Admin".</li>
+        <li><b>Fuchsia dot + Label-signed badge</b> where the label acted for someone; the line says who signed, which label, the reason and the date.</li>
+        <li>The label's own steps stay <b>green</b> — that was the label doing its own part.</li>
+        <li><i>QA Approved by Artist</i> after an override is fuchsia — today it shows green.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<h2><span class="id">M8</span>Ship without their approval — now with a reason</h2>
+
+<div class="browser">
+  <div class="url"><i></i><i></i><i></i><span class="addr">
+  <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a class="on">Projects</a><a>Registrations</a><a>Assets</a><a>Rights &amp; Splits</a><a>Collaborators</a><a>Integrations</a><a>Deliveries</a><span class="right"><i></i><i></i><i></i><b></b></span></div>
+  <div class="page">
+    <div class="banner"><b>You've approved — waiting on Nia to sign off</b> <span class="badge b-gray" style="vertical-align:2px">single · product page</span><div style="color:var(--muted);margin:2px 0 8px">You can finalize and start delivery now without their QA sign-off — it's recorded, they're notified, and they can still flag anything wrong.</div><span class="btn">Ship without their approval</span></div>
+    <div class="scrim" style="border-radius:12px">
+      <div class="modal" style="width:480px">
+        <div class="mh"><span class="ico"></span><div><h4>Ship without artist approval?</h4><p>This finalizes the registration and starts delivery without <b style="color:var(--ink)">Nia</b>'s QA sign-off. It's recorded, they'll be notified, and they can still flag anything that's wrong.</p></div></div>
+        <div class="mb"><div class="new" style="padding:8px;margin-top:10px"><span class="tag">NEW</span>
+          <div class="lbl" style="margin-top:0">How did Nia agree?</div>
+          <div class="seg"><span>Text message</span><span class="on">Email</span><span>Phone call</span><span>In person</span><span>Written agreement</span><span>Other</span></div>
+          <div class="inp ph" style="margin-top:8px">Add a note (required for Other)</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:8px">Shows fuchsia on <i>QA Approved by Artist</i> with your name and this reason. One signature model: this writes the same signed record as <i>Complete as label</i>.</div>
+        </div></div>
+        <div class="mf"><span class="btn">Cancel</span><span class="btn pri">Ship without approval</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<h2><span class="id">M9</span>Release product (EP) — the approval carousel and Complete as label</h2>
+
+<div class="browser">
+  <div class="url"><i></i><i></i><i></i><span class="addr">
+  <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a class="on">Projects</a><a>Registrations</a><a>Assets</a><a>Rights &amp; Splits</a><a>Collaborators</a><a>Integrations</a><a>Deliveries</a><span class="right"><i></i><i></i><i></i><b></b></span></div>
+  <div class="page">
+    <div class="hdr"><span style="color:var(--muted)">‹</span><span class="sq"></span><h3>Harbour Lights EP</h3><span class="badge b-gray">EP</span><span class="badge b-amber">Pending Approval</span>
+      <span style="margin-left:auto"></span><span class="btn">Delete</span>
+      <span class="new" style="border-radius:8px"><span class="tag">NEW</span><span class="btn pri">Complete as label</span></span><span class="btn">Go to project</span></div>
+    <div style="font-size:17px;font-weight:600;margin:0 0 10px">Approve tracks (2)</div>
+    <div class="banner" style="position:relative;padding-bottom:30px">
+      <div style="display:flex;gap:12px"><span class="ico" style="flex:none"></span><div style="flex:1"><b>You've approved — waiting on Nia to sign off</b><div style="color:var(--muted);margin:2px 0 8px">You can finalize and start delivery now without their QA sign-off — it's recorded, they're notified, and they can still flag anything wrong.</div>
+        <span class="new" style="border-radius:8px;display:inline-block;margin-top:14px"><span class="tag chg">CHANGED · OPENS M9b</span><span class="btn sm">Approve on their behalf</span></span></div></div>
+      <div style="position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:6px"><i style="width:9px;height:9px;border-radius:50%;background:var(--grad);display:inline-block"></i><i style="width:9px;height:9px;border-radius:50%;background:#d5d7da;display:inline-block"></i></div>
+    </div>
+    <div class="card" style="border-color:var(--amberline);background:var(--amber50);font-size:12px;margin-bottom:16px"><b>2 tracks not ready:</b> <a style="text-decoration:underline">Low Water</a>, <a style="text-decoration:underline">Saltwind</a> <span class="meta" style="margin-left:8px">— ship-readiness callout, exists today</span></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Header <b>Complete as label</b> → the sheet for every track:</div>
+    <div class="scrim" style="border-radius:12px">
+      <div class="modal">
+        <div class="mh"><span class="ico"></span><div><h4>Complete as label — Harbour Lights EP</h4><p>3 tracks · one reason per person, recorded on each of their tracks</p></div></div>
+        <div class="mb">
+          <div class="pr need"><b>Nia</b> · Main Artist <span class="meta">— tracks 1, 2, 3</span>
+            <div class="seg" style="margin-top:8px"><span class="on">Text message</span><span>Email</span><span>Phone call</span><span>In person</span><span>Written agreement</span><span>Other</span></div>
+            <div class="inp" style="margin-top:8px">OK'd tracklist + 80/50 by SMS, 30 Oct</div></div>
+          <div class="pr need"><b>Kilah Bennett</b> · Producer <span class="meta">— tracks 1, 2</span>
+            <div class="seg" style="margin-top:8px"><span>Text message</span><span class="on">Email</span><span>Phone call</span><span>In person</span><span>Written agreement</span><span>Other</span></div></div>
+          <div class="pr need"><b>T. Williams</b> · Composer <span class="meta">— track 1 · publisher: Don't know</span>
+            <div class="seg" style="margin-top:8px"><span>Text message</span><span>Email</span><span>Phone call</span><span>In person</span><span class="on">Written agreement</span><span>Other</span></div>
+            <div class="inp" style="margin-top:8px">Writer agreement 2025, clause 4</div>
+            <div style="font-size:12px;color:var(--fus700);margin-top:6px">Writer information not supplied — the writer's responsibility · will show <i>Not handed off</i></div></div>
+          <div style="font-size:12px;line-height:1.8"><span style="color:#067647">✓ 1 Harbour Lights — master 100 · audio · artwork</span><br><span style="color:#067647">✓ 2 Low Water — master 100 · audio · artwork</span><br><span style="color:#067647">✓ 3 Saltwind — master 100 · audio · artwork</span></div>
+        </div>
+        <div class="mf"><span style="font-size:12px;color:var(--muted)">Signing as <b style="color:var(--ink)">Ada Okonkwo</b> · 3 registrations → Ready to Ship · 3 ISRCs</span><span class="btn pri">Sign &amp; complete 3 registrations</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<h2><span class="id">M9b</span>Approve on their behalf — the sign-off sheet for one track</h2>
+
+<div class="browser">
+  <div class="url"><i></i><i></i><i></i><span class="addr">
+  <div class="scrim">
+    <div class="modal new" style="outline-offset:6px;width:560px"><span class="tag">CHANGED</span>
+      <div class="mh"><span class="ico"></span><div><h4>Complete as label — Low Water</h4><p>Track 2 of Harbour Lights EP · you've approved; you're signing for whoever hasn't confirmed their own part.</p></div></div>
+      <div class="mb">
+        <div class="pr ok"><b>Kilah Bennett</b> · Producer <span class="badge b-green" style="float:right">Confirmed by them · Oct 30</span><div class="meta">Nothing needed</div></div>
+        <div class="pr need"><b>Nia</b> · Main Artist <span class="badge b-amber" style="float:right">QA sign-off missing</span>
+          <div class="lbl" style="margin-top:8px">How did they agree?</div>
+          <div class="seg"><span>Text message</span><span class="on">Email</span><span>Phone call</span><span>In person</span><span>Written agreement</span><span>Other</span></div>
+          <div class="inp" style="margin-top:8px">Approved the final mix by email, 3 Nov</div></div>
+        <div style="font-size:12px;line-height:1.8"><span style="color:#067647">✓ Master splits total 100%</span><br><span style="color:#067647">✓ Audio, checksums ready</span></div>
+        <div style="font-size:12px;color:var(--muted);margin-top:8px">Today's text kept as the footnote: <i>"You can ship the release once every track is ready. It's recorded, they'll be notified, and they can still flag anything that's wrong."</i></div>
+      </div>
+      <div class="mf"><span style="font-size:12px;color:var(--muted)">Signing as <b style="color:var(--ink)">Ada Okonkwo</b> · this track → Ready to Ship</span><span><span class="btn">Cancel</span> <span class="btn pri">Sign &amp; approve</span></span></div>
+    </div>
+  </div>
+</div>
+
+
+
+<h2><span class="id">M10</span>Artist app — when the person joins later</h2>
+
+<div class="flex">
+  <div class="phone">
+    <div class="ah"><i></i>Ambler</div>
+    <div class="pc">
+      <div style="font-size:20px;font-weight:700;margin:4px 0 2px">Products</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Tune-in together with your team</div>
+      <div class="seg" style="margin-bottom:10px"><span style="border-color:var(--purple);background:var(--purple50);color:var(--purple);font-weight:600">In progress</span><span>Catalogue</span><span>Contributions</span></div>
+      <div class="card" style="border-left:4px solid var(--fus);padding:12px;margin-bottom:8px"><b>Harbour Lights</b><div style="font-size:12px;color:var(--muted)">Harmattan Records Ltd</div><span class="badge b-signed" style="margin-top:6px">Handled by the label</span></div>
+      <div class="card" style="border-left:4px solid var(--green);padding:12px"><b>Low Tide</b><div style="font-size:12px;color:var(--muted)">Harmattan Records Ltd</div><span class="badge b-green" style="margin-top:6px">You confirmed this</span></div>
+    </div>
+    <div class="bn"><span>Home</span><span>Registrations</span><b>Products</b><span>Contributors</span></div>
+  </div>
+  <div class="phone">
+    <div class="ah"><span style="color:var(--muted)">‹</span> Harbour Lights</div>
+    <div class="pc">
+      <div class="card" style="padding:12px">
+        <b>My data</b><div style="font-size:12px;color:var(--muted);margin-bottom:8px">Information about me as an artist</div>
+        <div class="note-blue new" style="outline-offset:3px;margin:16px 0 12px"><span class="tag">NEW</span><b>Handled by Harmattan Records Ltd on your behalf</b><br>Signed by Ada Okonkwo, Nov 3 · Text message — "OK'd tracklist + 80/50 by SMS, 30 Oct"</div>
+        <div class="kv"><div><span>Role</span><b>Main Artist</b></div><div><span>Country</span><b>Nigeria</b></div><div><span>Master</span><b>80%</b></div><div><span>Performance · Mechanical</span><b>50% · 50%</b></div></div>
+        <div style="display:flex;gap:8px;margin-top:18px;flex-wrap:wrap"><span class="new" style="border-radius:8px"><span class="tag">NEW</span><span class="btn ap">Confirm</span></span><span class="btn">⚑ Flag this as wrong</span></div>
+        <div style="font-size:11px;color:var(--muted);margin-top:8px">Flag now works on anything the label signed for — details, roles, splits. It notifies the label; it changes nothing.</div>
+      </div>
+    </div>
+    <div class="bn"><span>Home</span><span>Registrations</span><b>Products</b><span>Contributors</span></div>
+  </div>
+</div>
+
+
+
+</div></body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Everything your distributor asks for, filled in · planned screens</title><style>
+:root{--bg:#f4f4f6;--ink:#181d27;--ink2:#414651;--muted:#717680;--line:#e9eaeb;--line2:#d5d7da;--brand:#ff6b35;--brand50:#fff3ed;--grad:linear-gradient(90deg,#fff6b7 0%,#fb7c8c 60%,#d46879 100%);--purple:#6938ef;--purple50:#f4f3ff;--new:#c11574;--del:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:#f4f4f6;color:#181d27;line-height:1.45}
+.top{max-width:1240px;margin:0 auto;padding:28px 28px 0}.top h1{font-size:26px;margin:0 0 6px}.top p{color:#414651;font-size:14px;max-width:100ch;margin:0 0 8px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}.toc a{background:#fff;border:1px solid #d5d7da;border-radius:999px;padding:4px 12px;font-size:13px;color:#181d27;text-decoration:none}
+.sh{max-width:1240px;margin:0 auto;padding:34px 28px 0}.sh h1{font-size:21px;margin:0;border-top:2px solid #181d27;padding-top:14px}.sh p{margin:2px 0 0;color:#717680;font-size:13px}
+.tag-legend{display:inline-block;background:#c11574;color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px}
+#s1{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45;padding:28px}
+#s1 .wrap{max-width:1180px;margin:0 auto}
+#s1 h1{font-size:24px;margin:0 0 4px}
+#s1 .lede{color:var(--muted);font-size:14px;margin:0 0 18px;max-width:95ch}
+#s1 h2{font-size:16px;margin:26px 0 4px}
+#s1 h2 .id{background:var(--ink);color:#fff;border-radius:6px;font-size:12px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+#s1 .where{font-size:13px;color:var(--ink2);margin:0 0 10px}
+#s1 .grid{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:start}
+#s1 .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+#s1 .ch{display:flex;justify-content:space-between;align-items:center}
+#s1 .ch h4{margin:0;font-size:16px}
+#s1 .sub{font-size:12.5px;color:var(--muted);margin:0 0 8px}
+#s1 .ibtn{border:1px solid var(--line2);border-radius:8px;padding:3px 9px;font-size:12px}
+#s1 .tr{display:grid;grid-template-columns:1fr 150px;align-items:stretch;border-bottom:1px solid var(--line);font-size:13px;position:relative}
+#s1 .tr:last-child{border-bottom:none}
+#s1 .click{display:grid;grid-template-columns:20px 1fr 46px 16px;gap:8px;align-items:center;padding:9px 8px;border-radius:8px}
+#s1 .click.hover{background:#f9fafb}
+#s1 .click b{display:block}
+#s1 .click span.a{color:var(--muted);font-size:12px}
+#s1 .muted{color:var(--muted)}
+#s1 .vcol{display:flex;align-items:center;justify-content:flex-start;padding-left:12px;border-left:1px solid var(--line)}
+#s1 .vbtn{border:1px dashed var(--line2);border-radius:999px;padding:2px 10px;font-size:12px;color:var(--ink2);background:#fff;white-space:nowrap}
+#s1 .vbtn.filled{border-style:solid;background:#f9fafb;color:var(--ink)}
+#s1 .vbtn.on{border-color:var(--brand);box-shadow:0 0 0 3px #ffe6d9}
+#s1 .vbtn.lock{border-style:solid;background:#fff;color:var(--ink2);border-color:transparent;padding-left:0}
+#s1 .new{outline:2px dashed var(--new);outline-offset:3px;border-radius:8px}
+#s1 .tag{display:inline-block;background:var(--new);color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:1px}
+#s1 .pop{position:absolute;right:0;top:40px;width:290px;background:#fff;border:1px solid var(--line2);border-radius:12px;box-shadow:0 12px 24px rgba(16,24,40,.16);padding:12px;z-index:2}
+#s1 .pop label{font-size:12px;font-weight:600;color:var(--ink2)}
+#s1 .inp{border:1px solid var(--brand);border-radius:8px;padding:6px 10px;font-size:13px;margin-top:4px;box-shadow:0 0 0 3px #ffe6d9}
+#s1 .hint{font-size:11.5px;color:var(--muted);margin-top:4px}
+#s1 .pf{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+#s1 .btn{border:1px solid var(--line2);border-radius:8px;padding:4px 12px;font-size:12.5px;font-weight:600}
+#s1 .btn.p{background:var(--grad);border:none;color:#fff}
+#s1 .link{font-size:12px;color:#b42f04}
+#s1 .states{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px}
+#s1 .states h5{margin:0 0 6px;font-size:13px}
+#s1 .states ul{margin:0;padding-left:18px}
+#s1 .states li{margin:4px 0}
+#s1 .zone{font-size:11px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:2px 6px;border-radius:4px}
+#s1 .zone.r{background:#eff8ff;color:#175cd3}
+#s1 .zone.v{background:#fff5fa;color:var(--new)}
+#s1 .mine{font-size:11px;color:var(--muted);font-style:italic}
+#s2{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45;padding:28px}
+#s2 .wrap{max-width:1180px;margin:0 auto}
+#s2 h1{font-size:24px;margin:0 0 4px}
+#s2 .lede{color:var(--muted);font-size:14px;margin:0 0 18px;max-width:90ch}
+#s2 h2{font-size:17px;margin:34px 0 4px}
+#s2 h2 .id{background:var(--ink);color:#fff;border-radius:6px;font-size:12px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+#s2 .where{font-size:13px;color:var(--ink2);margin:0 0 10px}
+#s2 code{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:12px}
+#s2 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+#s2 .browser{background:#fff;border:1px solid var(--line2);border-radius:12px;overflow:hidden}
+#s2 .url{background:#f5f5f5;border-bottom:1px solid var(--line);padding:6px 12px;font-size:12px;color:var(--muted)}
+#s2 .page{background:linear-gradient(135deg,#eef0f6 0%,#fafafa 40%,#f5f6f9 100%);padding:16px}
+#s2 .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px}
+#s2 .card h4{margin:0 0 8px;font-size:15px}
+#s2 .kv{display:grid;grid-template-columns:130px 1fr;font-size:13px;row-gap:6px}
+#s2 .kv span{color:var(--muted)}
+#s2 .new{outline:2px dashed var(--new);outline-offset:2px;border-radius:6px;background:#fff5fa}
+#s2 .gone{outline:2px dashed var(--del);outline-offset:2px;border-radius:6px;background:#fef3f2;text-decoration:line-through;color:var(--del)}
+#s2 .tag{display:inline-block;background:var(--new);color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:1px}
+#s2 .tag.del{background:var(--del)}
+#s2 .fld{margin-bottom:9px}
+#s2 .fld label{display:block;font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:3px}
+#s2 .inp{border:1px solid var(--line2);border-radius:8px;padding:6px 10px;font-size:13px;background:#fff;min-height:32px}
+#s2 .inp.ph{color:#a4a7ae}
+#s2 .hint{font-size:11.5px;color:var(--muted);margin-top:3px}
+#s2 .row{display:flex;gap:10px}
+#s2 .row>*{flex:1}
+#s2 .sec{font-size:12px;font-weight:600;color:var(--ink2);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 8px}
+#s2 .modal{background:#fff;border:1px solid var(--line2);border-radius:14px;padding:16px;box-shadow:0 12px 24px rgba(16,24,40,.12)}
+#s2 .modal h3{margin:0 0 4px;font-size:17px}
+#s2 .phone{border:1px solid var(--line2);border-radius:24px;background:#fff;overflow:hidden}
+#s2 .phone .bar{background:linear-gradient(135deg,#7a5af8,#6938ef);color:#fff;padding:12px 14px;font-weight:600;font-size:14px}
+#s2 .phone .body{padding:12px;background:#faf9ff}
+#s2 .note{background:#f4f3ff;border:1px solid #d9d6fe;color:#5925dc;border-radius:8px;padding:6px 9px;font-size:12px;margin-top:4px}
+#s2 .drop{border:1px solid var(--line2);border-radius:8px;background:#fff;margin-top:4px;font-size:13px;box-shadow:0 4px 8px rgba(16,24,40,.08)}
+#s2 .drop div{padding:6px 10px}
+#s2 .drop div.on{background:#f9fafb;font-weight:600}
+#s2 .states{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px}
+#s2 .states h5{margin:0 0 6px;font-size:13px}
+#s2 .states ul{margin:0;padding-left:18px}
+#s2 .states li{margin:3px 0}
+#s2 .q{background:#fffaeb;border:1px solid #fedf89;border-radius:10px;padding:10px 12px;font-size:13px;margin-top:10px}
+#s2 .mine{font-size:11px;color:var(--muted);font-style:italic}
+#s3{padding:28px}
+#s3 .wrap{max-width:1180px;margin:0 auto}
+#s3 h2{font-size:16px;margin:26px 0 4px}
+#s3 h2 .id{background:#181d27;color:#fff;border-radius:6px;font-size:12px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+#s3 .where{font-size:13px;color:#414651;margin:0 0 10px}
+#s3 code{background:#fff;border:1px solid #e9eaeb;border-radius:4px;padding:1px 6px;font-size:12px}
+#s3 .grid{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:start}
+#s3 .card{background:#fff;border:1px solid #e9eaeb;border-radius:12px;padding:14px;margin-bottom:10px}
+#s3 .ch{display:flex;justify-content:space-between;align-items:center}
+#s3 .ch h4{margin:0;font-size:16px}
+#s3 .sub{font-size:12.5px;color:#717680;margin:2px 0 8px}
+#s3 .ibtn{border:1px solid #d5d7da;border-radius:8px;padding:3px 9px;font-size:12px}
+#s3 .tr{display:grid;grid-template-columns:1fr 150px;border-bottom:1px solid #e9eaeb;font-size:13px}
+#s3 .tr:last-child{border-bottom:none}
+#s3 .click{display:grid;grid-template-columns:20px 1fr 46px 16px;gap:8px;align-items:center;padding:9px 8px}
+#s3 .click b{display:block}
+#s3 .a{color:#717680;font-size:12px}
+#s3 .muted{color:#717680}
+#s3 .vcol{display:flex;align-items:center;padding-left:12px;border-left:1px solid #e9eaeb}
+#s3 .vbtn{border:1px solid #d5d7da;border-radius:999px;padding:2px 10px;font-size:12px;background:#f9fafb;white-space:nowrap}
+#s3 .vbtn.e{border-style:dashed;background:#fff;color:#414651}
+#s3 .new{outline:2px dashed #c11574;outline-offset:3px;border-radius:8px;background:#fff5fa}
+#s3 .tag{display:inline-block;background:#c11574;color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:1px}
+#s3 .fsel{display:inline-flex;gap:6px;align-items:center;font-size:12.5px;padding:3px 8px}
+#s3 .dd{border:1px solid #d5d7da;border-radius:8px;padding:2px 8px;background:#fff}
+#s3 .drop{width:280px;border:1px solid #d5d7da;border-radius:10px;background:#fff;box-shadow:0 12px 24px rgba(16,24,40,.14);font-size:12.5px;margin:4px 0 8px}
+#s3 .drop div{padding:6px 10px}
+#s3 .drop .on{background:#f9fafb;font-weight:600}
+#s3 .star{color:#f79009}
+#s3 .pkg{background:#fff;border:1px solid #e9eaeb;border-radius:12px;overflow:hidden;font-size:13px}
+#s3 .pr{display:flex;gap:10px;align-items:center;padding:10px 14px}
+#s3 .dot{width:10px;height:10px;border-radius:50%;background:#17b26a}
+#s3 .chkb{border-top:1px solid #e9eaeb;padding:10px 14px 10px 32px}
+#s3 .chkb h6{margin:0;font-size:12px}
+#s3 .chkb p{margin:2px 0 6px;font-size:12px;color:#717680}
+#s3 .chk{display:flex;gap:8px;font-size:12.5px;margin:5px 0}
+#s3 .chk i{width:14px;height:14px;border:1.5px solid #d5d7da;border-radius:4px;flex:none;margin-top:2px}
+#s3 .chk small{display:block;color:#717680}
+#s3 .dl{border:1px solid #d5d7da;border-radius:8px;padding:3px 10px;font-size:12px;margin-left:auto}
+#s3 .states{background:#fff;border:1px solid #e9eaeb;border-radius:12px;padding:12px 14px;font-size:13px;margin-bottom:10px}
+#s3 .states h5{margin:0 0 6px;font-size:13px}
+#s3 .states ul{margin:0;padding-left:18px}
+#s3 .states li{margin:4px 0}
+#s3 .mine{font-size:11px;color:#717680;font-style:italic}
+#s4{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45;padding:28px}
+#s4 .wrap{max-width:1180px;margin:0 auto}
+#s4 h1{font-size:24px;margin:0 0 4px}
+#s4 .lede{color:var(--muted);font-size:14px;margin:0 0 18px;max-width:90ch}
+#s4 h2{font-size:17px;margin:30px 0 4px}
+#s4 h2 .id{background:var(--ink);color:#fff;border-radius:6px;font-size:12px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+#s4 .where{font-size:13px;color:var(--ink2);margin:0 0 10px}
+#s4 code{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:12px}
+#s4 .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:start}
+#s4 .modal{background:#fff;border:1px solid var(--line2);border-radius:14px;box-shadow:0 12px 24px rgba(16,24,40,.12)}
+#s4 .mh{display:flex;gap:12px;padding:18px 22px;border-bottom:1px solid var(--line)}
+#s4 .ico{width:40px;height:40px;border:1px solid var(--line2);border-radius:10px;display:grid;place-items:center}
+#s4 .mh h3{margin:0;font-size:16px}
+#s4 .mh p{margin:0;font-size:13px;color:var(--muted)}
+#s4 .mb{padding:18px 22px}
+#s4 .f{display:grid;grid-template-columns:150px 1fr;gap:12px;margin-bottom:14px;font-size:14px}
+#s4 .f>label{padding-top:8px;font-weight:500;color:var(--ink2)}
+#s4 .req{color:#ff6b35}
+#s4 .inp{border:1px solid var(--line2);border-radius:8px;padding:8px 12px;background:#fff;min-height:38px}
+#s4 .ph{color:#a4a7ae}
+#s4 .hint{font-size:12px;color:var(--muted);margin-top:4px}
+#s4 .new{outline:2px dashed var(--new);outline-offset:4px;border-radius:6px;background:#fff5fa}
+#s4 .tag{display:inline-block;background:var(--new);color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:1px}
+#s4 .mf{display:flex;gap:12px;padding:14px 22px;border-top:1px solid var(--line)}
+#s4 .btn{flex:1;text-align:center;border:1px solid var(--line2);border-radius:8px;padding:9px;font-weight:600;font-size:14px}
+#s4 .btn.p{background:var(--grad);border:none;color:#fff}
+#s4 .states{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px;margin-bottom:12px}
+#s4 .states h5{margin:0 0 6px;font-size:13px}
+#s4 .states ul{margin:0;padding-left:18px}
+#s4 .states li{margin:4px 0}
+#s4 table{border-collapse:collapse;width:100%;font-size:12.5px;background:#fff}
+#s4 th,#s4 td{border:1px solid var(--line);padding:6px 8px;text-align:left}
+#s4 th{background:#f9fafb;font-weight:600}
+#s4 td.n{background:#fff5fa;color:var(--new);font-weight:600}
+#s4 .mine{font-size:11px;color:var(--muted);font-style:italic}
+#s4 .list{background:#fff;border:1px solid var(--line2);border-radius:12px;overflow:hidden;font-size:13px}
+#s4 .list .r{display:flex;gap:12px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)}
+#s4 .list .r:first-child{border-top:none}
+#s4 .sub{color:var(--muted);font-size:12px}
+</style></head><body><div style="max-width:1180px;margin:16px auto 0;padding:10px 16px;border-radius:10px;background:#fff3ed;border:1px solid #ffd6c2;font:14px/1.45 Inter,-apple-system,sans-serif;color:#181d27"><b>Design preview.</b> These are early sketches of the planned screens, filled in with example data. Details will change as we build and test them with you.</div><div class="top"><h1>Orchard file complete — mockups</h1>
+</div>
+<div class="sh"><h1>1 · Track version (EP / album)</h1></div><div id="s1"><div class="wrap">
+
+
+<h2><span class="id">1.1</span>Tracklist card</h2>
+
+<div class="grid">
+ <div class="card"><div class="ch"><h4>Tracklist</h4><span class="ibtn">✎ Manage</span></div><p class="sub">Tracks in this release</p>
+  <div style="display:grid;grid-template-columns:1fr 150px;font-size:11px;margin-bottom:4px"><span><span class="zone r">opens registration (as today)</span></span><span style="padding-left:12px"><span class="zone v">version</span></span></div>
+  <div class="tr"><div class="click"><span class="muted">1</span><div><b>Northern Lights</b><span class="a">Mira Vale</span></div><span class="muted">3:39</span><span class="muted">›</span></div>
+   <div class="vcol new"><span class="vbtn">＋ Add version</span></div></div>
+  <div class="tr"><div class="click hover"><span class="muted">2</span><div><b>Northern Lights</b><span class="a">Mira Vale</span></div><span class="muted">6:12</span><span class="muted">›</span></div>
+   <div class="vcol new"><span class="vbtn filled on">Extended Mix ✎</span></div>
+   <div class="pop new"><label>Version</label><div class="inp">Extended Mix|</div>
+    <div class="hint">How the stores show this cut, e.g. <i>Extended Mix</i>. Leave empty for the main version.</div>
+    <div class="pf"><span class="link">Remove version</span><span><span class="btn">Cancel</span> <span class="btn p">Save</span></span></div></div></div>
+  <div class="tr" style="margin-top:0"><div class="click"><span class="muted">3</span><div><b>Northern Lights</b><span class="a">Mira Vale</span></div><span class="muted">3:39</span><span class="muted">›</span></div>
+   <div class="vcol new"><span class="vbtn filled">Instrumental ✎</span></div></div>
+  <div style="height:70px"></div>
+ </div>
+ 
+</div>
+
+<h2><span class="id">1.2</span>Shipped, and on a phone</h2>
+
+<div class="grid">
+ <div class="card"><div class="ch"><h4>Tracklist</h4><span class="muted" style="font-size:12px">🔒 Locked</span></div><p class="sub">Tracks in this release</p>
+  <div class="tr"><div class="click"><span class="muted">1</span><div><b>Northern Lights</b><span class="a">Mira Vale</span></div><span class="muted">3:39</span><span class="muted">›</span></div><div class="vcol"><span class="vbtn lock muted">—</span></div></div>
+  <div class="tr"><div class="click"><span class="muted">2</span><div><b>Northern Lights</b><span class="a">Mira Vale</span></div><span class="muted">6:12</span><span class="muted">›</span></div><div class="vcol"><span class="vbtn lock">Extended Mix</span></div></div>
+ </div>
+ 
+</div>
+
+</div></div>
+<div class="sh"><h1>2 · Single, lyrics, lyrics language, preview start</h1></div><div id="s2"><div class="wrap">
+
+
+<h2><span class="id">2.1</span>A single today: release and track on one page</h2>
+
+<div class="grid">
+ <div class="browser"><div class="url">app.ambler.app/projects/…/products/…</div><div class="page">
+  <div class="card"><h4>Registration data</h4>
+   <div class="kv"><span>Title</span><b>Northern Lights</b><span>ISRC</span><b>DKAB12600012</b><span>Release date</span><b>14 Nov 2026</b>
+   <span>Version</span><b class="new">Radio Edit <span class="tag">SENT AS RELEASE + TRACK</span></b><span>Label</span><b>Harmattan Records</b><span>Genre</span><b>Electronic</b>
+   <span class="gone">Language</span><b class="gone">dansk</b>
+   <span class="new">Lyrics language</span><b class="new">Danish <span class="tag">NEW</span></b>
+   <span class="new">Preview start</span><b class="new">01:12 <span class="tag">NEW</span></b>
+   <span class="new">Lyrics</span><b class="new" style="font-weight:400">Første linje…<br>Anden linje… <a style="color:#b42f04">Show all</a></b></div>
+  </div></div></div>
+ 
+</div>
+
+<h2><span class="id">2.2</span>Edit registration data (label)</h2>
+
+<div class="grid">
+ <div class="modal"><h3>Edit registration data</h3>
+  <div class="sec">Basic information</div>
+  <div class="fld new"><label>Version</label><div class="inp">Radio Edit</div><div class="hint">How the stores show this cut, e.g. <i>Extended Mix</i>. Leave empty for the main version.</div></div>
+  <div class="sec">Technical details</div>
+  <div class="row"><div class="fld"><label>BPM</label><div class="inp">122</div></div><div class="fld"><label>Key</label><div class="inp">A minor</div></div></div>
+  <div class="fld gone"><label>Language <span class="tag del">REMOVED</span></label><div class="inp">dansk</div></div>
+  <div class="sec">Content &amp; Recording</div>
+  <div class="fld"><label>Explicit content</label><div class="inp ph">Contains explicit language</div></div>
+  <div class="fld"><label>Lyrics language</label><div class="inp">Danish</div><div class="hint">Already a pick list here. Now the only language field.</div></div>
+  <div class="fld new"><label>Lyrics <span class="tag">NEW</span></label><div class="inp" style="min-height:64px">Første linje<br>Anden linje<br>…</div><div class="hint">Paste the words as they're sung, one line per line. No chords or section labels. · 812 / 10,000</div></div>
+  <div class="fld new"><label>Preview start <span class="tag">NEW</span></label><div class="row"><div class="inp">01:12</div><div class="inp" style="flex:0 0 auto">▶ Play from here</div></div><div class="hint">Where TikTok and store previews start.</div></div>
+  <div class="row" style="margin-top:12px"><div></div><div style="display:flex;gap:8px;justify-content:flex-end"><span class="inp">Cancel</span><span class="inp" style="background:var(--grad);color:#fff;border:none;font-weight:600">Save changes</span></div></div>
+ </div>
+ 
+</div>
+
+<h2><span class="id">2.3</span>Artist app: same picker, same lyrics</h2>
+
+<div class="grid">
+ <div class="phone"><div class="bar">Track Information</div><div class="body">
+  <div class="card"><h4 style="font-size:14px">Technical details</h4>
+   <div class="row"><div class="fld"><label>BPM</label><div class="inp">122</div></div><div class="fld"><label>Key</label><div class="inp">A minor</div></div></div>
+   <div class="fld gone"><label>Language <span class="tag del">REMOVED</span></label><div class="inp">dansk</div></div></div>
+  <div class="card"><h4 style="font-size:14px">Content and recording</h4>
+   <div class="fld"><label>Explicit content</label><div class="inp ph">Contains explicit language</div></div>
+   <div class="fld new"><label>Lyrics language <span class="tag">NEW HERE</span></label><div class="inp">dan</div>
+    <div class="drop"><div class="on">Danish</div><div>Instrumental</div></div></div>
+   <div class="fld new"><label>Lyrics <span class="tag">NEW</span></label><div class="inp" style="min-height:56px">Første linje<br>Anden linje…</div>
+</div>
+   <div class="fld new"><label>Preview start <span class="tag">NEW</span></label><div class="row"><div class="inp">01:12</div><div class="inp" style="flex:0 0 auto">▶ Play</div></div></div>
+  </div></div></div>
+ 
+</div>
+
+
+<h2><span class="id">2.4</span>Label wizard: answer it once, no edit afterwards</h2>
+
+<div class="grid">
+ <div class="modal"><h3>Create registration</h3>
+  <div class="hint" style="margin:-4px 0 8px">Start by typing some basic information of the song you want to register</div>
+  <div class="sec">Full track detail &nbsp;<span class="inp" style="display:inline-block;padding:2px 10px;background:var(--grad);color:#fff;border:none;font-weight:600">Fill now</span> <span class="inp" style="display:inline-block;padding:2px 10px">Leave to artist</span></div>
+  <div class="hint" style="margin:0 0 8px">Optional — fill in what you already know; the artist completes the rest.</div>
+  <div class="sec">Technical details</div>
+  <div class="row"><div class="fld"><label>BPM</label><div class="inp">122</div></div><div class="fld"><label>Duration</label><div class="inp">3:30</div></div></div>
+  <div class="row"><div class="fld"><label>Key</label><div class="inp">A minor</div></div><div class="fld gone"><label>Language <span class="tag del">REMOVED</span></label><div class="inp ph">e.g. English</div></div></div>
+  <div class="fld new"><label>Lyrics language <span class="tag">NEW HERE</span></label><div class="inp">Danish</div><div class="hint">Same picker as <i>Edit registration data</i>: type to search, or <i>Instrumental</i>.</div></div>
+  <div class="sec">Content &amp; recording</div>
+  <div class="fld"><label>Explicit content</label><div class="inp ph">Contains explicit language</div></div>
+  <div class="fld new"><label>Lyrics <span class="tag">NEW</span></label><div class="inp" style="min-height:56px">Første linje<br>Anden linje<br>…</div><div class="hint">Paste the words as they're sung, one line per line. No chords or section labels. · 812 / 10,000</div></div>
+  <div class="fld new"><label>Preview start <span class="tag">NEW</span></label><div class="row"><div class="inp">1:12</div><div class="inp ph" style="flex:0 0 auto">▶ Play from here</div></div><div class="hint">Upload the audio to listen. Where TikTok and store previews start.</div></div>
+  <div class="row"><div class="fld"><label>Studio or live</label><div class="inp">Studio</div></div><div class="fld"><label>Available for sale as</label><div class="inp">Track</div></div></div>
+ </div>
+ 
+</div>
+</div></div>
+<div class="sh"><h1>3 · Focus track + Orchard after-upload checklist</h1></div><div id="s3"><div class="wrap">
+<h2><span class="id">3.1</span>Choose the focus track on the Tracklist card</h2>
+
+<div class="grid">
+ <div class="card"><div class="ch"><h4>Tracklist</h4><span class="ibtn">✎ Manage</span></div>
+  <p class="sub">Tracks in this release · <span class="fsel new">Focus track: <span class="dd">Northern Lights – Extended Mix ▾</span><span class="tag">NEW</span></span></p>
+  <div class="drop new" style="margin-left:150px"><div>None</div><div>1 · Northern Lights</div><div class="on">2 · Northern Lights – Extended Mix ✓</div><div>3 · Northern Lights – Instrumental</div></div>
+  <div class="tr"><div class="click"><span class="muted">1</span><div><b>Northern Lights</b><span class="a">Mira Vale</span></div><span class="muted">3:39</span><span class="muted">›</span></div><div class="vcol"><span class="vbtn e">＋ Add version</span></div></div>
+  <div class="tr"><div class="click"><span class="muted">2</span><div><b><span class="star new" style="padding:0 3px">★</span> Northern Lights</b><span class="a">Mira Vale</span></div><span class="muted">6:12</span><span class="muted">›</span></div><div class="vcol"><span class="vbtn">Extended Mix ✎</span></div></div>
+  <div class="tr"><div class="click"><span class="muted">3</span><div><b>Northern Lights</b><span class="a">Mira Vale</span></div><span class="muted">3:39</span><span class="muted">›</span></div><div class="vcol"><span class="vbtn">Instrumental ✎</span></div></div>
+ </div>
+ 
+</div>
+
+<h2><span class="id">3.2</span>The Orchard delivery row: after-upload checklist</h2>
+
+<div class="grid">
+ <div class="pkg">
+  <div class="pr"><span class="dot"></span><span class="muted" style="font-size:12px;font-weight:600;width:48px">DIST</span><div><b>The Orchard</b> <span class="muted" style="font-size:12px">· distributor</span><div class="muted" style="font-size:12px">Bulk Uploader file ready</div></div><span class="dl">Download</span></div>
+  <div class="chkb new"><h6>After upload in Orchard Workstation <span class="tag">NEW</span></h6>
+   <p>Orchard's spreadsheet can't set these. Do them in Workstation straight after uploading. Not required to mark delivered.</p>
+   <div class="chk"><i></i><div>Set “Northern Lights – Extended Mix” as the focus track<small>The Bulk Uploader has no column for it.</small></div></div></div>
+ </div>
+ 
+</div>
+
+<h2><span class="id">3.3</span>Preview start and lyrics: states (fields drawn in section 2)</h2>
+
+<div class="grid">
+ 
+ 
+</div>
+</div></div>
+<div class="sh"><h1>4 · Project number</h1></div><div id="s4"><div class="wrap">
+
+
+<h2><span class="id">4.1</span>New project / Edit project</h2>
+
+<div class="grid">
+ <div class="modal">
+  <div class="mh"><div class="ico">📁</div><div><h3>New project</h3><p>Create a new project folder to organize your music products</p></div></div>
+  <div class="mb">
+   <div class="f"><label>Project name <span class="req">*</span></label><div><div class="inp">Northern Lights – album deal</div></div></div>
+   <div class="f new"><label>Project number <span class="tag">NEW</span></label><div><div class="inp">SME-DK-2026-0187</div><div class="hint">Your own project / P&amp;L number, if you have one. Sent to Orchard as the Project Code. Leave empty and we'll make one.</div></div></div>
+   <div class="f"><label>Record label <span class="req">*</span></label><div><div class="inp">Harmattan Records</div></div></div>
+   <div class="f"><label>Artist name</label><div><div class="inp">Aurora Vale</div></div></div>
+   <div class="f"><label>Description</label><div><div class="inp ph" style="min-height:70px">Add project details, collaborators, or any relevant notes...</div></div></div>
+  </div>
+  <div class="mf"><div class="btn">Cancel</div><div class="btn p">Create project</div></div>
+ </div>
+ <div>
+  
+  
+ </div>
+</div>
+
+<h2><span class="id">4.2</span>Where you see it afterwards</h2>
+
+<div class="grid">
+ <div class="list">
+  <div class="r"><div style="width:32px;height:32px;border-radius:8px;background:#f2f4f7;display:grid;place-items:center">📁</div><div><b>Northern Lights – album deal</b><div class="sub new" style="display:inline-block;padding:0 4px">SME-DK-2026-0187</div></div></div>
+  <div class="r"><div style="width:32px;height:32px;border-radius:8px;background:#f2f4f7;display:grid;place-items:center">📁</div><div><b>Spring singles</b><div class="sub new" style="display:inline-block;padding:0 4px">DW-0042</div></div></div>
+ </div>
+ 
+</div>
+
+</div></div>
+<div style="height:60px"></div></body></html>

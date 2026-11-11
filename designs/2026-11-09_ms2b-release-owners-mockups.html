@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Everyone at your label owns their part · planned screens</title>
+<style>
+:root{--bg:#f4f4f6;--ink:#181d27;--ink2:#414651;--muted:#717680;--line:#e9eaeb;--line2:#d5d7da;--brand:#ff6b35;--grad:linear-gradient(90deg,#fff6b7 0%,#fb7c8c 60%,#d46879 100%);--new:#c11574;--del:#b42318;--ok:#067647;--okbg:#ecfdf3;--warn:#b54708;--warnbg:#fffaeb;--err:#b42318;--errbg:#fef3f2;--blue:#175cd3;--bluebg:#eff8ff;--grey:#344054;--greybg:#f2f4f7;
+--c1:#6938ef;--c1bg:#f4f3ff;--c2:#0e9384;--c2bg:#f0fdf9;--c3:#c4320a;--c3bg:#fff6ed}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+.top{max-width:1240px;margin:0 auto;padding:28px 28px 0}.top h1{font-size:26px;margin:0 0 6px}.top p{color:var(--ink2);font-size:14px;max-width:110ch;margin:0 0 8px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}.toc a{background:#fff;border:1px solid var(--line2);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--ink);text-decoration:none}
+.sh{max-width:1240px;margin:0 auto;padding:34px 28px 0}.sh h1{font-size:21px;margin:0;border-top:2px solid var(--ink);padding-top:14px}.sh p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+h2{font-size:16px;margin:26px 0 4px}h2 .id{background:var(--ink);color:#fff;border-radius:6px;font-size:12px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+.where{font-size:13px;color:var(--ink2);margin:0 0 10px}code{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:12px}
+.grid{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;align-items:start}
+.states{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px}.states h5{margin:0 0 6px;font-size:13px}.states ul{margin:0;padding-left:18px}.states li{margin:4px 0}
+.q{background:#fffaeb;border:1px solid #fedf89;border-radius:10px;padding:8px 10px;margin-top:10px;font-size:12.5px}
+.mine{font-size:11px;color:var(--muted);font-style:italic}
+.new{outline:2px dashed var(--new);outline-offset:3px;border-radius:8px}
+.tag{display:inline-block;background:var(--new);color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:1px}
+.tag.del{background:var(--del)}
+/* app chrome */
+.app{background:#fafafa;border:1px solid var(--line2);border-radius:12px;overflow:hidden}
+.topnav{display:flex;align-items:center;gap:4px;padding:10px 18px;border-bottom:1px solid var(--line);background:#fff;flex-wrap:wrap;position:relative}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;margin-right:12px}.logo i{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#c7b8ff,#3b2a8a);display:inline-block}
+.topnav a{font-size:13px;color:var(--ink2);padding:5px 9px;border-radius:6px;font-weight:500;white-space:nowrap}.topnav a.on{background:#f5f5f5;color:var(--ink)}
+.topnav .right{margin-left:auto;display:flex;gap:10px;align-items:center}.topnav .right i{width:15px;height:15px;border-radius:50%;border:1.5px solid #a4a7ae;display:inline-block}.topnav .right b{width:24px;height:24px;border-radius:50%;background:#7a5a48;display:inline-block}
+.menu{position:absolute;top:44px;background:#fff;border:1px solid var(--line2);border-radius:10px;box-shadow:0 12px 24px rgba(16,24,40,.14);padding:6px;min-width:190px;z-index:3}
+.menu div{padding:7px 10px;border-radius:6px;font-size:13px}.menu div.on{background:#f5f5f5;font-weight:600}.menu small{display:block;color:var(--muted);font-size:11.5px}
+.page{padding:18px 20px}
+.ph{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}.ph h3{margin:0;font-size:20px}.ph p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.btn{display:inline-block;border:1px solid var(--line2);border-radius:8px;padding:6px 12px;font-size:12.5px;font-weight:600;background:#fff;white-space:nowrap}
+.btn.pri{background:var(--grad);border:none;color:#fff}.btn.sm{padding:4px 10px;font-weight:500}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden}.seg span{padding:5px 12px;font-size:12.5px;font-weight:600;border-right:1px solid var(--line2);background:#fff}.seg span:last-child{border-right:none}.seg span.on{background:#f5f5f5}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px}
+.cardh{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px;border-bottom:1px solid var(--line)}.cardh h4{margin:0;font-size:15px}.cardh .sub{font-size:12px;color:var(--muted)}
+.inp{border:1px solid var(--line2);border-radius:8px;padding:5px 10px;font-size:12.5px;background:#fff;color:var(--ink)}.inp.ph{color:#a4a7ae}
+table.tbl{width:100%;border-collapse:collapse;font-size:12.5px}.tbl th{text-align:left;font-weight:600;color:var(--muted);font-size:11.5px;padding:8px 10px;border-bottom:1px solid var(--line);background:#fcfcfd;white-space:nowrap}.tbl td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl tr.grp td{background:#f9fafb;font-weight:600;font-size:12px;color:var(--ink2)}
+.b{display:inline-block;border-radius:999px;padding:1px 8px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.b.ok{background:var(--okbg);color:var(--ok)}.b.prog{background:var(--bluebg);color:var(--blue)}.b.att{background:var(--warnbg);color:var(--warn)}.b.ship{background:var(--greybg);color:var(--grey)}
+.dist{display:inline-block;border:1px solid var(--line2);border-radius:6px;padding:0 6px;font-size:11px;margin-right:3px;background:#fff}
+.tw{color:var(--blue);font-weight:600}.nodate{color:var(--muted);font-style:italic}
+/* calendar */
+.plan{display:grid;grid-template-columns:1fr 230px;gap:12px}
+.cal{display:grid;grid-template-columns:44px repeat(7,1fr);border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;font-size:11.5px}
+.cal .hd{background:#fcfcfd;color:var(--muted);font-weight:600;padding:6px;border-bottom:1px solid var(--line);text-align:center}
+.cal .wk{background:#fcfcfd;color:var(--muted);font-weight:600;padding:6px 4px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+.cal .d{min-height:86px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:4px;position:relative}
+.cal .d:nth-child(8n){border-right:none}
+.cal .d .n{color:var(--muted);font-size:11px}.cal .d.out .n{color:#c8ccd2}.cal .d.today .n{background:var(--brand);color:#fff;border-radius:999px;padding:0 6px}
+.cal .d.fri{background:#fffdf7}
+.rc{display:block;border-radius:6px;padding:3px 5px;margin-top:3px;font-size:11px;line-height:1.25;border:1px solid var(--line2);background:#fff;cursor:grab}
+.rc b{font-weight:600}.rc .s{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px;vertical-align:1px}
+.s.ok{background:#17b26a}.s.prog{background:#2e90fa}.s.att{background:#f79009}.s.ship{background:#98a2b3}
+.rc.lock{cursor:not-allowed;background:#f9fafb;color:var(--ink2)}
+.rc.ghost{opacity:.55;border-style:dashed}.rc.drop{outline:2px solid var(--brand);outline-offset:1px}
+.rc.g1{border-left:3px solid var(--c1)}.rc.g2{border-left:3px solid var(--c2)}.rc.g3{border-left:3px solid var(--c3)}
+.rc.ro{cursor:default}
+.strip{grid-column:2 / span 7;border-bottom:1px solid var(--line);background:var(--bluebg);padding:3px 6px;font-size:11px;color:var(--blue)}
+.pend{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:12px}.pend h5{margin:0 0 2px;font-size:13px}.pend .sub{color:var(--muted);font-size:11.5px;margin-bottom:6px}
+.wkrow{border:1px solid var(--line);border-radius:10px;background:#fff;margin-bottom:10px;overflow:hidden}
+.wkh{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 12px;background:#fcfcfd;border-bottom:1px solid var(--line);font-size:13px}.wkh b{font-size:13.5px}
+.wkb{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px 12px}
+.wc{border:1px solid var(--line2);border-radius:8px;padding:7px 9px;font-size:12px;background:#fff}.wc .t{font-weight:600}.wc .m{color:var(--muted);font-size:11.5px}
+.ub{font-size:11.5px;margin-top:3px}.ub.late{color:var(--err);font-weight:600}.ub.due{color:var(--warn);font-weight:600}
+.pop{position:absolute;background:#fff;border:1px solid var(--line2);border-radius:10px;box-shadow:0 12px 24px rgba(16,24,40,.16);padding:10px;font-size:12.5px;z-index:4;width:250px}
+.toggle{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600}.toggle i{width:30px;height:17px;border-radius:999px;background:#d0d5dd;position:relative;display:inline-block}.toggle i:after{content:"";position:absolute;width:13px;height:13px;border-radius:50%;background:#fff;top:2px;left:2px}
+.toggle.on i{background:var(--brand)}.toggle.on i:after{left:15px}
+.leg{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;margin-right:8px}.leg i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.panel{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:8px}
+.prow{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:13px}.prow .ic{width:30px;height:30px;border-radius:8px;background:#f2f4f7;display:grid;place-items:center;font-size:14px}
+.prow .t{font-weight:600}.prow .m{color:var(--muted);font-size:12px}
+.modal{background:#fff;border:1px solid var(--line2);border-radius:14px;box-shadow:0 12px 24px rgba(16,24,40,.12);padding:16px}
+.fld{margin-bottom:12px}.fld label{display:block;font-size:12.5px;font-weight:600;color:var(--ink2);margin-bottom:4px}.hint{font-size:11.5px;color:var(--muted);margin-top:3px}
+.admin{background:#fff;border:1px solid var(--line2);border-radius:12px;padding:18px;font-family:ui-sans-serif,system-ui}
+.admin h3{margin:0;font-size:22px}.admin .sub{color:var(--muted);font-size:13px;margin:2px 0 14px}
+.cb{display:flex;gap:8px;align-items:flex-start;font-size:13px}.cb i{width:16px;height:16px;border:1.5px solid var(--ink2);border-radius:4px;flex:none;margin-top:2px;display:grid;place-items:center;font-style:normal;font-size:11px}
+@media print{.toc{display:none}}
+
+</style></head><body><div style="max-width:1180px;margin:16px auto 0;padding:10px 16px;border-radius:10px;background:#fff3ed;border:1px solid #ffd6c2;font:14px/1.45 Inter,-apple-system,sans-serif;color:#181d27"><b>Design preview.</b> These are early sketches of the planned screens, filled in with example data. Details will change as we build and test them with you.</div>
+<div class="top">
+<h1>Each person owns their part: mockups (draft)</h1>
+
+
+</div>
+
+
+<div class="sh" id="s1"><h1>1 · Stage owners</h1></div>
+<div class="wrap">
+<h2><span class="id">1.1</span>Owners on the release page</h2>
+
+<div class="grid">
+ <div class="app" style="padding-bottom:110px">
+  <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a class="on">Projects ▾</a><a>Rights &amp; Splits ▾</a><a>Collaborators</a><a>Assets</a><a>Deliveries</a><a>Integrations</a><span class="right"><i></i><i></i><b></b></span></div>
+  <div class="page" style="position:relative">
+   <div class="ph"><div><h3>Winter Songs</h3><p>Album · Kayo · Kayo 2027 · <span class="tw">Week 49 (target)</span></p></div><span class="b prog">In progress</span></div>
+   <div class="card new" style="padding:10px 14px;display:flex;gap:26px;align-items:center;margin-bottom:12px;font-size:13px">
+    <b>Owners <span class="tag">NEW</span></b>
+    <span><span style="color:var(--muted)">PM</span> &nbsp;<b>Ada Okonkwo</b> <span class="btn sm">Change</span></span>
+    <span><span style="color:var(--muted)">Delivery</span> &nbsp;<span class="nodate">Unassigned</span> <span class="btn sm">Assign</span></span>
+    <span style="color:var(--muted);font-size:12px">Deal: Femi (on the project)</span>
+   </div>
+   <div class="pop new" style="left:440px;top:118px"><b>Assign delivery owner</b><div class="inp ph" style="margin:6px 0">Search team…</div>
+    <div style="padding:4px 0"><b>Tunde Bello</b> · Editor</div><div style="padding:4px 0">Ada Okonkwo · Editor</div><div style="padding:4px 0;color:var(--muted)">Chioma Obi · Coordinator</div>
+    <div class="hint">Viewers can't be owners. Tunde is told in Ambler.</div></div>
+   <div class="card"><div class="cardh"><h4>Release Metadata</h4><span class="sub">Release information</span></div><div style="padding:12px 14px;color:var(--muted);font-size:12.5px">… unchanged …</div></div>
+  </div>
+ </div>
+ 
+</div>
+
+<h2><span class="id">1.2</span>Owners and defaults on the project page</h2>
+
+<div class="grid">
+ <div class="app">
+  <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a class="on">Projects ▾</a><a>Rights &amp; Splits ▾</a><a>Collaborators</a><a>Assets</a><a>Deliveries</a><a>Integrations</a><span class="right"><i></i><i></i><b></b></span></div>
+  <div class="page">
+   <div class="ph"><div><h3>Kayo 2027</h3><p>Project · HR-2027-014</p></div><span class="btn">Edit project</span></div>
+   <div class="card new" style="padding:10px 14px;display:flex;gap:24px;flex-wrap:wrap;align-items:center;margin-bottom:12px;font-size:13px">
+    <b>Owners <span class="tag">NEW</span></b>
+    <span><span style="color:var(--muted)">Deal</span> &nbsp;<b>Femi Adebayo</b></span>
+    <span><span style="color:var(--muted)">Default PM</span> &nbsp;<b>Ada Okonkwo</b></span>
+    <span><span style="color:var(--muted)">Default delivery</span> &nbsp;<b>Tunde Bello</b></span>
+    <span class="btn sm">Change</span>
+    <span class="btn pri sm">Ready for PM</span>
+   </div>
+   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px">
+    <div class="card" style="padding:10px 12px"><div class="sub" style="color:var(--muted);font-size:12px">Total Products</div><b style="font-size:20px">3</b></div>
+    <div class="card" style="padding:10px 12px"><div style="color:var(--muted);font-size:12px">Completed</div><b style="font-size:20px">1</b></div>
+    <div class="card" style="padding:10px 12px"><div style="color:var(--muted);font-size:12px">Pending</div><b style="font-size:20px">2</b></div>
+    <div class="card" style="padding:10px 12px"><div style="color:var(--muted);font-size:12px">Draft</div><b style="font-size:20px">0</b></div>
+   </div>
+   <div class="card"><div class="cardh"><h4>Products &amp; Tracks</h4></div><table class="tbl"><tr><th>Name</th><th>Type</th><th>Status</th><th class="new">PM <span class="tag">NEW</span></th></tr>
+    <tr><td><b>Paper Boats</b></td><td>Single</td><td><span class="b ship">Shipped</span></td><td>Ada</td></tr>
+    <tr><td><b>Snow Lines</b></td><td>Single</td><td><span class="b ok">Ready to Ship</span></td><td>Ada</td></tr>
+    <tr><td><b>Winter Songs</b></td><td>Album</td><td><span class="b prog">In progress</span></td><td>Ada</td></tr></table></div>
+  </div>
+ </div>
+ 
+</div>
+
+<h2><span class="id">1.3</span>Notifications aimed at one person</h2>
+
+<div class="grid">
+ <div class="app" style="padding-bottom:20px">
+  <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a>Projects ▾</a><a>Rights &amp; Splits ▾</a><a>Collaborators</a><a>Assets</a><a>Deliveries</a><a>Integrations</a><span class="right"><i style="border-color:var(--brand)"></i><i></i><b></b></span></div>
+  <div class="page" style="display:flex;justify-content:flex-end">
+   <div class="modal new" style="width:380px;padding:10px">
+    <b style="font-size:14px">Notifications</b>
+    <div class="prow"><span class="ic">👤</span><div><div class="t">Assigned to you <span class="tag">NEW</span></div><div class="m">Ada made you delivery owner of <b>Winter Songs</b> · 2 min</div></div></div>
+    <div class="prow"><span class="ic">➜</span><div><div class="t">Handed over to you <span class="tag">NEW</span></div><div class="m"><b>Snow Lines</b> is shipped and ready for delivery (week 47) · 1 h</div></div></div>
+    <div class="prow"><span class="ic">➜</span><div><div class="t">Handed over to you <span class="tag">NEW</span></div><div class="m">The deal for <b>Kayo 2027</b> is ready · Femi · yesterday</div></div></div>
+    <div class="prow"><span class="ic">✓</span><div><div class="t">Ready to Ship</div><div class="m">Paper Boats passed QA · existing notification</div></div></div>
+   </div>
+  </div>
+ </div>
+ 
+</div>
+
+<h2><span class="id">1.4</span><i>My releases</i> on the Releases list and the release plan</h2>
+
+<div class="grid">
+ <div class="app">
+  <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a class="on">Projects ▾</a><a>Rights &amp; Splits ▾</a><a>Collaborators</a><a>Assets</a><a>Deliveries</a><a>Integrations</a><span class="right"><i></i><i></i><b></b></span></div>
+  <div class="page"><div class="card">
+   <div class="cardh"><div><h4>All releases</h4><div class="sub">1–3 of 3 releases</div></div>
+    <div style="display:flex;gap:6px"><span class="toggle on new"><i></i>My releases</span><span class="btn sm">Artist ▾</span><span class="btn sm">All statuses ▾</span><span class="btn sm new">Owner: anyone ▾</span></div></div>
+   <table class="tbl"><tr><th>Release date ↑</th><th>Title</th><th>Artist</th><th>Status</th><th class="new">PM <span class="tag">NEW</span></th><th class="new">Delivery <span class="tag">NEW</span></th></tr>
+    <tr><td>Fri 20 Nov</td><td><b>Snow Lines</b></td><td>Kayo</td><td><span class="b ok">Ready to Ship</span></td><td>Ada</td><td>Tunde</td></tr>
+    <tr><td>Fri 27 Nov</td><td><b>Glasshouse</b></td><td>Aurora Vale</td><td><span class="b prog">In progress</span></td><td>Ada</td><td class="nodate">Unassigned</td></tr>
+    <tr><td><span class="tw">Week 49 (target)</span></td><td><b>Winter Songs</b></td><td>Kayo</td><td><span class="b prog">In progress</span></td><td>Ada</td><td>Tunde</td></tr></table></div></div>
+ </div>
+ 
+</div>
+</div>
+
+
+<div class="sh" id="s2"><h1>2 · A&amp;R hand-over</h1></div>
+<div class="wrap">
+<h2><span class="id">2.1</span>Last step of the label wizard: <i>Hand over to PM</i></h2>
+
+<div class="grid">
+ <div class="app"><div class="page" style="display:flex;justify-content:center">
+  <div class="modal" style="width:440px">
+   <h3 style="margin:0 0 4px;font-size:16px">Send invitation</h3>
+   <p style="margin:0 0 10px;color:var(--muted);font-size:12.5px">Kayo will get a link to confirm <b>Winter Songs</b>. 4 contributors are staged and get theirs later.</p>
+   <div class="fld"><label>Artist phone</label><div class="inp">+45 20 11 22 33</div></div>
+   <div style="display:flex;gap:8px;justify-content:space-between;align-items:center"><span class="btn">Save as draft</span><span class="btn pri">Send invitation</span></div>
+   <div class="new" style="margin-top:14px;padding:10px;border-radius:8px;background:#fcfcfd">
+    <b style="font-size:13px">Not yours to send? <span class="tag">NEW</span></b>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:6px"><span class="inp" style="flex:1">Ada Okonkwo (project PM) ▾</span><span class="btn">Hand over to PM</span></div>
+    <div class="hint">Moves this draft to Ada. Nothing is sent to the artist or contributors.</div>
+   </div>
+  </div></div></div>
+ 
+</div>
+
+<h2><span class="id">2.2</span>The PM finds it in Registrations</h2>
+
+<div class="grid">
+ <div class="app"><div class="page"><div class="card">
+  <div class="cardh"><h4>Registrations</h4></div>
+  <table class="tbl"><tr><th>Track</th><th>Artist</th><th>Status</th><th></th></tr>
+   <tr class="new"><td><b>Winter Songs</b> <span class="b prog" style="background:var(--c1bg);color:var(--c1)">Prepared by A&amp;R: Chioma</span> <span class="tag">NEW</span></td><td>Kayo</td><td><span class="b ship">Draft</span></td><td><span class="btn sm">Resume</span></td></tr>
+   <tr><td><b>Glasshouse</b></td><td>Aurora Vale</td><td><span class="b prog">Artist input</span></td><td></td></tr></table></div></div></div>
+ 
+</div>
+</div>
+
+
+<div class="sh" id="s3"><h1>3 · Deal intake + master ownership</h1></div>
+<div class="wrap">
+<h2><span class="id">3.1</span>Edit project: the contract</h2>
+
+<div class="grid">
+ <div class="app"><div class="page" style="display:flex;justify-content:center">
+  <div class="modal" style="width:520px">
+   <h3 style="margin:0 0 12px;font-size:16px">Edit project</h3>
+   <div class="fld"><label>Project name *</label><div class="inp">Kayo 2027</div></div>
+   <div class="fld"><label>Record label *</label><div class="inp">Harmattan Records</div></div>
+   <div class="fld new"><label>Artist <span class="tag">NOW SAVED</span></label><div class="inp">Kayo</div><div class="hint">Today this field is shown but never saved.</div></div>
+   <div class="fld"><label>Project number <span style="color:var(--muted);font-weight:400"></span></label><div class="inp">HR-2027-014</div></div>
+   <div class="new" style="border-top:1px solid var(--line);padding-top:10px">
+    <b style="font-size:13px">Contract <span class="tag">NEW</span></b>
+    <div class="fld" style="margin-top:8px"><label>Contract file</label><div class="inp">📄 Kayo_recording_agreement.pdf &nbsp;<span style="color:var(--muted)">Replace</span></div></div>
+    <div class="fld"><label>Committed releases</label><div style="display:flex;gap:6px"><span class="inp">3 × Single</span><span class="inp">0 × EP</span><span class="inp">1 × Album</span></div></div>
+    <div class="fld"><label>Default territories</label><div class="inp">Nordics (DK, SE, NO, FI, IS) ▾</div><div class="hint">Same picker as the release's Territorial Control card. Copied to each new release.</div></div>
+    <div class="fld"><label>Label's share of the master</label><div style="display:flex;gap:8px;align-items:center"><span class="inp" style="width:70px">50 %</span><span style="font-size:12.5px;color:var(--ink2)">of the artist's part · only the label sees this</span></div><div class="hint">Copied to each new release; can differ per release and per person.</div></div>
+   </div>
+   <div style="display:flex;justify-content:flex-end;gap:8px"><span class="btn">Cancel</span><span class="btn pri">Save</span></div>
+  </div></div></div>
+ 
+</div>
+
+<h2><span class="id">3.2</span>"2 of 4 released" on the project page and the Projects list</h2>
+
+<div class="grid">
+ <div>
+  <div class="card new" style="padding:12px 14px;margin-bottom:12px;font-size:13px"><b>Contract: 2 of 4 released <span class="tag">NEW</span></b>
+   <div style="margin-top:6px;display:flex;gap:18px;color:var(--ink2)"><span>Singles <b>2 / 3</b> · 1 in progress</span><span>Album <b>0 / 1</b> · planned (week 49)</span></div>
+   <div style="height:8px;border-radius:999px;background:#f2f4f7;margin-top:8px;overflow:hidden"><div style="width:50%;height:100%;background:var(--grad)"></div></div></div>
+  <div class="app"><div class="page"><div class="card"><div class="cardh"><h4>Projects</h4></div>
+   <table class="tbl"><tr><th>Projects</th><th>Artist</th><th>Status</th><th>Tracks</th><th class="new">Released <span class="tag">NEW</span></th><th>Release date</th></tr>
+    <tr><td><b>Kayo 2027</b></td><td>Kayo</td><td><span class="b prog">In progress</span></td><td>12</td><td><b>2 / 4</b></td><td>20 Nov</td></tr>
+    <tr><td><b>Mira Vale – album deal</b></td><td>Mira Vale</td><td><span class="b prog">In progress</span></td><td>15</td><td><b>1 / 2</b></td><td>13 Nov</td></tr>
+    <tr><td><b>Aurora Vale – singles</b></td><td>Aurora Vale</td><td><span class="b prog">In progress</span></td><td>2</td><td class="nodate">—</td><td>27 Nov</td></tr></table></div></div></div>
+ </div>
+ 
+</div>
+
+<h2><span class="id">3.3</span>Master ownership on the release (label only)</h2>
+
+<div class="grid">
+ <div class="card new" style="padding:0">
+  <div class="cardh"><div><h4>Master ownership <span class="tag">NEW</span></h4><div class="sub">From the contract · only your label sees this · the confirmed split is not changed</div></div><span class="btn sm">Apply 50 % to everyone</span></div>
+  <table class="tbl"><tr><th>Person</th><th>Confirmed master split</th><th>Label's share of their part</th><th>Effective</th></tr>
+   <tr><td><b>Kayo</b> <span style="color:var(--muted)">main artist</span></td><td>98 %</td><td><span class="inp" style="width:64px;display:inline-block">50 %</span> <span style="color:var(--muted);font-size:11.5px">contract</span></td><td>49 %</td></tr>
+   <tr><td><b>Selasi</b> <span style="color:var(--muted)">producer</span></td><td>2 %</td><td><span class="inp" style="width:64px;display:inline-block">0 %</span></td><td>2 %</td></tr>
+   <tr class="grp"><td>Harmattan Records (label)</td><td>—</td><td></td><td><b>49 %</b></td></tr></table>
+ </div>
+ 
+</div>
+</div>
+
+
+<div class="sh" id="s4"><h1>4 · Project folders</h1></div>
+<div class="wrap">
+<h2><span class="id">4.1</span><i>Files</i> tab on the project page</h2>
+
+<div class="grid">
+ <div class="app"><div class="page">
+  <div class="seg" style="margin-bottom:10px"><span>Products &amp; Tracks</span><span class="on new">Files <b style="color:var(--new);font-size:10px">NEW</b></span></div>
+  <div class="card new">
+   <div class="cardh"><div><h4>Files</h4><div class="sub">Kayo 2027 › <b>Marketing</b></div></div><div style="display:flex;gap:6px"><span class="btn sm">New folder</span><span class="btn pri sm">Upload</span></div></div>
+   <table class="tbl"><tr><th>Name</th><th>Kind</th><th>Added by</th><th></th></tr>
+    <tr><td>📁 <b>Video</b></td><td>Folder · 3 files</td><td>Ada</td><td><span class="btn sm">⋯</span></td></tr>
+    <tr><td>📁 <b>Press shots</b></td><td>Folder · 8 files</td><td>Chioma</td><td><span class="btn sm">⋯</span></td></tr>
+    <tr><td>📄 Campaign plan.pdf</td><td>Document</td><td>Ada</td><td><span class="btn sm">Move to…</span></td></tr></table>
+   <div style="padding:8px 14px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)">Project root: 📄 Contract · 📁 Marketing · 🔒📁 Paper Boats (Single) · 🔒📁 Snow Lines (Single) · 🔒📁 Winter Songs (Album)</div>
+  </div></div></div>
+ 
+</div>
+</div>
+
+
+<div class="sh" id="s5"><h1>5 · Scoped team access (2.8, </h1></div>
+<div class="wrap">
+<h2><span class="id">5.1</span>Limit a team member to their artists</h2>
+
+<div class="grid">
+ <div class="app" style="padding-bottom:20px">
+  <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a>Projects ▾</a><a>Rights &amp; Splits ▾</a><a class="on">Collaborators</a><a>Assets</a><a>Deliveries</a><a>Integrations</a><span class="right"><i></i><i></i><b></b></span></div>
+  <div class="page"><div class="card">
+   <div class="cardh"><h4>Label team</h4><span class="btn sm">Invite member</span></div>
+   <table class="tbl"><tr><th>Member</th><th>Role</th><th class="new">Can edit <span class="tag">NEW</span></th></tr>
+    <tr><td><b>Kwame Mensah</b> · owner</td><td>Owner</td><td>Everything</td></tr>
+    <tr class="new"><td><b>Ada Okonkwo</b></td><td>Editor ▾</td><td>Kayo, Aurora Vale <span class="btn sm">Change</span></td></tr>
+    <tr><td><b>Tunde Bello</b></td><td>Editor ▾</td><td>Everything</td></tr>
+    <tr><td><b>Chioma Obi</b></td><td>Coordinator ▾</td><td>Everything (projects, registrations, files)</td></tr></table></div>
+   <div class="modal new" style="width:400px;margin:12px 0 0 auto"><b>Ada Okonkwo can edit</b>
+    <div class="cb" style="margin-top:8px"><i></i>Everything in Harmattan Records</div>
+    <div class="cb" style="margin-top:6px"><i>✓</i><div>Only these artists<div class="inp" style="margin-top:4px">Kayo ✕ · Aurora Vale ✕ · <span style="color:#a4a7ae">add artist…</span></div><div class="hint">She still sees every release in the label, read-only.</div></div></div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:10px"><span class="btn">Cancel</span><span class="btn pri">Save</span></div></div>
+  </div></div>
+ 
+</div>
+
+<h2><span class="id">5.2</span>What a limited PM sees on the release plan</h2>
+
+<div class="grid">
+ <div class="cal" style="grid-template-columns:44px repeat(5,1fr)">
+  <div class="hd">Wk</div><div class="hd">Mon</div><div class="hd">Tue</div><div class="hd">Wed</div><div class="hd">Thu</div><div class="hd">Fri</div>
+  <div class="wk">47</div><div class="d"><span class="n">16</span></div><div class="d"><span class="n">17</span></div><div class="d"><span class="n">18</span></div><div class="d"><span class="n">19</span></div>
+  <div class="d fri"><span class="n">20</span><span class="rc"><span class="s ok"></span><b>Snow Lines</b><br>Kayo</span><span class="rc lock new" title="Not one of your artists">🔒 <b>Northern Lights</b><br>Mira Vale · <i>view only</i></span></div>
+ </div>
+ 
+</div>
+</div>
+<div style="height:40px"></div>
+</body></html>

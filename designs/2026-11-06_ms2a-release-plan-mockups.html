@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>See every release in one plan · planned screens</title>
+<style>
+:root{--bg:#f4f4f6;--ink:#181d27;--ink2:#414651;--muted:#717680;--line:#e9eaeb;--line2:#d5d7da;--brand:#ff6b35;--grad:linear-gradient(90deg,#fff6b7 0%,#fb7c8c 60%,#d46879 100%);--new:#c11574;--del:#b42318;--ok:#067647;--okbg:#ecfdf3;--warn:#b54708;--warnbg:#fffaeb;--err:#b42318;--errbg:#fef3f2;--blue:#175cd3;--bluebg:#eff8ff;--grey:#344054;--greybg:#f2f4f7;
+--c1:#6938ef;--c1bg:#f4f3ff;--c2:#0e9384;--c2bg:#f0fdf9;--c3:#c4320a;--c3bg:#fff6ed}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+.top{max-width:1240px;margin:0 auto;padding:28px 28px 0}.top h1{font-size:26px;margin:0 0 6px}.top p{color:var(--ink2);font-size:14px;max-width:110ch;margin:0 0 8px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}.toc a{background:#fff;border:1px solid var(--line2);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--ink);text-decoration:none}
+.sh{max-width:1240px;margin:0 auto;padding:34px 28px 0}.sh h1{font-size:21px;margin:0;border-top:2px solid var(--ink);padding-top:14px}.sh p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+h2{font-size:16px;margin:26px 0 4px}h2 .id{background:var(--ink);color:#fff;border-radius:6px;font-size:12px;padding:2px 8px;margin-right:8px;vertical-align:2px}
+.where{font-size:13px;color:var(--ink2);margin:0 0 10px}code{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:12px}
+.grid{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;align-items:start}
+.states{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px}.states h5{margin:0 0 6px;font-size:13px}.states ul{margin:0;padding-left:18px}.states li{margin:4px 0}
+.q{background:#fffaeb;border:1px solid #fedf89;border-radius:10px;padding:8px 10px;margin-top:10px;font-size:12.5px}
+.mine{font-size:11px;color:var(--muted);font-style:italic}
+.new{outline:2px dashed var(--new);outline-offset:3px;border-radius:8px}
+.tag{display:inline-block;background:var(--new);color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:1px}
+.tag.del{background:var(--del)}
+/* app chrome */
+.app{background:#fafafa;border:1px solid var(--line2);border-radius:12px;overflow:hidden}
+.topnav{display:flex;align-items:center;gap:4px;padding:10px 18px;border-bottom:1px solid var(--line);background:#fff;flex-wrap:wrap;position:relative}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;margin-right:12px}.logo i{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#c7b8ff,#3b2a8a);display:inline-block}
+.topnav a{font-size:13px;color:var(--ink2);padding:5px 9px;border-radius:6px;font-weight:500;white-space:nowrap}.topnav a.on{background:#f5f5f5;color:var(--ink)}
+.topnav .right{margin-left:auto;display:flex;gap:10px;align-items:center}.topnav .right i{width:15px;height:15px;border-radius:50%;border:1.5px solid #a4a7ae;display:inline-block}.topnav .right b{width:24px;height:24px;border-radius:50%;background:#7a5a48;display:inline-block}
+.menu{position:absolute;top:44px;background:#fff;border:1px solid var(--line2);border-radius:10px;box-shadow:0 12px 24px rgba(16,24,40,.14);padding:6px;min-width:190px;z-index:3}
+.menu div{padding:7px 10px;border-radius:6px;font-size:13px}.menu div.on{background:#f5f5f5;font-weight:600}.menu small{display:block;color:var(--muted);font-size:11.5px}
+.page{padding:18px 20px}
+.ph{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}.ph h3{margin:0;font-size:20px}.ph p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.btn{display:inline-block;border:1px solid var(--line2);border-radius:8px;padding:6px 12px;font-size:12.5px;font-weight:600;background:#fff;white-space:nowrap}
+.btn.pri{background:var(--grad);border:none;color:#fff}.btn.sm{padding:4px 10px;font-weight:500}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden}.seg span{padding:5px 12px;font-size:12.5px;font-weight:600;border-right:1px solid var(--line2);background:#fff}.seg span:last-child{border-right:none}.seg span.on{background:#f5f5f5}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px}
+.cardh{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px;border-bottom:1px solid var(--line)}.cardh h4{margin:0;font-size:15px}.cardh .sub{font-size:12px;color:var(--muted)}
+.inp{border:1px solid var(--line2);border-radius:8px;padding:5px 10px;font-size:12.5px;background:#fff;color:var(--ink)}.inp.ph{color:#a4a7ae}
+table.tbl{width:100%;border-collapse:collapse;font-size:12.5px}.tbl th{text-align:left;font-weight:600;color:var(--muted);font-size:11.5px;padding:8px 10px;border-bottom:1px solid var(--line);background:#fcfcfd;white-space:nowrap}.tbl td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl tr.grp td{background:#f9fafb;font-weight:600;font-size:12px;color:var(--ink2)}
+.b{display:inline-block;border-radius:999px;padding:1px 8px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.b.ok{background:var(--okbg);color:var(--ok)}.b.prog{background:var(--bluebg);color:var(--blue)}.b.att{background:var(--warnbg);color:var(--warn)}.b.ship{background:var(--greybg);color:var(--grey)}
+.dist{display:inline-block;border:1px solid var(--line2);border-radius:6px;padding:0 6px;font-size:11px;margin-right:3px;background:#fff}
+.tw{color:var(--blue);font-weight:600}.nodate{color:var(--muted);font-style:italic}
+/* calendar */
+.plan{display:grid;grid-template-columns:1fr 230px;gap:12px}
+.cal{display:grid;grid-template-columns:44px repeat(7,1fr);border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;font-size:11.5px}
+.cal .hd{background:#fcfcfd;color:var(--muted);font-weight:600;padding:6px;border-bottom:1px solid var(--line);text-align:center}
+.cal .wk{background:#fcfcfd;color:var(--muted);font-weight:600;padding:6px 4px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+.cal .d{min-height:86px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:4px;position:relative}
+.cal .d:nth-child(8n){border-right:none}
+.cal .d .n{color:var(--muted);font-size:11px}.cal .d.out .n{color:#c8ccd2}.cal .d.today .n{background:var(--brand);color:#fff;border-radius:999px;padding:0 6px}
+.cal .d.fri{background:#fffdf7}
+.rc{display:block;border-radius:6px;padding:3px 5px;margin-top:3px;font-size:11px;line-height:1.25;border:1px solid var(--line2);background:#fff;cursor:grab}
+.rc b{font-weight:600}.rc .s{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px;vertical-align:1px}
+.s.ok{background:#17b26a}.s.prog{background:#2e90fa}.s.att{background:#f79009}.s.ship{background:#98a2b3}
+.rc.lock{cursor:not-allowed;background:#f9fafb;color:var(--ink2)}
+.rc.ghost{opacity:.55;border-style:dashed}.rc.drop{outline:2px solid var(--brand);outline-offset:1px}
+.rc.g1{border-left:3px solid var(--c1)}.rc.g2{border-left:3px solid var(--c2)}.rc.g3{border-left:3px solid var(--c3)}
+.rc.ro{cursor:default}
+.strip{grid-column:2 / span 7;border-bottom:1px solid var(--line);background:var(--bluebg);padding:3px 6px;font-size:11px;color:var(--blue)}
+.pend{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:12px}.pend h5{margin:0 0 2px;font-size:13px}.pend .sub{color:var(--muted);font-size:11.5px;margin-bottom:6px}
+.wkrow{border:1px solid var(--line);border-radius:10px;background:#fff;margin-bottom:10px;overflow:hidden}
+.wkh{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 12px;background:#fcfcfd;border-bottom:1px solid var(--line);font-size:13px}.wkh b{font-size:13.5px}
+.wkb{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px 12px}
+.wc{border:1px solid var(--line2);border-radius:8px;padding:7px 9px;font-size:12px;background:#fff}.wc .t{font-weight:600}.wc .m{color:var(--muted);font-size:11.5px}
+.ub{font-size:11.5px;margin-top:3px}.ub.late{color:var(--err);font-weight:600}.ub.due{color:var(--warn);font-weight:600}
+.pop{position:absolute;background:#fff;border:1px solid var(--line2);border-radius:10px;box-shadow:0 12px 24px rgba(16,24,40,.16);padding:10px;font-size:12.5px;z-index:4;width:250px}
+.toggle{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600}.toggle i{width:30px;height:17px;border-radius:999px;background:#d0d5dd;position:relative;display:inline-block}.toggle i:after{content:"";position:absolute;width:13px;height:13px;border-radius:50%;background:#fff;top:2px;left:2px}
+.toggle.on i{background:var(--brand)}.toggle.on i:after{left:15px}
+.leg{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;margin-right:8px}.leg i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.panel{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:8px}
+.prow{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:13px}.prow .ic{width:30px;height:30px;border-radius:8px;background:#f2f4f7;display:grid;place-items:center;font-size:14px}
+.prow .t{font-weight:600}.prow .m{color:var(--muted);font-size:12px}
+.modal{background:#fff;border:1px solid var(--line2);border-radius:14px;box-shadow:0 12px 24px rgba(16,24,40,.12);padding:16px}
+.fld{margin-bottom:12px}.fld label{display:block;font-size:12.5px;font-weight:600;color:var(--ink2);margin-bottom:4px}.hint{font-size:11.5px;color:var(--muted);margin-top:3px}
+.admin{background:#fff;border:1px solid var(--line2);border-radius:12px;padding:18px;font-family:ui-sans-serif,system-ui}
+.admin h3{margin:0;font-size:22px}.admin .sub{color:var(--muted);font-size:13px;margin:2px 0 14px}
+.cb{display:flex;gap:8px;align-items:flex-start;font-size:13px}.cb i{width:16px;height:16px;border:1.5px solid var(--ink2);border-radius:4px;flex:none;margin-top:2px;display:grid;place-items:center;font-style:normal;font-size:11px}
+@media print{.toc{display:none}}
+</style></head><body><div style="max-width:1180px;margin:16px auto 0;padding:10px 16px;border-radius:10px;background:#fff3ed;border:1px solid #ffd6c2;font:14px/1.45 Inter,-apple-system,sans-serif;color:#181d27"><b>Design preview.</b> These are early sketches of the planned screens, filled in with example data. Details will change as we build and test them with you.</div>
+
+<div class="top">
+<h1>The label sees every release: mockups</h1>
+
+
+</div>
+
+
+<div class="sh" id="s1"><h1>1 · Top bar</h1></div>
+<div class="wrap">
+<h2><span class="id">1.1</span>Projects ▾ and Rights &amp; Splits ▾</h2>
+
+<div class="grid">
+ <div>
+  <div class="app" style="padding-bottom:150px;margin-bottom:10px">
+   <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a class="on new">Projects ▾</a><a class="new">Rights &amp; Splits ▾</a><a>Collaborators</a><a>Assets</a><a>Deliveries</a><a>Integrations</a><span class="right"><i></i><i></i><b></b></span>
+    <div class="menu new" style="left:150px"><div>Projects</div><div class="on">Releases <span class="tag">NEW</span><small>Every release, by date</small></div><div>Registrations<small>moved here</small></div><div>Release plan <span class="tag">NEW</span><small>Month · Week · List</small></div></div>
+   </div>
+  </div>
+  <div class="app" style="padding-bottom:100px">
+   <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a>Projects ▾</a><a class="on new">Rights &amp; Splits ▾</a><a>Collaborators</a><a>Assets</a><a>Deliveries</a><a>Integrations</a><span class="right"><i></i><i></i><b></b></span>
+    <div class="menu new" style="left:240px"><div class="on">Splits<small>today's Rights &amp; Splits page</small></div><div>Territories &amp; licensees <span class="tag">NEW</span><small>opens </small></div></div>
+   </div>
+  </div>
+ </div>
+ 
+</div>
+</div>
+
+
+<div class="sh" id="s2"><h1>2 · Releases list</h1></div>
+<div class="wrap">
+<h2><span class="id">2.1</span>Releases</h2>
+
+<div class="grid">
+ <div class="app new">
+  <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a class="on">Projects ▾</a><a>Rights &amp; Splits ▾</a><a>Collaborators</a><a>Assets</a><a>Deliveries</a><a>Integrations</a><span class="right"><i></i><i></i><b></b></span></div>
+  <div class="page">
+   <div class="ph"><div><h3>Releases <span class="tag">NEW</span></h3><p>Every release across your projects, by release date</p></div><span class="btn">Open release plan →</span></div>
+   <div class="card">
+    <div class="cardh"><div><h4>All releases</h4><div class="sub">1–7 of 7 releases</div></div>
+     <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="inp ph" style="width:130px">Search title</span><span class="btn sm">Artist ▾</span><span class="btn sm">All statuses ▾</span><span class="btn sm">Project ▾</span><span class="btn sm">Month: Nov 2026 ▾</span></div></div>
+    <table class="tbl">
+     <tr><th>Release date ↑</th><th>Title</th><th>Artist</th><th>Project</th><th>Type</th><th>Status</th><th>Tracks</th><th>Destinations</th></tr>
+     <tr><td>Fri 13 Nov</td><td><b>Low Tide</b></td><td>Mira Vale</td><td>Mira Vale – album deal</td><td>Single</td><td><span class="b ship">Shipped</span></td><td>1/1</td><td><span class="dist">Orchard</span></td></tr>
+     <tr><td>Fri 20 Nov</td><td><b>Northern Lights</b></td><td>Mira Vale</td><td>Mira Vale – album deal</td><td>EP</td><td><span class="b ok">Ready to Ship</span></td><td>3/3</td><td><span class="dist">Orchard</span></td></tr>
+     <tr><td>Fri 20 Nov</td><td><b>Paper Boats</b></td><td>Kayo</td><td>Kayo 2026</td><td>Single</td><td><span class="b att">Needs attention</span></td><td>0/1</td><td><span class="dist">Orchard</span><span class="dist">Believe</span></td></tr>
+     <tr><td>Fri 27 Nov</td><td><b>Glasshouse</b></td><td>Aurora Vale</td><td>Aurora Vale – singles</td><td>Single</td><td><span class="b prog">In progress</span></td><td>0/1</td><td><span class="dist">Orchard</span></td></tr>
+     <tr class="new"><td><span class="tw">Week 49 (target)</span></td><td><b>Winter Songs</b></td><td>Kayo</td><td>Kayo 2026</td><td>Album</td><td><span class="b prog">In progress</span></td><td>4/9</td><td><span class="dist">Orchard</span></td></tr>
+     <tr class="grp"><td colspan="8">No date yet</td></tr>
+     <tr><td class="nodate">No date yet</td><td><b>Untitled remix</b></td><td>Aurora Vale</td><td>Aurora Vale – singles</td><td>Single</td><td><span class="b prog">In progress</span></td><td>0/1</td><td><span class="dist">Orchard</span></td></tr>
+     <tr><td class="nodate">No date yet</td><td><b>Fieldnotes</b></td><td>Mira Vale</td><td>Mira Vale – album deal</td><td>Album</td><td><span class="b prog">In progress</span></td><td>2/11</td><td>—</td></tr>
+    </table>
+    <div style="display:flex;justify-content:space-between;padding:10px 14px;font-size:12px;color:var(--muted)"><span>Page 1 of 1</span><span><span class="btn sm">Previous</span> <span class="btn sm">Next</span></span></div>
+   </div>
+  </div>
+ </div>
+ 
+</div>
+</div>
+
+
+<div class="sh" id="s3"><h1>3 · Release plan</h1></div>
+<div class="wrap">
+<h2><span class="id">3.1</span>Month view with the Pending date list (dragging a release onto a day)</h2>
+
+<div class="grid" style="grid-template-columns:1.9fr 1fr">
+ <div class="app new">
+  <div class="topnav"><span class="logo"><i></i>Ambler</span><a>Dashboard</a><a class="on">Projects ▾</a><a>Rights &amp; Splits ▾</a><a>Collaborators</a><a>Assets</a><a>Deliveries</a><a>Integrations</a><span class="right"><i></i><i></i><b></b></span></div>
+  <div class="page">
+   <div class="ph"><div><h3>Release plan <span class="tag">NEW</span></h3><p>Plan release dates. Drag a release onto a day, or onto a week as a target.</p></div>
+    <div style="display:flex;gap:8px;align-items:center"><span class="seg"><span class="on">Month</span><span>Week</span><span>List</span></span></div></div>
+   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="display:flex;gap:8px;align-items:center"><span class="btn sm">‹</span><b>November 2026</b><span class="btn sm">›</span><span class="btn sm">Today</span></div></div>
+   <div class="plan">
+    <div class="cal">
+     <div class="hd">Wk</div><div class="hd">Mon</div><div class="hd">Tue</div><div class="hd">Wed</div><div class="hd">Thu</div><div class="hd">Fri</div><div class="hd">Sat</div><div class="hd">Sun</div>
+     <div class="wk">45</div><div class="d"><span class="n">2</span></div><div class="d"><span class="n">3</span></div><div class="d"><span class="n">4</span></div><div class="d"><span class="n">5</span></div><div class="d fri today"><span class="n">6</span></div><div class="d"><span class="n">7</span></div><div class="d"><span class="n">8</span></div>
+     <div class="wk">46</div><div class="d"><span class="n">9</span></div><div class="d"><span class="n">10</span></div><div class="d"><span class="n">11</span></div><div class="d"><span class="n">12</span></div><div class="d fri"><span class="n">13</span><span class="rc lock"><span class="s ship"></span>🔒 <b>Mira Vale</b> – Low Tide</span></div><div class="d"><span class="n">14</span></div><div class="d"><span class="n">15</span></div>
+     <div class="wk">47</div><div class="d"><span class="n">16</span></div><div class="d"><span class="n">17</span></div><div class="d"><span class="n">18</span></div><div class="d"><span class="n">19</span></div><div class="d fri"><span class="n">20</span><span class="rc"><span class="s ok"></span><b>Mira Vale</b> – Northern Lights</span><span class="rc"><span class="s att"></span><b>Kayo</b> – Paper Boats</span></div><div class="d"><span class="n">21</span></div><div class="d"><span class="n">22</span></div>
+     <div class="wk">48</div><div class="d"><span class="n">23</span></div><div class="d"><span class="n">24</span></div><div class="d"><span class="n">25</span></div><div class="d"><span class="n">26</span></div><div class="d fri"><span class="n">27</span><span class="rc"><span class="s prog"></span><b>Aurora Vale</b> – Glasshouse</span><span class="rc drop new"><span class="s prog"></span><b>Aurora Vale</b> – Untitled remix</span></div><div class="d"><span class="n">28</span></div><div class="d"><span class="n">29</span></div>
+     <div class="wk">49</div><div class="d"><span class="n">30</span></div><div class="d out"><span class="n">1</span></div><div class="d out"><span class="n">2</span></div><div class="d out"><span class="n">3</span></div><div class="d out fri"><span class="n">4</span></div><div class="d out"><span class="n">5</span></div><div class="d out"><span class="n">6</span></div>
+     <div class="wk" style="font-weight:400">↳</div><div class="strip new">Target week 49: <b>Kayo</b> – Winter Songs (Album) · no day yet</div>
+    </div>
+    <div class="pend new"><h5>Pending date <span class="tag">NEW</span></h5><div class="sub">2 releases without a date. Drag onto a day.</div>
+     <span class="rc ghost"><span class="s prog"></span><b>Aurora Vale</b> – Untitled remix<br><span class="m" style="color:var(--muted)">Single · being dragged…</span></span>
+     <span class="rc"><span class="s prog"></span><b>Mira Vale</b> – Fieldnotes<br><span style="color:var(--muted)">Album · 2/11 tracks ready</span> <span style="float:right">⋯</span></span>
+    </div>
+   </div>
+  </div>
+ </div>
+ 
+</div>
+
+<h2><span class="id">3.2</span>Week view: Tunde's week, with upload-by dates</h2>
+
+<div class="grid" style="grid-template-columns:1.9fr 1fr">
+ <div class="app new"><div class="page">
+  <div class="ph"><div><h3>Release plan</h3></div><span class="seg"><span>Month</span><span class="on">Week</span><span>List</span></span></div>
+  <div class="wkrow"><div class="wkh"><span><b>Week 47 · Fri 20 Nov</b> &nbsp;<span class="b ok">1 ready</span> <span class="b att">1 needs attention: missing artwork</span></span><span class="btn sm">Deliveries for week 47 →</span></div>
+   <div class="wkb"><div class="wc"><div class="t">Mira Vale – Northern Lights</div><div class="m">EP · Fri 20 Nov · Orchard</div><div class="ub late new">Upload by Fri 23 Oct · overdue</div></div>
+    <div class="wc"><div class="t">Kayo – Paper Boats</div><div class="m">Single · Fri 20 Nov · Orchard, Believe</div><div class="ub late new">Upload by Fri 23 Oct · overdue</div></div>
+    <div class="wc" style="border-style:dashed;color:var(--muted);display:grid;place-items:center">Drop here to set week 47 as target</div></div></div>
+  <div class="wkrow"><div class="wkh"><span><b>Week 48 · Fri 27 Nov</b> &nbsp;<span class="b prog">1 in progress</span></span><span class="btn sm">Deliveries for week 48 →</span></div>
+   <div class="wkb"><div class="wc"><div class="t">Aurora Vale – Glasshouse</div><div class="m">Single · Fri 27 Nov · Orchard</div><div class="ub late new">Upload by Fri 30 Oct · overdue</div></div></div></div>
+  <div class="wkrow"><div class="wkh"><span><b>Week 49 · Fri 4 Dec</b> &nbsp;<span class="b prog">1 in progress</span></span><span class="btn sm">Deliveries for week 49 →</span></div>
+   <div class="wkb"><div class="wc new"><div class="t">Kayo – Winter Songs</div><div class="m"><span class="tw">Week 49 (target)</span> · Album · Orchard</div><div class="ub due new">Upload by Fri 6 Nov · today</div></div></div></div>
+ </div></div>
+ 
+</div>
+
+<h2><span class="id">3.3</span>List view: the plan list, print and CSV</h2>
+
+<div class="grid" style="grid-template-columns:1.9fr 1fr">
+ <div class="app new"><div class="page">
+  <div class="ph"><div><h3>Release plan</h3></div><div style="display:flex;gap:8px"><span class="btn sm new">Print</span><span class="btn sm new">Export CSV</span><span class="seg"><span>Month</span><span>Week</span><span class="on">List</span></span></div></div>
+  <div class="card"><table class="tbl">
+   <tr><th>Date / target</th><th>Artist</th><th>Title</th><th>Type</th><th>Status</th></tr>
+   <tr class="grp"><td colspan="5">Week 46 · Fri 13 Nov</td></tr>
+   <tr><td>Fri 13 Nov</td><td>Mira Vale</td><td>Low Tide</td><td>Single</td><td><span class="b ship">Shipped</span></td></tr>
+   <tr class="grp"><td colspan="5">Week 47 · Fri 20 Nov</td></tr>
+   <tr><td>Fri 20 Nov</td><td>Mira Vale</td><td>Northern Lights</td><td>EP</td><td><span class="b ok">Ready to Ship</span></td></tr>
+   <tr><td>Fri 20 Nov</td><td>Kayo</td><td>Paper Boats</td><td>Single</td><td><span class="b att">Needs attention</span></td></tr>
+   <tr class="grp"><td colspan="5">Week 48 · Fri 27 Nov</td></tr>
+   <tr><td>Fri 27 Nov</td><td>Aurora Vale</td><td>Glasshouse</td><td>Single</td><td><span class="b prog">In progress</span></td></tr>
+   <tr class="grp"><td colspan="5">Week 49 · Fri 4 Dec</td></tr>
+   <tr><td><span class="tw">Week 49 (target)</span></td><td>Kayo</td><td>Winter Songs</td><td>Album</td><td><span class="b prog">In progress</span></td></tr>
+   <tr class="grp"><td colspan="5">Pending date</td></tr>
+   <tr><td class="nodate">No date yet</td><td>Aurora Vale</td><td>Untitled remix</td><td>Single</td><td><span class="b prog">In progress</span></td></tr>
+   <tr><td class="nodate">No date yet</td><td>Mira Vale</td><td>Fieldnotes</td><td>Album</td><td><span class="b prog">In progress</span></td></tr>
+  </table></div>
+ </div></div>
+ 
+</div>
+
+<h2><span class="id">3.4</span>"Set date…" for keyboard and touch</h2>
+
+<div class="grid" style="grid-template-columns:1.2fr 1fr">
+ <div style="position:relative;min-height:230px">
+  <span class="rc" style="width:220px"><span class="s prog"></span><b>Mira Vale</b> – Fieldnotes <span style="float:right">⋯</span></span>
+  <div class="pop new" style="top:34px;left:0;width:300px"><b>Set date for "Fieldnotes"</b>
+   <div class="seg" style="margin:8px 0"><span class="on">Release date</span><span>Target week</span></div>
+   <div class="inp" style="margin-bottom:6px">Fri 11 Dec 2026 📅</div>
+   <div class="hint">A real date replaces any target week.</div>
+   <div style="display:flex;justify-content:space-between;margin-top:10px"><span style="color:var(--err);font-size:12px">Clear date</span><span><span class="btn sm">Cancel</span> <span class="btn sm pri">Save</span></span></div></div>
+ </div>
+ 
+</div>
+
+<h2><span class="id">3.5</span>Creating a release: the date can wait</h2>
+
+<div class="grid" style="grid-template-columns:1.2fr 1fr">
+ <div class="modal"><b style="font-size:15px">Create registration</b><div class="hint" style="margin-bottom:12px">Start by typing some basic information of the song you want to register</div>
+  <div class="fld"><label>Version</label><div class="inp ph">e.g. Radio Edit, Deluxe</div></div>
+  <div class="fld new"><label>Release date <span class="tag">CHANGED</span></label>
+   <div class="seg" style="margin-bottom:6px"><span>Release date</span><span>Target week</span><span class="on">Decide later</span></div>
+   <div class="hint">You can set the date once everything is in. The release waits in <i>Pending date</i> on the release plan.</div></div>
+ </div>
+ 
+</div>
+</div>
+
+
+<div class="sh" id="s4"><h1>4 · Group view</h1></div>
+<div class="wrap">
+<h2><span class="id">4.1</span>Group view on: the Monday meeting</h2>
+
+<div class="grid" style="grid-template-columns:1.9fr 1fr">
+ <div class="app new"><div class="page">
+  <div class="ph"><div><h3>Release plan</h3></div><span class="seg"><span class="on">Month</span><span>Week</span><span>List</span></span></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px"><div style="display:flex;gap:8px;align-items:center"><span class="btn sm">‹</span><b>November 2026</b><span class="btn sm">›</span></div>
+   <div style="display:flex;gap:10px;align-items:center"><span class="toggle on new"><i></i>Group view <span class="tag">NEW</span></span><span class="btn sm new">All sublabels ▾</span></div></div>
+  <div style="margin-bottom:8px"><span class="leg"><i style="background:var(--c1)"></i>Harmattan Records (you)</span><span class="leg"><i style="background:var(--c2)"></i>Harmattan Live</span><span class="leg"><i style="background:var(--c3)"></i>Harmattan South</span></div>
+  <div class="cal">
+   <div class="hd">Wk</div><div class="hd">Mon</div><div class="hd">Tue</div><div class="hd">Wed</div><div class="hd">Thu</div><div class="hd">Fri</div><div class="hd">Sat</div><div class="hd">Sun</div>
+   <div class="wk">47</div><div class="d"><span class="n">16</span></div><div class="d"><span class="n">17</span></div><div class="d"><span class="n">18</span></div><div class="d"><span class="n">19</span></div><div class="d fri"><span class="n">20</span><span class="rc g1"><span class="s ok"></span><b>Mira Vale</b> – Northern Lights</span><span class="rc g1"><span class="s att"></span><b>Kayo</b> – Paper Boats</span><span class="rc ro g2 new"><span class="s prog"></span><b>Amara</b> – Ebb</span><span class="rc ro g3 new"><span class="s ok"></span><b>NOVA</b> – Signal</span></div><div class="d"><span class="n">21</span></div><div class="d"><span class="n">22</span></div>
+   <div class="wk">48</div><div class="d"><span class="n">23</span></div><div class="d"><span class="n">24</span></div><div class="d"><span class="n">25</span></div><div class="d"><span class="n">26</span></div><div class="d fri"><span class="n">27</span><span class="rc g1"><span class="s prog"></span><b>Aurora Vale</b> – Glasshouse</span><span class="rc ro g2 new"><span class="s prog"></span><b>Juno Bay</b> – Tidewater</span></div><div class="d"><span class="n">28</span></div><div class="d"><span class="n">29</span></div>
+  </div>
+ </div></div>
+ 
+</div>
+</div>
+
+
+<div class="sh" id="s5"><h1>5 · Deliveries: week filter and upload-by</h1></div>
+<div class="wrap">
+<h2><span class="id">5.1</span>Deliveries filtered to a release week</h2>
+
+<div class="grid" style="grid-template-columns:1.9fr 1fr">
+ <div class="app"><div class="page">
+  <div class="ph"><div><h3>Deliveries</h3><p>Track and deliver every release across societies, distributors, and licensees</p></div></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+   <div style="display:flex;gap:8px;align-items:center"><span class="seg"><span class="on">All</span><span>In progress</span><span>Delivered</span></span><span class="seg new"><span>‹</span><span class="on">Week 47 · Fri 20 Nov</span><span>›</span></span><span class="btn sm new">All weeks</span></div>
+   </div>
+  <div class="panel"><div class="prow"><span class="ic">📦</span><div style="flex:1"><div class="t">Northern Lights</div><div class="m">Mira Vale · EP · <span class="new" style="outline-offset:1px">Fri 20 Nov</span></div><div class="ub late new">Orchard: upload by Fri 23 Oct · overdue</div></div><span class="b ok">Ready</span><span>⌄</span></div></div>
+  <div class="panel"><div class="prow"><span class="ic">📦</span><div style="flex:1"><div class="t">Paper Boats</div><div class="m">Kayo · Single · <span class="new" style="outline-offset:1px">Fri 20 Nov</span></div><div class="ub late new">Orchard: upload by Fri 23 Oct · overdue</div><div class="ub due new">Believe: upload by Fri 6 Nov · today</div><div class="m" style="color:var(--warn)">Missing artwork</div></div><span class="b att">Blocked</span><span>⌄</span></div></div>
+  
+ </div></div>
+ 
+</div>
+</div>
+
+
+<div class="sh" id="s6"><h1>6 · Setup</h1></div>
+<div class="wrap">
+<h2><span class="id">6.1</span>Upload lead time in the distributor's release defaults</h2>
+
+<div class="grid" style="grid-template-columns:1.2fr 1fr">
+ <div class="modal"><b style="font-size:15px">The Orchard</b><div class="hint" style="margin-bottom:12px">Distributor</div>
+  <p style="font-weight:600;font-size:13px;margin:0 0 8px">Release defaults</p>
+  <div class="fld"><label>Who owns the recording</label><div class="inp">Licensed</div></div>
+  <div class="fld"><label>Where it was recorded</label><div class="inp">Denmark</div></div>
+  <div class="fld new"><label>Upload lead time <span class="tag">NEW</span></label><div style="display:flex;gap:8px;align-items:center"><div class="inp" style="width:70px">4</div><span style="font-size:13px">weeks before release</span></div><div class="hint">Digital Ops sees an "upload by" date on each release in Deliveries and the release plan. Leave empty for none.</div></div>
+  <div style="text-align:right"><span class="btn sm">Cancel</span> <span class="btn sm pri">Save</span></div></div>
+ 
+</div>
+
+<h2><span class="id">6.2</span>Group sharing, switched on by Ambler at onboarding</h2>
+
+<div class="grid" style="grid-template-columns:1.2fr 1fr">
+ <div class="admin"><h3>Edit Label</h3><div class="sub">Update label information</div>
+  <div class="fld"><label>Name</label><div class="inp">Harmattan Records</div></div>
+  <div class="fld"><label>Imprint Name</label><div class="inp ph">Imprint or sub-label name</div></div>
+  <div class="fld"><label>Parent Label ID</label><div class="inp ph">UUID of parent label (leave empty for root label)</div></div>
+  <div class="fld new"><div class="cb"><i>✓</i><div><b>Share release plan across the group</b> <span class="tag">NEW</span><div class="hint">Everyone in this label and its sublabels can see every sublabel's releases in the release plan's Group view (date, artist, title, type, status only). Switch on only with the group's written OK.</div></div></div></div>
+  <div style="text-align:right"><span class="btn sm">Cancel</span> <span class="btn sm pri">Save</span></div></div>
+ 
+</div>
+<p style="color:var(--muted);font-size:12.5px;margin:30px 0 40px">End of mockups.</p>
+</div>
+</body></html>
