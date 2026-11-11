@@ -71,8 +71,12 @@ h1,h2,h3{text-wrap:balance;margin:0}
 .scrim{z-index:99990}.viewer{z-index:99991} .hero h1{font-family:inherit;text-transform:none;margin:0}`;
   const host = document.getElementById('ambler-roadmap') || (() => { const d = document.createElement('div'); d.id = 'ambler-roadmap'; (document.currentScript?.parentNode || document.body).appendChild(d); return d; })();
   const root = host.attachShadow({ mode: 'open' });
+  // Dialog + screen viewer live in their own host on <body>: Squarespace sections create stacking contexts
+  // that would otherwise trap a fixed overlay under the site header.
+  const ohost = document.createElement('div'); ohost.id = 'ambler-roadmap-overlay'; document.body.appendChild(ohost);
+  const oroot = ohost.attachShadow({ mode: 'open' });
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const $ = s => root.querySelector(s);
+  const $ = s => root.querySelector(s) || oroot.querySelector(s);
   const LABEL = { now: 'Building now', next: 'Up next', planned: 'Planned', exploring: 'Exploring with you' };
   const upd = new Date(D.updated + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   const curKey = new Date().toISOString().slice(0, 7);
@@ -92,7 +96,8 @@ h1,h2,h3{text-wrap:balance;margin:0}
           <span class="more">${i.design ? 'See what changes and the planned screens' : 'See what changes'} →</span></button>`).join('')}</div>`).join('')}
     </div>
     <div class="foot"><b>Something missing, or something you'd move up?</b> Tell us. This plan is shaped by the labels using Ambler, and we update this page as things ship.</div>
-  </div>
+  </div>`;
+  oroot.innerHTML = `<style>${CSS} :host{all:initial;font-family:${getComputedStyle(host).fontFamily.replace(/`/g, '')}}</style>
   <div class="scrim" id="scrim" role="dialog" aria-modal="true" aria-labelledby="dTitle"><div class="dlg" id="dlg"></div></div>
   <div class="viewer" id="viewer" role="dialog" aria-label="Planned screens"><div class="bar"><b id="vTitle"></b><button id="vClose">Close</button></div><iframe id="vFrame" title="Planned screens" sandbox="allow-same-origin"></iframe></div>`;
 
