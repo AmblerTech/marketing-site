@@ -1,0 +1,23 @@
+@font-face { font-family: 'Supreme'; src: url('../fonts/Supreme-Variable.woff2') format('woff2-variations'); font-weight: 100 800; font-display: swap; }
+@font-face { font-family: 'Anton'; src: url('../fonts/anton-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Roboto'; src: url('../fonts/roboto-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Roboto'; src: url('../fonts/roboto-latin-500-normal.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Roboto'; src: url('../fonts/roboto-latin-700-normal.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+
+.amb-v2 {
+  --amb-ink: #0C0C0C;
+  --amb-paper: #F4F4F0;
+  --amb-rule: #E3E3DE;
+  --amb-coral: #F0747E;
+  --amb-coral-deep: #D9545F;
+  --amb-grey: #6E6E68;
+  --amb-on-ink-muted: #C9C9C3;
+  --amb-line: 1.5px solid;
+  --amb-display: 'Anton', Impact, 'Arial Narrow Bold', sans-serif;
+  --amb-body: 'Roboto', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --amb-mono: ui-monospace, Menlo, 'SF Mono', Consolas, monospace;
+  --amb-app: 'Supreme', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --amb-gutter: clamp(16px, 4vw, 48px);
+  --amb-max: 1280px;
+  --amb-gradient: linear-gradient(165deg, #fff6b7 12.09%, #fb7c8c 72.19%, #d46879 104%);
+}
